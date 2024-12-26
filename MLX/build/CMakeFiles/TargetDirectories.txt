@@ -1,0 +1,7 @@
+/Users/ghriyba/Desktop/Cub3D/MLX/build/CMakeFiles/mlx42.dir
+/Users/ghriyba/Desktop/Cub3D/MLX/build/CMakeFiles/edit_cache.dir
+/Users/ghriyba/Desktop/Cub3D/MLX/build/CMakeFiles/rebuild_cache.dir
+/Users/ghriyba/Desktop/Cub3D/MLX/build/CMakeFiles/list_install_components.dir
+/Users/ghriyba/Desktop/Cub3D/MLX/build/CMakeFiles/install.dir
+/Users/ghriyba/Desktop/Cub3D/MLX/build/CMakeFiles/install/local.dir
+/Users/ghriyba/Desktop/Cub3D/MLX/build/CMakeFiles/install/strip.dir

@@ -1,0 +1,20 @@
+/*
+Ajoutiit struct dial player fiha position dialo ou centre dialo 
+
+Bedelt fl prototypes 3la 9bel norm 
+
+
+
+
+
+
+lmhm salit 7taaaaa salit ou l9it l pplayer makit7arkch ma3rftch 3lach oupssss!!!!!
+
+*/
+
+-----------f9i9sa
+/*
+p_hooks.c
+	data->player->turn_dir = 1; // knti kat incrementi hnaya makhasch it incrementa hadi kat defini gha sighn bach t3rf bch7al mn pixel adour
+    pos_y -= 1;	    // data->player->y_pos -= 1; knti katbdli f li7datyat dyal palyer machi bch7al ayzid
+*/
