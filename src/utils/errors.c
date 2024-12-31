@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asel-kha <asel-kha@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: wabolles <wabolles@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 22:35:34 by asel-kha          #+#    #+#             */
-/*   Updated: 2024/12/01 23:36:50 by asel-kha         ###   ########.fr       */
+/*   Updated: 2024/12/31 03:26:27 by wabolles         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub.h"
 
-void ft_err(char *err_msg)
+void	ft_err(char *err_msg)
 {
 	ft_putstr_fd(err_msg, 2);
 	exit(EXIT_FAILURE);

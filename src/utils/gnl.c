@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   gnl.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asel-kha <asel-kha@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: wabolles <wabolles@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 09:58:28 by asel-kha          #+#    #+#             */
-/*   Updated: 2024/12/17 00:15:20 by asel-kha         ###   ########.fr       */
+/*   Updated: 2024/12/31 03:26:55 by wabolles         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"../../includes/cub.h"
+#include "../../includes/cub.h"
 
 char	*split_nl(char **save)
 {
@@ -43,7 +43,7 @@ char	*read_line(int fd, char *save)
 	{
 		readret = read(fd, buff, BUFFER_SIZE);
 		if (readret == -1)
-			return ( NULL);
+			return (NULL);
 		buff [readret] = '\0';
 		save = ft_strjoin(save, buff);
 		if (!*save)

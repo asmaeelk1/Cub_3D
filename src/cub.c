@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: f9i9sa <f9i9sa@student.42.fr>              +#+  +:+       +#+        */
+/*   By: wabolles <wabolles@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 06:29:40 by asel-kha          #+#    #+#             */
-/*   Updated: 2024/12/21 07:14:48 by f9i9sa           ###   ########.fr       */
+/*   Updated: 2024/12/31 03:54:54 by wabolles         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,13 @@ void	cleanup_and_exit(t_map_data **data)
 	exit(EXIT_SUCCESS);
 }
 
-int	main(int ac, char **av)
-{
-	int			init_mlx;
-	t_map_data	*map_data;
+// void	__attribute__ ((destructor)) _leaks(void)
+// {
+// 	system("leaks cub3D");
+// }
 
-	if (ac < 2)
-		return (1);
-	map_data = gcollector(sizeof(t_map_data), 1);
+static void	set_data(t_map_data *map_data)
+{
 	map_data->colors = gcollector(sizeof(t_colors), 1);
 	map_data->data_mlx = gcollector(sizeof(t_mlx_data), 1);
 	map_data->textures = gcollector(sizeof(t_textures), 1);
@@ -62,7 +61,18 @@ int	main(int ac, char **av)
 	map_data->p_y_pos = 0;
 	map_data->wall = false;
 	map_data->player->rotate_angle = M_PI / 2;
-	map_data->player->rotation_speed = 2 * ( M_PI / 180) ;
+	map_data->player->rotation_speed = 2 * ( M_PI / 180);
+}
+
+int	main(int ac, char **av)
+{
+	int			init_mlx;
+	t_map_data	*map_data;
+
+	if (ac < 2)
+		return (EXIT_FAILURE);
+	map_data = gcollector(sizeof(t_map_data), 1);
+	set_data(map_data);
 	parsing(av[1], &map_data);
 	init_mlx = init_mlx_data(&map_data);
 	if (init_mlx)
@@ -73,7 +83,6 @@ int	main(int ac, char **av)
 	// draw 2d_map
 	// draw_square(map_data);
 	map_2d(&map_data);
-
 	mlx_loop_hook(map_data->data_mlx->mlx, (void *)my_keyhook, &map_data);
 	mlx_loop(map_data->data_mlx->mlx);
 	cleanup_and_exit(&map_data);

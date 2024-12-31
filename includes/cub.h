@@ -3,39 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: f9i9sa <f9i9sa@student.42.fr>              +#+  +:+       +#+        */
+/*   By: wabolles <wabolles@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 06:30:49 by asel-kha          #+#    #+#             */
-/*   Updated: 2024/12/21 03:08:39 by f9i9sa           ###   ########.fr       */
+/*   Updated: 2024/12/31 03:46:57 by wabolles         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB_H
-#define CUB_H
+# define CUB_H
 
-#include <unistd.h>
-#include <stdlib.h>
+# include <unistd.h>
+# include <stdlib.h>
 # include <stdio.h>
 # include <fcntl.h>
 # include <stdbool.h>
 # include <limits.h>
-#include <math.h>
-#include "../MLX/include/MLX42/MLX42.h"
+# include <math.h>
+# include "../../MLX/include/MLX42/MLX42.h"
 
-# define WIDTH 1800
-# define HEIGHT 1200
-#define TILE_SIZE 32
+enum    e_macros
+{
+    WIDTH = 1800,
+    HEIGHT = 1200,
+    TILE_SIZE = 32,
+    BUFFER_SIZE = 42,
+    H = HEIGHT
+};
 
-#define BUFFER_SIZE 42
-#define INVALID_FILE "Invalid file name. Example: file_name.cub"
-#define FILE_NOT_FOUND "File not found"    
-#define INVALID_MAP    "Invalid map!"
-#define INVALID_COLOR "Error: Invalid color values. Each RGB component must be \
+# define INVALID_FILE "Invalid file name. Example: file_name.cub"
+# define FILE_NOT_FOUND "File not found"    
+# define INVALID_MAP    "Invalid map!"
+# define INVALID_COLOR "Error: Invalid color values. Each RGB component must be \
 between 0 and 255."
 
-#define INVALID_COLOR_FORMAT "Error: Invalid color format. A valid color must \
+# define INVALID_COLOR_FORMAT "Error: Invalid color format. A valid color must \
 have exactly 3 components (R, G, B), each between 0 and 255."
-
 
 typedef struct s_gc
 {
@@ -71,7 +74,7 @@ typedef struct s_player
     bool	if_player_exist;
 	int		x_pos;
 	int		y_pos;
-	float		rotate_angle; // hadi khasha tkoun float bach t3ti l3bar exact makntch katrsm mgad 7int kant int
+	float		rotate_angle;
 	float		rotation_speed;
 	int		turn_dir;
 	int		xc;
@@ -132,9 +135,7 @@ char	*ft_strtok(char *str, char *sep);
 int		ft_atoi(const char *str);
 char	**ft_split(char *s, char c);
 char	*get_next_line(int fd);
-
 void	ft_err(char *err_msg);
-
 
 // draw 2D map
 void	plot_line(t_map_data **data, t_p p0, t_p p1, long color);
@@ -144,4 +145,5 @@ void map_2d(t_map_data **map_data);
 // player movement
 void	my_keyhook(void *param);
 bool is_wall(t_map_data **map_data, int x, int y);
+
 #endif

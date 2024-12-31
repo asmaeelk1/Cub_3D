@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asel-kha <asel-kha@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: wabolles <wabolles@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 02:34:10 by asel-kha          #+#    #+#             */
-/*   Updated: 2024/12/06 15:27:36 by asel-kha         ###   ########.fr       */
+/*   Updated: 2024/12/31 03:27:37 by wabolles         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ char	*ft_strtrim(char *s1, char const *set)
 		j--;
 	return (ft_substr(s1, i, j - (i - 1)));
 }
+
 static bool	find_c(const char *sep, char c)
 {
 	while (*sep)
@@ -70,7 +71,7 @@ int	ft_atoi(const char *str)
 		(str[0] == '-') && (sign = -1);
 		i++;
 	}
-	if(!str[0])
+	if (!str[0])
 		ft_err(INVALID_COLOR);
 	while (str[++i])
 	{
