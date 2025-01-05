@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wabolles <wabolles@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asel-kha <asel-kha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/29 06:30:49 by asel-kha          #+#    #+#             */
-/*   Updated: 2024/12/31 03:46:57 by wabolles         ###   ########.fr       */
+/*   Created: 2025/01/04 21:24:15 by asel-kha          #+#    #+#             */
+/*   Updated: 2025/01/04 23:05:40 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct s_textures
     char    *south;
     char    *west;
     char    *east;
+	int		*fds_textures;
 }    t_textures;
 
 typedef struct s_colors
