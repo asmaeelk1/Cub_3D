@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../../includes/cub.h"
-#include <sys/fcntl.h>
 
 int	rgb_to_int(int r, int g, int b, int a)
 {
@@ -28,12 +27,12 @@ void	pars_colors(char *color)
 	i_rgb = 0;
 	if(!ft_strtrim(color, " "))
 		ft_err("Empty file");
-	color_token = ft_strtok(color, ",");
-	if (color[ft_strlen(color) - 1] == ',')
+	if (color[ft_strlen(color) - 1] == ',' || color[0] == ',')
 		ft_err(INVALID_COLOR_FORMAT);
 	while (color[++i])
 		if (color[i] == ',' && color[i + 1] == ',')
 			ft_err(INVALID_COLOR_FORMAT);
+	color_token = ft_strtok(color, ",");
 	while (color_token)
 	{
 		if (i_rgb >= 3)
