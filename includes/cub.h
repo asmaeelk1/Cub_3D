@@ -6,7 +6,7 @@
 /*   By: asel-kha <asel-kha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 21:24:15 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/04 23:05:40 by asel-kha         ###   ########.fr       */
+/*   Updated: 2025/01/06 20:47:51 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ typedef struct s_textures
     char    *south;
     char    *west;
     char    *east;
-	int		*fds_textures;
 }    t_textures;
 
 typedef struct s_colors

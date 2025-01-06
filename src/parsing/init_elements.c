@@ -6,7 +6,7 @@
 /*   By: asel-kha <asel-kha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 23:01:25 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/06 17:00:39 by asel-kha         ###   ########.fr       */
+/*   Updated: 2025/01/06 20:48:49 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ void	pars_colors(char *color)
 	i_rgb = 0;
 	if(!ft_strtrim(color, " "))
 		ft_err("Empty file");
-	color_token = ft_strtok(color, ",");
-	if (color[ft_strlen(color) - 1] == ',')
+	if (color[ft_strlen(color) - 1] == ',' || color[0] == ',')
 		ft_err(INVALID_COLOR_FORMAT);
 	while (color[++i])
 		if (color[i] == ',' && color[i + 1] == ',')
 			ft_err(INVALID_COLOR_FORMAT);
+	color_token = ft_strtok(color, ",");
 	while (color_token)
 	{
 		if (i_rgb >= 3)
@@ -96,35 +96,6 @@ static void	init_textures(t_textures **textures, t_colors **colors, char *line)
 		init_colors(colors, line);
 }
 
-void	check_textures(t_textures **textures)
-{
-	int		*fds;
-	int		i;
-	bool	open_faild;
-
-	i = -1;
-	open_faild = false;
-	(*textures)->fds_textures = gcollector(sizeof(int) * 4, 1);
-	fds = (*textures)->fds_textures;
-	fds[0] = open((*textures)->north, O_RDONLY, 0644);
-	fds[1] = open((*textures)->south, O_RDONLY, 0644);
-	fds[2] = open((*textures)->west, O_RDONLY, 0644);
-	fds[3] = open((*textures)->east, O_RDONLY, 0644);
-	while(fds[++i])
-		if(fds[i] == -1)
-			open_faild = true;
-	if(open_faild == true)
-	{
-		i = -1;
-		while(fds[++i])
-		{
-			if(fds[i] != -1)
-				continue;
-			close(fds[i]);
-		}
-	}
-}
-
 void	read_elements(int file_name, t_map_data **map_data)
 {
 	int		i_elements;
@@ -146,5 +117,4 @@ void	read_elements(int file_name, t_map_data **map_data)
 			line = get_next_line(file_name);
 		i_elements--;
 	}
-	check_textures(&(*map_data)->textures);
 }
