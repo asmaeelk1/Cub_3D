@@ -6,12 +6,11 @@
 /*   By: asel-kha <asel-kha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 23:01:25 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/05 01:23:13 by asel-kha         ###   ########.fr       */
+/*   Updated: 2025/01/06 17:00:39 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub.h"
-#include <sys/fcntl.h>
 
 int	rgb_to_int(int r, int g, int b, int a)
 {
@@ -75,23 +74,23 @@ static void	init_textures(t_textures **textures, t_colors **colors, char *line)
 		line++;
 	if (!ft_strncmp(line, "NO ", 3))
 	{
-		(*textures)->north = ft_strtrim(line + 3, " ");
-		(*textures)->north[ft_strlen((*textures)->north) - 1] = 0;
+		line[ft_strlen(line) - 1] = 0;
+		(*textures)->north = ft_strtrim(line + 3, " \t");
 	}
 	else if (!ft_strncmp(line, "SO ", 3))
 	{
-		(*textures)->south = ft_strtrim(line + 3, " ");
-		(*textures)->south[ft_strlen((*textures)->south) - 1] = 0;
+		line[ft_strlen(line) - 1] = 0;
+		(*textures)->south = ft_strtrim(line + 3, " \t");
 	}
 	else if (!ft_strncmp(line, "WE ", 3))
 	{
-		(*textures)->west = ft_strtrim(line + 3, " ");
-		(*textures)->west[ft_strlen((*textures)->west) - 1] = 0;
+		line[ft_strlen(line) - 1] = 0;
+		(*textures)->west = ft_strtrim(line + 3, " \t");
 	}
 	else if (!ft_strncmp(line, "EA ", 3))
 	{
-		(*textures)->east = ft_strtrim(line + 3, " ");
-		(*textures)->east[ft_strlen((*textures)->east) - 1] = 0;
+		line[ft_strlen(line) - 1] = 0;
+		(*textures)->east = ft_strtrim(line + 3, " \t");
 	}
 	else
 		init_colors(colors, line);
