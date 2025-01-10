@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 06:29:40 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/10 02:18:55 by marvin           ###   ########.fr       */
+/*   Updated: 2025/01/10 02:26:10 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,6 +175,7 @@ void	raycasting(t_map_data **map_data)
 		}
 		y++;
 	}
+	map_data->cast = cast;
 }
 
 int	main(int ac, char **av)
