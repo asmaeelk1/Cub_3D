@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 06:29:40 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/10 02:26:10 by marvin           ###   ########.fr       */
+/*   Updated: 2025/01/10 02:30:18 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ void	texture(t_map_data **map_data)
 	(*map_data)->textures->south = mlx_xpm_file_to_image((*map_data)->data_mlx->mlx, (*map_data)->textures->south_path, &(*map_data)->textures->south_width, &(*map_data)->textures->south_height);
 	(*map_data)->textures->west = mlx_xpm_file_to_image((*map_data)->data_mlx->mlx, (*map_data)->textures->west_path, &(*map_data)->textures->west_width, &(*map_data)->textures->west_height);
 	(*map_data)->textures->east = mlx_xpm_file_to_image((*map_data)->data_mlx->mlx, (*map_data)->textures->east_path, &(*map_data)->textures->east_width, &(*map_data)->textures->east_height);
+	// sprites textures hna I guess wlkn nhandliw mandatory first bla erros
+
 }
 
 void raycasting_init(t_cast **cast)
@@ -96,7 +98,6 @@ void raycasting_init(t_cast **cast)
 	tmp->drawStart = 0;
 	tmp->drawEnd = 0;
 }
-
 void	raycasting(t_map_data **map_data)
 {
 	int		x;
@@ -111,6 +112,7 @@ void	raycasting(t_map_data **map_data)
 		x = 0;
 		while (x < (*map_data)->width_map)
 		{
+			// Calcul dyal pos d camera
 			cast->cameraX = 2 * x / (float)(*map_data)->width_map - 1;
 			cast->rayDirX = (*map_data)->player->xc + (*map_data)->player->xc * cast->cameraX;
 			cast->rayDirY = (*map_data)->player->yc + (*map_data)->player->yc * cast->cameraX;
@@ -119,6 +121,8 @@ void	raycasting(t_map_data **map_data)
 			cast->deltaDistX = fabs(1 / cast->rayDirX);
 			cast->deltaDistY = fabs(1 / cast->rayDirY);
 			cast->hit = 0;
+
+			// Calcule step ou sideDist
 			if (cast->rayDirX < 0)
 			{
 				cast->stepX = -1;
@@ -139,6 +143,8 @@ void	raycasting(t_map_data **map_data)
 				cast->stepY = 1;
 				cast->sideDistY = (cast->mapY + 1.0 - (*map_data)->player->y_pos) * cast->deltaDistY;
 			}
+
+			// Hna reje3t DDA
 			while (cast->hit == 0)
 			{
 				if (cast->sideDistX < cast->sideDistY)
@@ -156,21 +162,29 @@ void	raycasting(t_map_data **map_data)
 				if ((*map_data)->map[cast->mapY][cast->mapX] == '1')
 					cast->hit = 1;
 			}
+
+			// Calcule dyal distance 3la l wall
 			if (cast->side == 0)
 				cast->perpWallDist = (cast->mapX - (*map_data)->player->x_pos + (1 - cast->stepX) / 2) / cast->rayDirX;
 			else
 				cast->perpWallDist = (cast->mapY - (*map_data)->player->y_pos + (1 - cast->stepY) / 2) / cast->rayDirY;
+
+			// Calcule height dyal line
 			cast->lineHeight = (int)((*map_data)->height_map / cast->perpWallDist);
+
+			// Calcule start ou end dyal line
 			cast->drawStart = -cast->lineHeight / 2 + (*map_data)->height_map / 2;
 			if (cast->drawStart < 0)
 				cast->drawStart = 0;
 			cast->drawEnd = cast->lineHeight / 2 + (*map_data)->height_map / 2;
 			if (cast->drawEnd >= (*map_data)->height_map)
 				cast->drawEnd = (*map_data)->height_map - 1;
+
+			// Draw line
 			if (cast->side == 1)
-				mlx_draw_line((*map_data)->data_mlx->mlx, x, cast->drawStart, x, cast->drawEnd, 0x00FF00);
+				mlx_draw_line((*map_data)->data_mlx->mlx, x, cast->drawStart, x, cast->drawEnd, 0x00FF00); // Green for Y-side
 			else
-				mlx_draw_line((*map_data)->data_mlx->mlx, x, cast->drawStart, x, cast->drawEnd, 0x0000FF);
+				mlx_draw_line((*map_data)->data_mlx->mlx, x, cast->drawStart, x, cast->drawEnd, 0x0000FF); // Blue for X-side
 			x++;
 		}
 		y++;

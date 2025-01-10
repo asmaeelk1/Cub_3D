@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 06:30:49 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/10 02:14:39 by marvin           ###   ########.fr       */
+/*   Updated: 2025/01/10 02:34:45 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,24 +83,24 @@ typedef struct s_player
 
 typedef struct s_cast
 {
-    float   cameraX;
-    float   rayDirX;
-    float   rayDirY;
-    int     mapX;
-    int     mapY;
-    float   sideDistX;
-    float   sideDistY;
-    float   deltaDistX;
-    float   deltaDistY;
-    float   perpWallDist;
-    float   posX;
-    int     stepX;
-    int     stepY;
-    int     hit;
-    int     side;
-    int     lineHeight;
-    int     drawStart;
-    int     drawEnd;
+    float   cameraX; // X pos dyal camera
+    float   rayDirX; // Dir dyal ray f x
+    float   rayDirY; // Dir dyal ray f y
+    int     mapX;    // X pos f map 
+    int     mapY;    // Y pos f map
+    float   sideDistX; // Distance l a9rab x
+    float   sideDistY; // Distance l a9rab y
+    float   deltaDistX; // Distance dyal 1 tile f x
+    float   deltaDistY; // Distance dyal 1 tile f y
+    float   perpWallDist; // Distance dyal ray f wall (90 degree)
+    float   posX; // X pos dyal player
+    int     stepX; // Step dir f x (1 oula -1)
+    int     stepY;  // Step dir f y (1 oula -1)
+    int     hit; // Check ila t9as l wall oula la
+    int     side; // ina jiha t9as l7ayt
+    int     lineHeight; // Height dyal line
+    int     drawStart; // Start dyal line
+    int     drawEnd; // End dyal line
 } t_cast;
 
 typedef struct s_map_data
