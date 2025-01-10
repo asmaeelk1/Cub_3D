@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wabolles <wabolles@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 06:29:40 by asel-kha          #+#    #+#             */
-/*   Updated: 2024/12/31 03:54:54 by wabolles         ###   ########.fr       */
+/*   Updated: 2025/01/10 02:18:55 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,119 @@ static void	set_data(t_map_data *map_data)
 	map_data->player->rotation_speed = 2 * ( M_PI / 180);
 }
 
+void	texture(t_map_data **map_data)
+{
+	(*map_data)->textures->north = mlx_xpm_file_to_image((*map_data)->data_mlx->mlx, (*map_data)->textures->north_path, &(*map_data)->textures->north_width, &(*map_data)->textures->north_height);
+	(*map_data)->textures->south = mlx_xpm_file_to_image((*map_data)->data_mlx->mlx, (*map_data)->textures->south_path, &(*map_data)->textures->south_width, &(*map_data)->textures->south_height);
+	(*map_data)->textures->west = mlx_xpm_file_to_image((*map_data)->data_mlx->mlx, (*map_data)->textures->west_path, &(*map_data)->textures->west_width, &(*map_data)->textures->west_height);
+	(*map_data)->textures->east = mlx_xpm_file_to_image((*map_data)->data_mlx->mlx, (*map_data)->textures->east_path, &(*map_data)->textures->east_width, &(*map_data)->textures->east_height);
+}
+
+void raycasting_init(t_cast **cast)
+{
+	t_cast	*tmp;
+
+	tmp = *cast;
+	tmp->cameraX = 0;
+	tmp->rayDirX = 0;
+	tmp->rayDirY = 0;
+	tmp->mapX = 0;
+	tmp->mapY = 0;
+	tmp->sideDistX = 0;
+	tmp->sideDistY = 0;
+	tmp->deltaDistX = 0;
+	tmp->deltaDistY = 0;
+	tmp->perpWallDist = 0;
+	tmp->posX = 0;
+	tmp->stepX = 0;
+	tmp->stepY = 0;
+	tmp->hit = 0;
+	tmp->side = 0;
+	tmp->lineHeight = 0;
+	tmp->drawStart = 0;
+	tmp->drawEnd = 0;
+}
+
+void	raycasting(t_map_data **map_data)
+{
+	int		x;
+	int		y;
+	t_cast	*cast;
+
+	y = 0;
+	cast = gcollector(sizeof(t_cast), 1);
+	raycasting_init(&cast);
+	while (y < (*map_data)->height_map)
+	{
+		x = 0;
+		while (x < (*map_data)->width_map)
+		{
+			cast->cameraX = 2 * x / (float)(*map_data)->width_map - 1;
+			cast->rayDirX = (*map_data)->player->xc + (*map_data)->player->xc * cast->cameraX;
+			cast->rayDirY = (*map_data)->player->yc + (*map_data)->player->yc * cast->cameraX;
+			cast->mapX = (int)(*map_data)->player->x_pos;
+			cast->mapY = (int)(*map_data)->player->y_pos;
+			cast->deltaDistX = fabs(1 / cast->rayDirX);
+			cast->deltaDistY = fabs(1 / cast->rayDirY);
+			cast->hit = 0;
+			if (cast->rayDirX < 0)
+			{
+				cast->stepX = -1;
+				cast->sideDistX = ((*map_data)->player->x_pos - cast->mapX) * cast->deltaDistX;
+			}
+			else
+			{
+				cast->stepX = 1;
+				cast->sideDistX = (cast->mapX + 1.0 - (*map_data)->player->x_pos) * cast->deltaDistX;
+			}
+			if (cast->rayDirY < 0)
+			{
+				cast->stepY = -1;
+				cast->sideDistY = ((*map_data)->player->y_pos - cast->mapY) * cast->deltaDistY;
+			}
+			else
+			{
+				cast->stepY = 1;
+				cast->sideDistY = (cast->mapY + 1.0 - (*map_data)->player->y_pos) * cast->deltaDistY;
+			}
+			while (cast->hit == 0)
+			{
+				if (cast->sideDistX < cast->sideDistY)
+				{
+					cast->sideDistX += cast->deltaDistX;
+					cast->mapX += cast->stepX;
+					cast->side = 0;
+				}
+				else
+				{
+					cast->sideDistY += cast->deltaDistY;
+					cast->mapY += cast->stepY;
+					cast->side = 1;
+				}
+				if ((*map_data)->map[cast->mapY][cast->mapX] == '1')
+					cast->hit = 1;
+			}
+			if (cast->side == 0)
+				cast->perpWallDist = (cast->mapX - (*map_data)->player->x_pos + (1 - cast->stepX) / 2) / cast->rayDirX;
+			else
+				cast->perpWallDist = (cast->mapY - (*map_data)->player->y_pos + (1 - cast->stepY) / 2) / cast->rayDirY;
+			cast->lineHeight = (int)((*map_data)->height_map / cast->perpWallDist);
+			cast->drawStart = -cast->lineHeight / 2 + (*map_data)->height_map / 2;
+			if (cast->drawStart < 0)
+				cast->drawStart = 0;
+			cast->drawEnd = cast->lineHeight / 2 + (*map_data)->height_map / 2;
+			if (cast->drawEnd >= (*map_data)->height_map)
+				cast->drawEnd = (*map_data)->height_map - 1;
+			if (cast->side == 1)
+				mlx_draw_line((*map_data)->data_mlx->mlx, x, cast->drawStart, x, cast->drawEnd, 0x00FF00);
+			else
+				mlx_draw_line((*map_data)->data_mlx->mlx, x, cast->drawStart, x, cast->drawEnd, 0x0000FF);
+			x++;
+		}
+		y++;
+	}
+}
+
 int	main(int ac, char **av)
 {
 	int			init_mlx;
@@ -83,6 +196,8 @@ int	main(int ac, char **av)
 	// draw 2d_map
 	// draw_square(map_data);
 	map_2d(&map_data);
+	textures(&map_data);
+	raycasting(&map_data);
 	mlx_loop_hook(map_data->data_mlx->mlx, (void *)my_keyhook, &map_data);
 	mlx_loop(map_data->data_mlx->mlx);
 	cleanup_and_exit(&map_data);

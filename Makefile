@@ -1,6 +1,6 @@
 NAME		=	cub3D
 CC			= 	cc
-CFLAGS		=	-Wall -Wextra -Werror -Iincludes -I./includes/ # -fsanitize=address -g3
+CFLAGS		=	-Wall -Wextra -Iincludes -I./includes/ # -fsanitize=address -g3
 SRC			=	src/cub.c \
 				src/parsing/parsing.c src/parsing/init_elements.c src/parsing/init_map.c\
 				src/utils/gcollector.c src/utils/gnl.c src/utils/gnl_utils.c src/utils/utils1.c \
@@ -8,9 +8,10 @@ SRC			=	src/cub.c \
 				src/randring/draw_utils.c src/randring/map2D.c  \
 				src/movement/p_hooks.c \
 
-LIBMLX		=	..//MLX/build/libmlx42.a
+LIBMLX		=	MLX42/build/libmlx42.a
 LIBMLX_INC	=	-IMLX/include/MLX -Iinclude
-MLXFLG		=	-Iinclude -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/" -framework Cocoa -framework OpenGL -framework IOKit
+BREW_PREFIX	=	$(shell brew --prefix)
+MLXFLG		=	-Iinclude -L$(BREW_PREFIX)/lib -lglfw -lm -ldl -lX11 -lXext -lXcursor -lXfixes -lpthread
 OBJ			=	$(SRC:%.c=%.o)
 BNS_OBJ		=	$(BNS_SRCS:%.c=%.o)
 HEADER		= 	includes/cub.h

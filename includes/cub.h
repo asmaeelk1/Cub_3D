@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wabolles <wabolles@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 06:30:49 by asel-kha          #+#    #+#             */
-/*   Updated: 2024/12/31 03:46:57 by wabolles         ###   ########.fr       */
+/*   Updated: 2025/01/10 02:14:39 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <stdbool.h>
 # include <limits.h>
 # include <math.h>
-# include "../../MLX/include/MLX42/MLX42.h"
+# include "../MLX42/include/MLX42/MLX42.h"
 
 enum    e_macros
 {
@@ -81,6 +81,28 @@ typedef struct s_player
 	int		yc;
 }	t_player;
 
+typedef struct s_cast
+{
+    float   cameraX;
+    float   rayDirX;
+    float   rayDirY;
+    int     mapX;
+    int     mapY;
+    float   sideDistX;
+    float   sideDistY;
+    float   deltaDistX;
+    float   deltaDistY;
+    float   perpWallDist;
+    float   posX;
+    int     stepX;
+    int     stepY;
+    int     hit;
+    int     side;
+    int     lineHeight;
+    int     drawStart;
+    int     drawEnd;
+} t_cast;
+
 typedef struct s_map_data
 {
     t_textures		*textures;
@@ -94,7 +116,10 @@ typedef struct s_map_data
     int				width_map;
     char			**map;
 	int				tile_size;
+    t_cast          *cast;
 }    t_map_data;
+
+
 
 
 typedef struct s_p
