@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asel-kha <asel-kha@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: ghriyba <ghriyba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 21:24:10 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/08 18:23:35 by asel-kha         ###   ########.fr       */
+/*   Updated: 2025/01/11 20:45:40 by ghriyba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/cub.h"
 
-void	rotation_hook(t_map_data *data)
+void	hook_vector(t_map_data *data)
 {
 	float	value;
 
@@ -30,47 +30,6 @@ void	rotation_hook(t_map_data *data)
 	}
 }
 
-void	translation_hook2(t_map_data *data, float pos_x, float pos_y, float speed)
-{
-	if (mlx_is_key_down(data->data_mlx->mlx, MLX_KEY_D))
-	{
-		pos_x = speed * cos(data->player->rotate_angle + M_PI_2);
-		pos_y = speed * sin(data->player->rotate_angle + M_PI_2);
-	}
-	if (!is_wall(&data, data->player->xc + pos_x, data->player->yc + pos_y))
-	{
-		data->p_x_pos += pos_x;
-		data->p_y_pos += pos_y;
-	}
-}
-
-void	translation_hook(t_map_data *data)
-{
-	float	pos_x;
-	float	pos_y;
-	float	speed;
-
-	pos_x = 0;
-	pos_y = 0;
-	speed = 3;
-	if (mlx_is_key_down(data->data_mlx->mlx, MLX_KEY_W))
-	{
-		pos_y = speed * sin(data->player->rotate_angle);
-		pos_x = speed * cos(data->player->rotate_angle);
-	}
-	if (mlx_is_key_down(data->data_mlx->mlx, MLX_KEY_A))
-	{
-		pos_x = -speed * cos(data->player->rotate_angle + M_PI_2);
-		pos_y = -speed * sin(data->player->rotate_angle + M_PI_2);
-	}
-	if (mlx_is_key_down(data->data_mlx->mlx, MLX_KEY_S))
-	{
-		pos_y = -speed * sin(data->player->rotate_angle);
-		pos_x = -speed * cos(data->player->rotate_angle);
-	}
-	translation_hook2(data, pos_x, pos_y, speed);
-}
-
 void	my_keyhook(void *param)
 {
 	t_map_data	**data;
@@ -78,8 +37,7 @@ void	my_keyhook(void *param)
 	data = param;
 	if (mlx_is_key_down((*data)->data_mlx->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window((*data)->data_mlx->mlx);
-	translation_hook(*data);
-	rotation_hook(*data);
+	hook_vector(*data);
 	mlx_delete_image((*data)->data_mlx->mlx, (*data)->data_mlx->image);
 	(*data)->data_mlx->image = mlx_new_image((*data)->data_mlx->mlx, WIDTH, H);
 	map_2d(data);
