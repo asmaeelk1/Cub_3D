@@ -1,5 +1,17 @@
 
-#include "../../includes/cub.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: asel-kha <asel-kha@student.1337.ma>        #+#  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025-01-08 10:52:13 by asel-kha          #+#    #+#             */
+/*   Updated: 2025-01-08 10:52:13 by asel-kha         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../../../includes/cub.h"
 
 void	plot_line(t_map_data **data, t_p p0, t_p p1, long color)
 {
@@ -30,20 +42,26 @@ void	plot_line(t_map_data **data, t_p p0, t_p p1, long color)
 	}
 }
 
-void draw_square(t_map_data **map_data, int x, int y, long color)
+void		draw_square(t_map_data **data, int x, int y, long color)
 {
-    t_p p1;
-    t_p p2;
-
-    p1.x = x;
-    p1.y = y;
-    p2.y = y;
-    p2.x = x + 20;
-    while (p1.y < (y+20))
+    int i;
+    int j;
+    int start_x = x;
+    int start_y = y;
+    
+    i = 0;
+    while (i < TILE_SIZE)
     {
-        plot_line(map_data, p1, p2, color);
-        p1.y++;
-        p2.y++;
+        j = 0;
+        while (j < TILE_SIZE)
+        {
+            if (start_x + i < (*data)->data_mlx->width && 
+                start_y + j < (*data)->data_mlx->height)
+                mlx_put_pixel((*data)->data_mlx->image, 
+                    start_x + i, start_y + j, color);
+            j++;
+        }
+        i++;
     }
 }
 

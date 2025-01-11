@@ -6,11 +6,11 @@
 /*   By: asel-kha <asel-kha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 06:36:29 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/04 22:16:39 by asel-kha         ###   ########.fr       */
+/*   Updated: 2025/01/08 11:51:44 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub.h"
+#include "../../../includes/cub.h"
 
 static int	check_file(char *file)
 {

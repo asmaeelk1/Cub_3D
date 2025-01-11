@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   p_hooks.c                                          :+:      :+:    :+:   */
+/*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asel-kha <asel-kha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 21:24:10 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/04 22:24:10 by asel-kha         ###   ########.fr       */
+/*   Updated: 2025/01/08 18:23:35 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-#include "../../includes/cub.h"
+#include "../../../includes/cub.h"
 
 void	rotation_hook(t_map_data *data)
 {
@@ -31,12 +30,12 @@ void	rotation_hook(t_map_data *data)
 	}
 }
 
-void	translation_hook2(t_map_data *data, float pos_x, float pos_y, float mv)
+void	translation_hook2(t_map_data *data, float pos_x, float pos_y, float speed)
 {
 	if (mlx_is_key_down(data->data_mlx->mlx, MLX_KEY_D))
 	{
-		pos_x = mv * cos(data->player->rotate_angle + M_PI_2);
-		pos_y = mv * sin(data->player->rotate_angle + M_PI_2);
+		pos_x = speed * cos(data->player->rotate_angle + M_PI_2);
+		pos_y = speed * sin(data->player->rotate_angle + M_PI_2);
 	}
 	if (!is_wall(&data, data->player->xc + pos_x, data->player->yc + pos_y))
 	{
@@ -49,27 +48,27 @@ void	translation_hook(t_map_data *data)
 {
 	float	pos_x;
 	float	pos_y;
-	float	movement_speed;
+	float	speed;
 
 	pos_x = 0;
 	pos_y = 0;
-	movement_speed = 3;
+	speed = 3;
 	if (mlx_is_key_down(data->data_mlx->mlx, MLX_KEY_W))
 	{
-		pos_y = movement_speed * sin(data->player->rotate_angle);
-		pos_x = movement_speed * cos(data->player->rotate_angle);
+		pos_y = speed * sin(data->player->rotate_angle);
+		pos_x = speed * cos(data->player->rotate_angle);
 	}
 	if (mlx_is_key_down(data->data_mlx->mlx, MLX_KEY_A))
 	{
-		pos_x = -movement_speed * cos(data->player->rotate_angle + M_PI_2);
-		pos_y = -movement_speed * sin(data->player->rotate_angle + M_PI_2);
+		pos_x = -speed * cos(data->player->rotate_angle + M_PI_2);
+		pos_y = -speed * sin(data->player->rotate_angle + M_PI_2);
 	}
 	if (mlx_is_key_down(data->data_mlx->mlx, MLX_KEY_S))
 	{
-		pos_y = -movement_speed * sin(data->player->rotate_angle);
-		pos_x = -movement_speed * cos(data->player->rotate_angle);
+		pos_y = -speed * sin(data->player->rotate_angle);
+		pos_x = -speed * cos(data->player->rotate_angle);
 	}
-	translation_hook2(data, pos_x, pos_y, movement_speed);
+	translation_hook2(data, pos_x, pos_y, speed);
 }
 
 void	my_keyhook(void *param)

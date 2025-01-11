@@ -6,11 +6,11 @@
 /*   By: asel-kha <asel-kha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 21:23:53 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/05 01:24:24 by asel-kha         ###   ########.fr       */
+/*   Updated: 2025/01/08 14:18:14 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub.h"
+#include "../../../includes/cub.h"
 
 bool is_wall(t_map_data **map_data, int x, int y)
 {
@@ -24,6 +24,7 @@ bool is_wall(t_map_data **map_data, int x, int y)
 		return(true);
 	return(false);
 }
+
 void	draw_vector(t_map_data **map_data)
 {
 	t_p p1;
@@ -32,6 +33,7 @@ void	draw_vector(t_map_data **map_data)
 	p1.y = (*map_data)->player->yc;
 	p2.x = (*map_data)->player->xc + cos((*map_data)->player->rotate_angle) * 20;
 	p2.y = (*map_data)->player->yc + sin((*map_data)->player->rotate_angle) * 20;
+	
 	plot_line(map_data, p1, p2, 16777215);
 }
 
