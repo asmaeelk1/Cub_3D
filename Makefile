@@ -1,11 +1,11 @@
 NAME		=	cub3D
 CC			= 	cc
-CFLAGS		=	-Wall -Wextra -Iincludes -I./includes/ # -fsanitize=address -g3
+CFLAGS		=	-Wall -Wextra -Iincludes -I./includes/ #-fsanitize=address -g
 SRC			=	src/cub.c \
 				src/parsing/parsing.c src/parsing/init_elements.c src/parsing/init_map.c\
 				src/utils/gcollector.c src/utils/gnl.c src/utils/gnl_utils.c src/utils/utils1.c \
 				src/utils/errors.c src/utils/ft_split.c src/utils/utils2.c \
-				src/randring/draw_utils.c src/randring/map2D.c  \
+				src/rendering/draw_utils.c src/rendering/map2D.c  \
 				src/movement/p_hooks.c \
 
 LIBMLX		=	MLX42/build/libmlx42.a

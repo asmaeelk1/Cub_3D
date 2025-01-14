@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 06:30:49 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/10 02:34:45 by marvin           ###   ########.fr       */
+/*   Updated: 2025/01/14 23:01:44 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,5 +170,7 @@ void map_2d(t_map_data **map_data);
 // player movement
 void	my_keyhook(void *param);
 bool is_wall(t_map_data **map_data, int x, int y);
+void	raycasting(t_map_data **map_data);
+
 
 #endif

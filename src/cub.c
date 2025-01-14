@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 06:29:40 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/10 02:30:18 by marvin           ###   ########.fr       */
+/*   Updated: 2025/01/14 23:08:00 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,15 +64,15 @@ static void	set_data(t_map_data *map_data)
 	map_data->player->rotation_speed = 2 * ( M_PI / 180);
 }
 
-void	texture(t_map_data **map_data)
-{
-	(*map_data)->textures->north = mlx_xpm_file_to_image((*map_data)->data_mlx->mlx, (*map_data)->textures->north_path, &(*map_data)->textures->north_width, &(*map_data)->textures->north_height);
-	(*map_data)->textures->south = mlx_xpm_file_to_image((*map_data)->data_mlx->mlx, (*map_data)->textures->south_path, &(*map_data)->textures->south_width, &(*map_data)->textures->south_height);
-	(*map_data)->textures->west = mlx_xpm_file_to_image((*map_data)->data_mlx->mlx, (*map_data)->textures->west_path, &(*map_data)->textures->west_width, &(*map_data)->textures->west_height);
-	(*map_data)->textures->east = mlx_xpm_file_to_image((*map_data)->data_mlx->mlx, (*map_data)->textures->east_path, &(*map_data)->textures->east_width, &(*map_data)->textures->east_height);
-	// sprites textures hna I guess wlkn nhandliw mandatory first bla erros
+// void	texture(t_map_data **map_data)
+// {
+// 	(*map_data)->textures->north = mlx_xpm_file_to_image((*map_data)->data_mlx->mlx, (*map_data)->textures->north_path, &(*map_data)->textures->north_width, &(*map_data)->textures->north_height);
+// 	(*map_data)->textures->south = mlx_xpm_file_to_image((*map_data)->data_mlx->mlx, (*map_data)->textures->south_path, &(*map_data)->textures->south_width, &(*map_data)->textures->south_height);
+// 	(*map_data)->textures->west = mlx_xpm_file_to_image((*map_data)->data_mlx->mlx, (*map_data)->textures->west_path, &(*map_data)->textures->west_width, &(*map_data)->textures->west_height);
+// 	(*map_data)->textures->east = mlx_xpm_file_to_image((*map_data)->data_mlx->mlx, (*map_data)->textures->east_path, &(*map_data)->textures->east_width, &(*map_data)->textures->east_height);
+// 	// sprites textures hna I guess wlkn nhandliw mandatory first bla erros
 
-}
+// }
 
 void raycasting_init(t_cast **cast)
 {
@@ -98,6 +98,34 @@ void raycasting_init(t_cast **cast)
 	tmp->drawStart = 0;
 	tmp->drawEnd = 0;
 }
+
+void	mlx_my_draw_line(void *mlx, int x, int y, int x1, int y1, int color)
+{
+	t_plotline	vars;
+
+	vars.dx = abs(x1 - x);
+	vars.dy = abs(y1 - y);
+	vars.sx = x < x1 ? 1 : -1;
+	vars.sy = y < y1 ? 1 : -1;
+	vars.err = (vars.dx > vars.dy ? vars.dx : -vars.dy) / 2;
+	while (x != x1 || y != y1)
+	{
+		if (x >= 0 && y >= 0 && x < 800 && y < 800)
+			mlx_put_pixel(mlx, x, y, color);
+		vars.e2 = vars.err;
+		if (vars.e2 > -vars.dx)
+		{
+			vars.err -= vars.dy;
+			x += vars.sx;
+		}
+		if (vars.e2 < vars.dy)
+		{
+			vars.err += vars.dx;
+			y += vars.sy;
+		}
+	}
+}
+
 void	raycasting(t_map_data **map_data)
 {
 	int		x;
@@ -182,14 +210,14 @@ void	raycasting(t_map_data **map_data)
 
 			// Draw line
 			if (cast->side == 1)
-				mlx_draw_line((*map_data)->data_mlx->mlx, x, cast->drawStart, x, cast->drawEnd, 0x00FF00); // Green for Y-side
+				mlx_my_draw_line((*map_data)->data_mlx->mlx, x, cast->drawStart, x, cast->drawEnd, 0x00FF00); // Green for Y-side
 			else
-				mlx_draw_line((*map_data)->data_mlx->mlx, x, cast->drawStart, x, cast->drawEnd, 0x0000FF); // Blue for X-side
+				mlx_my_draw_line((*map_data)->data_mlx->mlx, x, cast->drawStart, x, cast->drawEnd, 0x0000FF); // Blue for X-side
 			x++;
 		}
 		y++;
 	}
-	map_data->cast = cast;
+	(*map_data)->cast = cast;
 }
 
 int	main(int ac, char **av)
@@ -210,9 +238,9 @@ int	main(int ac, char **av)
 	}
 	// draw 2d_map
 	// draw_square(map_data);
+	// textures(&map_data);
+	// raycasting(&map_data);
 	map_2d(&map_data);
-	textures(&map_data);
-	raycasting(&map_data);
 	mlx_loop_hook(map_data->data_mlx->mlx, (void *)my_keyhook, &map_data);
 	mlx_loop(map_data->data_mlx->mlx);
 	cleanup_and_exit(&map_data);

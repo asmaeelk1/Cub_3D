@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map2D.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: f9i9sa <f9i9sa@student.42.fr>              +#+  +:+       +#+        */
+/*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 12:26:38 by asel-kha          #+#    #+#             */
-/*   Updated: 2024/12/23 05:00:06 by f9i9sa           ###   ########.fr       */
+/*   Updated: 2025/01/14 23:01:37 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void draw_player(t_map_data **map_data, t_player *player, int color)
 	player->yc = player->y_pos + 10 + (*map_data)->p_y_pos;
 	int r = 6;
     circleBres(*map_data, player, r, color);
-	draw_vector(map_data);
+	raycasting(map_data);
 }
 
 void map_2d(t_map_data **map_data)
