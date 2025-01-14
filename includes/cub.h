@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wabolles <wabolles@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ghriyba <ghriyba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/29 06:30:49 by asel-kha          #+#    #+#             */
-/*   Updated: 2024/12/31 03:46:57 by wabolles         ###   ########.fr       */
+/*   Created: 2025/01/04 21:24:15 by asel-kha          #+#    #+#             */
+/*   Updated: 2025/01/11 20:45:52 by ghriyba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ typedef struct s_player
 	int		turn_dir;
 	int		xc;
 	int		yc;
+    int     x_pos_map;
+    int     y_pos_map;
 }	t_player;
 
 typedef struct s_map_data
@@ -144,6 +146,5 @@ void circleBres(t_map_data *map_data, t_player *player, int r, long color);
 void map_2d(t_map_data **map_data);
 // player movement
 void	my_keyhook(void *param);
-bool is_wall(t_map_data **map_data, int x, int y);
 
 #endif

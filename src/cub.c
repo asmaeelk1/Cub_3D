@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wabolles <wabolles@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asel-kha <asel-kha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/29 06:29:40 by asel-kha          #+#    #+#             */
-/*   Updated: 2024/12/31 03:54:54 by wabolles         ###   ########.fr       */
+/*   Created: 2025/01/04 21:24:07 by asel-kha          #+#    #+#             */
+/*   Updated: 2025/01/04 23:59:17 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,6 @@ void	cleanup_and_exit(t_map_data **data)
 	exit(EXIT_SUCCESS);
 }
 
-// void	__attribute__ ((destructor)) _leaks(void)
-// {
-// 	system("leaks cub3D");
-// }
-
 static void	set_data(t_map_data *map_data)
 {
 	map_data->colors = gcollector(sizeof(t_colors), 1);
@@ -80,8 +75,6 @@ int	main(int ac, char **av)
 		gcollector(0, 0);
 		exit(EXIT_FAILURE);
 	}
-	// draw 2d_map
-	// draw_square(map_data);
 	map_2d(&map_data);
 	mlx_loop_hook(map_data->data_mlx->mlx, (void *)my_keyhook, &map_data);
 	mlx_loop(map_data->data_mlx->mlx);

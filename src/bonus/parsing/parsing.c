@@ -6,11 +6,11 @@
 /*   By: asel-kha <asel-kha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 06:36:29 by asel-kha          #+#    #+#             */
-/*   Updated: 2024/12/05 17:41:14 by asel-kha         ###   ########.fr       */
+/*   Updated: 2025/01/08 22:19:09 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub.h"
+#include "../../../includes/cub.h"
 
 static int	check_file(char *file)
 {
@@ -40,6 +40,8 @@ static void	read_map(int file_name, t_map_data **map_data)
 	map_lines = NULL;
 	while (line && !ft_strncmp(line, "\n", ft_strlen(line)))
 		line = get_next_line(file_name);
+	if(!line)
+		ft_err("Empty_file");
 	line = ft_strjoin(line, "\n");
 	while (line)
 	{
@@ -61,6 +63,7 @@ void	parsing(char *file_name, t_map_data **map_data)
 	int	fd;
 
 	fd = check_file(file_name);
+	
 	read_elements(fd, map_data);
 	read_map(fd, map_data);
 	pars_map(map_data);
