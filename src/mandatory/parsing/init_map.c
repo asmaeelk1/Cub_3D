@@ -6,11 +6,11 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 23:27:44 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/15 19:25:58 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/01/15 19:17:57 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub.h"
+#include "../../../includes/cub.h"
 
 static void	check_if_walls(char *line)
 {
@@ -24,21 +24,19 @@ static void	check_if_walls(char *line)
 	}
 }
 
-
 static void	check_char(char *line_map, int i_map, t_player *player)
 {
 	int	i;
 
 	i = -1;
-
 	while (line_map[++i])
 	{
 		if (line_map[i] != '1' && line_map[i] != '0' && line_map[i] != 'N'
 			&& line_map[i] != 'S' && line_map[i] != 'W' && line_map[i] != 'E'
 			&& line_map[i] != ' ')
 			ft_err(INVALID_MAP);
-		if(line_map[i] != 'N' && line_map[i] != 'S' && line_map[i] != 'W'
-			&& line_map[i] != 'E')
+		if(line_map[i] == 'N' || line_map[i] == 'S' || line_map[i] == 'W'
+			|| line_map[i] == 'E')
 			{
 				player->x_pos_map = i;
 				player->y_pos_map = i_map;
@@ -51,8 +49,12 @@ static void	is_zero_next_to_space(char *l_curr, char *prev, char *next,
 		t_map_data **map)
 {
 	int	i;
+	char *str;
 
 	i = -1;
+	str = ft_strtrim(l_curr, " ");
+	if(str[0] != '1' || str[ft_strlen(str) - 1] != '1' )
+		ft_err(INVALID_MAP);
 	while (l_curr[++i])
 	{
 		if (l_curr[i] == '0' || l_curr[i] == 'N' || l_curr[i] == 'S'
@@ -114,7 +116,6 @@ void	pars_map(t_map_data **map_data)
 		if (max_len_line < len_current_line)
 			max_len_line = len_current_line;
 	}
-	printf("x: %d, y: %d\n", (*map_data)->player->x_pos_map, (*map_data)->player->y_pos_map);
 	i_map = -1;
 	while ((*map_data)->map[++i_map])
 	{

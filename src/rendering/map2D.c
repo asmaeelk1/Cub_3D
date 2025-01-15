@@ -6,7 +6,7 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 12:26:38 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/14 23:01:37 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/01/15 19:28:31 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void draw_player(t_map_data **map_data, t_player *player, int color)
 	player->xc = player->x_pos + 10 + (*map_data)->p_x_pos ;
 	player->yc = player->y_pos + 10 + (*map_data)->p_y_pos;
 	int r = 6;
-    circleBres(*map_data, player, r, color);
+	circleBres(*map_data, player, r, color);
 	raycasting(map_data);
 }
 

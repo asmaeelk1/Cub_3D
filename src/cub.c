@@ -6,7 +6,7 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 06:29:40 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/15 18:56:52 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/01/15 19:21:19 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,8 +149,6 @@ void	raycasting(t_map_data **map_data)
 			cast->deltaDistX = fabs(1 / cast->rayDirX);
 			cast->deltaDistY = fabs(1 / cast->rayDirY);
 			cast->hit = 0;
-			printf("mapX = %d, mapY = %d\n", cast->mapX, cast->mapY);
-			printf("x_pos_map = %d, y_pos_map = %d\n", (*map_data)->player->x_pos_map, (*map_data)->player->y_pos_map);
 			// Calcule step ou sideDist
 			if (cast->rayDirX < 0)
 			{
@@ -188,9 +186,9 @@ void	raycasting(t_map_data **map_data)
 					cast->mapY += cast->stepY;
 					cast->side = 1;
 				}
+				printf("mapX: %d, mapY: %d\n", cast->mapX, cast->mapY);
 				if ((*map_data)->map[cast->mapY][cast->mapX] == '1')
 					cast->hit = 1;
-				printf("mapX = %d, mapY = %d\n", cast->mapX, cast->mapY);
 			}
 
 			// Calcule dyal distance 3la l wall

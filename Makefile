@@ -1,6 +1,6 @@
 NAME		=	cub3D
 CC			= 	cc
-CFLAGS		=	-Wall -Wextra -Iincludes -I./includes/ #-fsanitize=address -g
+CFLAGS		=	-Wall -Wextra -Iincludes -I./includes/ -fsanitize=address -g
 SRC			=	src/cub.c \
 				src/parsing/parsing.c src/parsing/init_elements.c src/parsing/init_map.c \
 				src/utils/gcollector.c src/utils/gnl.c src/utils/gnl_utils.c src/utils/utils1.c \
@@ -21,7 +21,7 @@ all: $(NAME)
 	@$(CC) $(CFLAGS) $(LIBMLX_INC)  -c $< -o $@
 
 $(NAME): $(OBJ)
-	@$(CC) $(OBJ) $(MLXFLG) $(LIBMLX)  -o $(NAME)
+	@$(CC) $(OBJ) $(MLXFLG) $(LIBMLX) $(CFLAGS) -o $(NAME)
 
 bonus : $(BNS_NAME)
 
