@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asel-kha <asel-kha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 06:29:40 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/15 19:21:19 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/01/15 19:53:41 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,38 +99,40 @@ void raycasting_init(t_cast **cast)
 	tmp->drawEnd = 0;
 }
 
-void	mlx_my_draw_line(void *mlx, int x, int y, int x1, int y1, int color)
-{
-	t_plotline	vars;
+// void	mlx_my_draw_line(void *mlx, int x, int y, int x1, int y1, int color)
+// {
+// 	t_plotline	vars;
 
-	vars.dx = abs(x1 - x);
-	vars.dy = abs(y1 - y);
-	vars.sx = x < x1 ? 1 : -1;
-	vars.sy = y < y1 ? 1 : -1;
-	vars.err = (vars.dx > vars.dy ? vars.dx : -vars.dy) / 2;
-	while (x != x1 || y != y1)
-	{
-		if (x >= 0 && y >= 0 && x < 800 && y < 800)
-			mlx_put_pixel(mlx, x, y, color);
-		vars.e2 = vars.err;
-		if (vars.e2 > -vars.dx)
-		{
-			vars.err -= vars.dy;
-			x += vars.sx;
-		}
-		if (vars.e2 < vars.dy)
-		{
-			vars.err += vars.dx;
-			y += vars.sy;
-		}
-	}
-}
+// 	vars.dx = abs(x1 - x);
+// 	vars.dy = abs(y1 - y);
+// 	vars.sx = x < x1 ? 1 : -1;
+// 	vars.sy = y < y1 ? 1 : -1;
+// 	vars.err = (vars.dx > vars.dy ? vars.dx : -vars.dy) / 2;
+// 	while (x != x1 || y != y1)
+// 	{
+// 		if (x >= 0 && y >= 0 && x < 800 && y < 800)
+// 			mlx_put_pixel(mlx, x, y, color);
+// 		vars.e2 = vars.err;
+// 		if (vars.e2 > -vars.dx)
+// 		{
+// 			vars.err -= vars.dy;
+// 			x += vars.sx;
+// 		}
+// 		if (vars.e2 < vars.dy)
+// 		{
+// 			vars.err += vars.dx;
+// 			y += vars.sy;
+// 		}
+// 	}
+// }
 
 void	raycasting(t_map_data **map_data)
 {
 	int		x;
 	int		y;
 	t_cast	*cast;
+	t_p		p1;
+	t_p		p2;
 
 	y = 0;
 	cast = gcollector(sizeof(t_cast), 1);
@@ -209,10 +211,16 @@ void	raycasting(t_map_data **map_data)
 				cast->drawEnd = (*map_data)->height_map - 1;
 
 			// Draw line
+				// mlx_my_draw_line((*map_data)->data_mlx->mlx, x, cast->drawStart, x, cast->drawEnd, 0x00FF00); // Green for Y-side
+				// mlx_my_draw_line((*map_data)->data_mlx->mlx, x, cast->drawStart, x, cast->drawEnd, 0x0000FF); // Blue for X-side
+			p1.x = x;
+			p1.y = cast->drawStart;
+			p2.x = x;
+			p2.y = cast->drawEnd;
 			if (cast->side == 1)
-				mlx_my_draw_line((*map_data)->data_mlx->mlx, x, cast->drawStart, x, cast->drawEnd, 0x00FF00); // Green for Y-side
+				plot_line(map_data, p1, p2, 0x00FF00);
 			else
-				mlx_my_draw_line((*map_data)->data_mlx->mlx, x, cast->drawStart, x, cast->drawEnd, 0x0000FF); // Blue for X-side
+				plot_line(map_data, p1, p2, 0x0000FF);
 			x++;
 		}
 		y++;
