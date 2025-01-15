@@ -1,6 +1,6 @@
 NAME		=	cub3D
 CC			= 	cc
-CFLAGS		=	-Wall -Wextra -Iincludes -I./includes/ -fsanitize=address -fsanitize-blacklist=blacklist.txt -g
+CFLAGS		=	-Wall -Wextra -Iincludes -I./includes/ #-fsanitize=address -g
 SRC			=	src/cub.c \
 				src/parsing/parsing.c src/parsing/init_elements.c src/parsing/init_map.c\
 				src/utils/gcollector.c src/utils/gnl.c src/utils/gnl_utils.c src/utils/utils1.c \
@@ -8,10 +8,9 @@ SRC			=	src/cub.c \
 				src/rendering/draw_utils.c src/rendering/map2D.c  \
 				src/movement/p_hooks.c \
 
-LIBMLX		=	MLX42/build/libmlx42.a
+LIBMLX		=	MLX42/libmlx42.a
 LIBMLX_INC	=	-IMLX/include/MLX -Iinclude
-BREW_PREFIX	=	$(shell brew --prefix)
-MLXFLG		=	-Iinclude -L$(BREW_PREFIX)/lib -lglfw -lm -ldl -lX11 -lXext -lXcursor -lXfixes -lpthread
+MLXFLG		=	-Iinclude -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/" -framework Cocoa -framework OpenGL -framework IOKit
 OBJ			=	$(SRC:%.c=%.o)
 BNS_OBJ		=	$(BNS_SRCS:%.c=%.o)
 HEADER		= 	includes/cub.h
@@ -20,25 +19,22 @@ all: $(NAME)
 
 %.o: %.c $(HEADER)
 	@$(CC) $(CFLAGS) $(LIBMLX_INC)  -c $< -o $@
-	@echo "🛠️ Creating Objects!!"
 
 $(NAME): $(OBJ)
 	@$(CC) $(OBJ) $(MLXFLG) $(LIBMLX)  -o $(NAME)
-	@echo "👌 Done"
+	@echo "Mandatory Done"
 
 bonus : $(BNS_NAME)
 
 $(BNS_NAME) : $(BNS_OBJ)
 	@$(CC) $(CFLAGS) $(BNS_OBJ) -o $(BNS_NAME)
-	@echo "✨ Bonus Done"
+	@echo "Bonus Done"
 
 clean:
 	@rm -f $(OBJ) $(BNS_OBJ)
-	@echo  "🧨 Deleting OBJS."
 
 fclean: clean
 	@rm -f  $(NAME) $(BNS_NAME)
-	@echo  "💣 Destroy all"
 
 re: fclean all
 
