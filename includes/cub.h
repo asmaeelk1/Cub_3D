@@ -6,7 +6,7 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 06:30:49 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/14 23:01:44 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/01/15 07:59:33 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ typedef struct s_player
 	int		turn_dir;
 	int		xc;
 	int		yc;
+    int     x_pos_map;
+    int     y_pos_map;
 }	t_player;
 
 typedef struct s_cast

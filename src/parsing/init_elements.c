@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_elements.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asel-kha <asel-kha@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 23:01:25 by asel-kha          #+#    #+#             */
-/*   Updated: 2024/12/17 23:42:57 by asel-kha         ###   ########.fr       */
+/*   Updated: 2025/01/15 07:57:34 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,8 @@ void	read_elements(int file_name, t_map_data **map_data)
 
 	i_elements = 6;
 	line = get_next_line(file_name);
+	if(!line)
+		ft_err("Empty file ");
 	while (line && i_elements > 0)
 	{
 		if (!ft_strncmp(line, "\n", ft_strlen(line)))
