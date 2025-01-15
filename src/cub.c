@@ -6,7 +6,7 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 06:29:40 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/15 17:21:47 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/01/15 18:56:52 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,32 +144,33 @@ void	raycasting(t_map_data **map_data)
 			cast->cameraX = 2 * x / (float)(*map_data)->width_map - 1;
 			cast->rayDirX = (*map_data)->player->xc + (*map_data)->player->xc * cast->cameraX;
 			cast->rayDirY = (*map_data)->player->yc + (*map_data)->player->yc * cast->cameraX;
-			cast->mapX = (int)(*map_data)->player->x_pos;
-			cast->mapY = (int)(*map_data)->player->y_pos;
+			cast->mapX = (int)(*map_data)->player->x_pos_map;
+			cast->mapY = (int)(*map_data)->player->y_pos_map;
 			cast->deltaDistX = fabs(1 / cast->rayDirX);
 			cast->deltaDistY = fabs(1 / cast->rayDirY);
 			cast->hit = 0;
-
+			printf("mapX = %d, mapY = %d\n", cast->mapX, cast->mapY);
+			printf("x_pos_map = %d, y_pos_map = %d\n", (*map_data)->player->x_pos_map, (*map_data)->player->y_pos_map);
 			// Calcule step ou sideDist
 			if (cast->rayDirX < 0)
 			{
 				cast->stepX = -1;
-				cast->sideDistX = ((*map_data)->player->x_pos - cast->mapX) * cast->deltaDistX;
+				cast->sideDistX = ((*map_data)->player->x_pos_map - cast->mapX) * cast->deltaDistX;
 			}
 			else
 			{
 				cast->stepX = 1;
-				cast->sideDistX = (cast->mapX + 1.0 - (*map_data)->player->x_pos) * cast->deltaDistX;
+				cast->sideDistX = (cast->mapX + 1.0 - (*map_data)->player->x_pos_map) * cast->deltaDistX;
 			}
 			if (cast->rayDirY < 0)
 			{
 				cast->stepY = -1;
-				cast->sideDistY = ((*map_data)->player->y_pos - cast->mapY) * cast->deltaDistY;
+				cast->sideDistY = ((*map_data)->player->y_pos_map - cast->mapY) * cast->deltaDistY;
 			}
 			else
 			{
 				cast->stepY = 1;
-				cast->sideDistY = (cast->mapY + 1.0 - (*map_data)->player->y_pos) * cast->deltaDistY;
+				cast->sideDistY = (cast->mapY + 1.0 - (*map_data)->player->y_pos_map) * cast->deltaDistY;
 			}
 
 			// Hna reje3t DDA
@@ -189,13 +190,14 @@ void	raycasting(t_map_data **map_data)
 				}
 				if ((*map_data)->map[cast->mapY][cast->mapX] == '1')
 					cast->hit = 1;
+				printf("mapX = %d, mapY = %d\n", cast->mapX, cast->mapY);
 			}
 
 			// Calcule dyal distance 3la l wall
 			if (cast->side == 0)
-				cast->perpWallDist = (cast->mapX - (*map_data)->player->x_pos + (1 - cast->stepX) / 2) / cast->rayDirX;
+				cast->perpWallDist = (cast->mapX - (*map_data)->player->x_pos_map + (1 - cast->stepX) / 2) / cast->rayDirX;
 			else
-				cast->perpWallDist = (cast->mapY - (*map_data)->player->y_pos + (1 - cast->stepY) / 2) / cast->rayDirY;
+				cast->perpWallDist = (cast->mapY - (*map_data)->player->y_pos_map + (1 - cast->stepY) / 2) / cast->rayDirY;
 
 			// Calcule height dyal line
 			cast->lineHeight = (int)((*map_data)->height_map / cast->perpWallDist);
