@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   init_elements.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asel-kha <asel-kha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 23:01:25 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/15 07:57:34 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/01/08 11:51:32 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub.h"
+#include "../../../includes/cub.h"
 
 int	rgb_to_int(int r, int g, int b, int a)
 {
@@ -25,12 +25,14 @@ void	pars_colors(char *color)
 
 	i = -1;
 	i_rgb = 0;
-	color_token = ft_strtok(color, ",");
-	if (color[ft_strlen(color) - 1] == ',')
+	if(!ft_strtrim(color, " "))
+		ft_err("Empty file");
+	if (color[ft_strlen(color) - 1] == ',' || color[0] == ',')
 		ft_err(INVALID_COLOR_FORMAT);
 	while (color[++i])
 		if (color[i] == ',' && color[i + 1] == ',')
 			ft_err(INVALID_COLOR_FORMAT);
+	color_token = ft_strtok(color, ",");
 	while (color_token)
 	{
 		if (i_rgb >= 3)
@@ -50,6 +52,8 @@ static void	init_colors(t_colors **colors, char *line)
 	char	*save_line;
 	int		color;
 
+	if (!ft_strncmp(line, "\n", ft_strlen(line)))
+		ft_err("invalid file");
 	save_line = line;
 	line[ft_strlen(line) - 1] = 0;
 	line = ft_strtrim(line + 2, " ");
@@ -66,27 +70,27 @@ static void	init_colors(t_colors **colors, char *line)
 
 static void	init_textures(t_textures **textures, t_colors **colors, char *line)
 {
-	while (*line == ' ')
+	while (*line == ' ' )
 		line++;
 	if (!ft_strncmp(line, "NO ", 3))
 	{
-		(*textures)->north = ft_strtrim(line + 3, " ");
-		(*textures)->north[ft_strlen((*textures)->north) - 1] = 0;
+		line[ft_strlen(line) - 1] = 0;
+		(*textures)->north = ft_strtrim(line + 3, " \t");
 	}
 	else if (!ft_strncmp(line, "SO ", 3))
 	{
-		(*textures)->south = ft_strtrim(line + 3, " ");
-		(*textures)->south[ft_strlen((*textures)->south) - 1] = 0;
+		line[ft_strlen(line) - 1] = 0;
+		(*textures)->south = ft_strtrim(line + 3, " \t");
 	}
 	else if (!ft_strncmp(line, "WE ", 3))
 	{
-		(*textures)->west = ft_strtrim(line + 3, " ");
-		(*textures)->west[ft_strlen((*textures)->west) - 1] = 0;
+		line[ft_strlen(line) - 1] = 0;
+		(*textures)->west = ft_strtrim(line + 3, " \t");
 	}
 	else if (!ft_strncmp(line, "EA ", 3))
 	{
-		(*textures)->east = ft_strtrim(line + 3, " ");
-		(*textures)->east[ft_strlen((*textures)->east) - 1] = 0;
+		line[ft_strlen(line) - 1] = 0;
+		(*textures)->east = ft_strtrim(line + 3, " \t");
 	}
 	else
 		init_colors(colors, line);

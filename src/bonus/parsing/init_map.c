@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asel-kha <asel-kha@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 23:27:44 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/15 19:46:59 by asel-kha         ###   ########.fr       */
+/*   Updated: 2025/01/17 15:57:47 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,27 +24,16 @@ static void	check_if_walls(char *line)
 	}
 }
 
-
-static void	check_char(char *line_map, int i_map, t_player *player)
+static void	check_char(char *line_map)
 {
 	int	i;
 
 	i = -1;
-
 	while (line_map[++i])
-	{
 		if (line_map[i] != '1' && line_map[i] != '0' && line_map[i] != 'N'
 			&& line_map[i] != 'S' && line_map[i] != 'W' && line_map[i] != 'E'
 			&& line_map[i] != ' ')
 			ft_err(INVALID_MAP);
-		if(line_map[i] == 'N' || line_map[i] == 'S' || line_map[i] == 'W'
-			|| line_map[i] == 'E')
-			{
-				player->x_pos_map = i;
-				player->y_pos_map = i_map;
-				
-			}
-	}
 }
 
 static void	is_zero_next_to_space(char *l_curr, char *prev, char *next,
@@ -110,11 +99,10 @@ void	pars_map(t_map_data **map_data)
 	while ((*map_data)->map[++i_map])
 	{
 		len_current_line = ft_strlen((*map_data)->map[i_map]);
-		check_char((*map_data)->map[i_map], i_map, (*map_data)->player);
+		check_char((*map_data)->map[i_map]);
 		if (max_len_line < len_current_line)
 			max_len_line = len_current_line;
 	}
-	printf("x: %d, y: %d\n", (*map_data)->player->x_pos_map, (*map_data)->player->y_pos_map);
 	i_map = -1;
 	while ((*map_data)->map[++i_map])
 	{

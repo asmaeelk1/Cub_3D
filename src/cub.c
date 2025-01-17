@@ -6,7 +6,7 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 06:29:40 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/17 12:08:44 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/01/17 15:57:19 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,6 @@ void	cleanup_and_exit(t_map_data **data)
 	gcollector(0, 0);
 	exit(EXIT_SUCCESS);
 }
-
-// void	__attribute__ ((destructor)) _leaks(void)
-// {
-// 	system("leaks cub3D");
-// }
 
 static void	set_data(t_map_data *map_data)
 {

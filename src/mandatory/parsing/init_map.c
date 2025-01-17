@@ -6,7 +6,7 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 23:27:44 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/15 19:17:57 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/01/17 15:58:54 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,11 @@ static void	check_char(char *line_map, int i_map, t_player *player)
 			&& line_map[i] != 'S' && line_map[i] != 'W' && line_map[i] != 'E'
 			&& line_map[i] != ' ')
 			ft_err(INVALID_MAP);
-		if(line_map[i] == 'N' || line_map[i] == 'S' || line_map[i] == 'W'
-			|| line_map[i] == 'E')
+		if(line_map[i] != 'N' && line_map[i] != 'S' && line_map[i] != 'W'
+			&& line_map[i] != 'E')
 			{
 				player->x_pos_map = i;
 				player->y_pos_map = i_map;
-				
 			}
 	}
 }
