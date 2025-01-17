@@ -6,7 +6,7 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 06:30:49 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/15 07:59:33 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/01/17 10:34:30 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <limits.h>
 # include <math.h>
 # include "../MLX42/include/MLX42/MLX42.h"
+// # include "../minilibx-linux/mlx.h"
 
 enum    e_macros
 {
@@ -54,6 +55,15 @@ typedef struct s_textures
     char    *east;
 }    t_textures;
 
+typedef struct s_textures_img
+{
+    void    *image;
+    int     pixels;
+    int     line;
+    int     endian;
+    int     *address;
+}    t_textures_img;
+
 typedef struct s_colors
 {
     int	c_floor;
@@ -62,8 +72,8 @@ typedef struct s_colors
 
 typedef struct s_mlx_data
 {
-    mlx_t        	*mlx;
-    mlx_image_t    *image;
+    mlx_t			*mlx;
+    mlx_image_t		*image;
 	int				width;
 	int				height;
 }    t_mlx_data;
@@ -74,8 +84,8 @@ typedef struct s_player
     bool	if_player_exist;
 	int		x_pos;
 	int		y_pos;
-	float		rotate_angle;
-	float		rotation_speed;
+	double	rotate_angle;
+	double	rotation_speed;
 	int		turn_dir;
 	int		xc;
 	int		yc;
@@ -85,17 +95,17 @@ typedef struct s_player
 
 typedef struct s_cast
 {
-    float   cameraX; // X pos dyal camera
-    float   rayDirX; // Dir dyal ray f x
-    float   rayDirY; // Dir dyal ray f y
+    double   cameraX; // X pos dyal camera
+    double   rayDirX; // Dir dyal ray f x
+    double   rayDirY; // Dir dyal ray f y
     int     mapX;    // X pos f map 
     int     mapY;    // Y pos f map
-    float   sideDistX; // Distance l a9rab x
-    float   sideDistY; // Distance l a9rab y
-    float   deltaDistX; // Distance dyal 1 tile f x
-    float   deltaDistY; // Distance dyal 1 tile f y
-    float   perpWallDist; // Distance dyal ray f wall (90 degree)
-    float   posX; // X pos dyal player
+    double   sideDistX; // Distance l a9rab x
+    double   sideDistY; // Distance l a9rab y
+    double   deltaDistX; // Distance dyal 1 tile f x
+    double   deltaDistY; // Distance dyal 1 tile f y
+    double   perpWallDist; // Distance dyal ray f wall (90 degree)
+    double   posX; // X pos dyal player
     int     stepX; // Step dir f x (1 oula -1)
     int     stepY;  // Step dir f y (1 oula -1)
     int     hit; // Check ila t9as l wall oula la
@@ -117,12 +127,10 @@ typedef struct s_map_data
     int				height_map;
     int				width_map;
     char			**map;
+	int				**arr_text;
 	int				tile_size;
-    t_cast          *cast;
+    t_cast          cast;
 }    t_map_data;
-
-
-
 
 typedef struct s_p
 {
@@ -165,14 +173,17 @@ char	*get_next_line(int fd);
 void	ft_err(char *err_msg);
 
 // draw 2D map
-void	plot_line(t_map_data **data, t_p p0, t_p p1, long color);
-void draw_square(t_map_data **map_data, int x, int y, long color);
-void circleBres(t_map_data *map_data, t_player *player, int r, long color);
-void map_2d(t_map_data **map_data);
+void    plot_line(t_map_data **data, t_p p0, t_p p1, long color);
+void    draw_square(t_map_data **map_data, int x, int y, long color);
+void    circleBres(t_map_data *map_data, t_player *player, int r, long color);
+void    map_2d(t_map_data **map_data);
 // player movement
-void	my_keyhook(void *param);
-bool is_wall(t_map_data **map_data, int x, int y);
-void	raycasting(t_map_data **map_data);
-
+void    my_keyhook(void *param);
+bool    is_wall(t_map_data **map_data, int x, int y);
+void	recheck_text(t_map_data **map_data);
+void	rendering(t_map_data **map_data);
+void    start_raycast(t_map_data **map_data);
+void	raycasting_init(t_cast *cast);
+void	raycasting(t_map_data **map_data, t_cast *cast);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_hooks.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wabolles <wabolles@student.42.fr>          +#+  +:+       +#+        */
+/*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 03:28:15 by wabolles          #+#    #+#             */
-/*   Updated: 2024/12/31 03:40:17 by wabolles         ###   ########.fr       */
+/*   Updated: 2025/01/17 05:46:52 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	rotation_hook(t_map_data *data)
 {
-	float	value;
+	double	value;
 
 	if (mlx_is_key_down(data->data_mlx->mlx, MLX_KEY_RIGHT))
 	{
@@ -30,7 +30,7 @@ void	rotation_hook(t_map_data *data)
 	}
 }
 
-void	translation_hook2(t_map_data *data, float pos_x, float pos_y, float mv)
+void	translation_hook2(t_map_data *data, double pos_x, double pos_y, double mv)
 {
 	if (mlx_is_key_down(data->data_mlx->mlx, MLX_KEY_D))
 	{
@@ -46,9 +46,9 @@ void	translation_hook2(t_map_data *data, float pos_x, float pos_y, float mv)
 
 void	translation_hook(t_map_data *data)
 {
-	float	pos_x;
-	float	pos_y;
-	float	movement_speed;
+	double	pos_x;
+	double	pos_y;
+	double	movement_speed;
 
 	pos_x = 0;
 	pos_y = 0;
