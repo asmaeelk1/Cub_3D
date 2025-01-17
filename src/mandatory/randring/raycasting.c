@@ -6,7 +6,7 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 05:35:38 by oel-feng          #+#    #+#             */
-/*   Updated: 2025/01/17 12:08:10 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/01/17 16:14:48 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,7 +192,6 @@ void	raycasting(t_map_data **map_data, t_cast *cast)
 			mlx_put_pixel((*map_data)->data_mlx->image, j, x, 0x00FF00);
 			j++;
 		}
-		
 		// if (cast->side == 0)
 		// 	cast->posX = (*map_data)->player->y_pos_map + cast->perpWallDist * cast->rayDirY;
 		// else

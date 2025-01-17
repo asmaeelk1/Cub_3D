@@ -6,7 +6,7 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 06:36:29 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/17 15:57:52 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/01/17 16:06:30 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ static void	read_map(int file_name, t_map_data **map_data)
 	map_lines = NULL;
 	while (line && !ft_strncmp(line, "\n", ft_strlen(line)))
 		line = get_next_line(file_name);
+	if(!line)
+		ft_err("Empty_file");
 	line = ft_strjoin(line, "\n");
 	while (line)
 	{
@@ -61,6 +63,7 @@ void	parsing(char *file_name, t_map_data **map_data)
 	int	fd;
 
 	fd = check_file(file_name);
+	
 	read_elements(fd, map_data);
 	read_map(fd, map_data);
 	pars_map(map_data);

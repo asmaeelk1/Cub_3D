@@ -6,7 +6,7 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 23:27:44 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/17 15:57:47 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/01/17 16:06:10 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ static void	is_zero_next_to_space(char *l_curr, char *prev, char *next,
 	int	i;
 
 	i = -1;
+	if(l_curr[0] != '1' || l_curr[ft_strlen(l_curr) - 1] != '1' )
+		ft_err(INVALID_MAP);
 	while (l_curr[++i])
 	{
 		if (l_curr[i] == '0' || l_curr[i] == 'N' || l_curr[i] == 'S'
@@ -94,8 +96,7 @@ void	pars_map(t_map_data **map_data)
 	int	max_len_line;
 	int	len_current_line;
 
-	i_map = -1;
-	max_len_line = 0;
+	(1) && (i_map = -1, max_len_line = 0);
 	while ((*map_data)->map[++i_map])
 	{
 		len_current_line = ft_strlen((*map_data)->map[i_map]);

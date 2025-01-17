@@ -3,17 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map2D.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-<<<<<<< HEAD:src/rendering/map2D.c
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 12:26:38 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/17 05:56:26 by oel-feng         ###   ########.fr       */
-=======
-/*   By: ghriyba <ghriyba@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/04 21:23:53 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/11 20:41:38 by ghriyba          ###   ########.fr       */
->>>>>>> main:src/mandatory/randring/map2D.c
+/*   Updated: 2025/01/17 16:08:06 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +25,6 @@ void	draw_vector(t_map_data **map_data)
 
 void draw_player(t_map_data **map_data, int color)
 {
-<<<<<<< HEAD:src/rendering/map2D.c
-	player->xc = player->x_pos + 10 + (*map_data)->p_x_pos ;
-	player->yc = player->y_pos + 10 + (*map_data)->p_y_pos;
-	int r = 6;
-	circleBres(*map_data, player, r, color);
-	raycasting(map_data, &(*map_data)->cast);
-=======
 	int i;
     int j;
     int start_x = (*map_data)->player->x_pos - 4;
@@ -60,7 +46,6 @@ void draw_player(t_map_data **map_data, int color)
 	(*map_data)->player->xc = (*map_data)->player->x_pos  + (*map_data)->p_x_pos ;
 	(*map_data)->player->yc = (*map_data)->player->y_pos + (*map_data)->p_y_pos;
 	draw_vector(map_data);
->>>>>>> main:src/mandatory/randring/map2D.c
 }
 
 void map_2d(t_map_data **map_data)
