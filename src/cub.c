@@ -6,7 +6,7 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 06:29:40 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/17 10:17:36 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/01/17 12:08:44 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	main(int ac, char **av)
 	set_data(map_data);
 	parsing(av[1], &map_data);
 	init_mlx = init_mlx_data(&map_data);
-	raycasting_init(cast);
+	// raycasting_init(cast);
 	if (init_mlx)
 	{
 		gcollector(0, 0);

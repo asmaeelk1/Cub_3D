@@ -6,7 +6,7 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 06:30:49 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/17 10:34:30 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/01/17 12:06:42 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,7 +181,7 @@ void    map_2d(t_map_data **map_data);
 void    my_keyhook(void *param);
 bool    is_wall(t_map_data **map_data, int x, int y);
 void	recheck_text(t_map_data **map_data);
-void	rendering(t_map_data **map_data);
+// void	rendering(t_map_data **map_data);
 void    start_raycast(t_map_data **map_data);
 void	raycasting_init(t_cast *cast);
 void	raycasting(t_map_data **map_data, t_cast *cast);

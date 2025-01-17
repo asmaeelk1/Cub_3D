@@ -6,7 +6,7 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 05:35:38 by oel-feng          #+#    #+#             */
-/*   Updated: 2025/01/17 10:21:57 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/01/17 12:08:10 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,33 +29,33 @@ void	recheck_text(t_map_data **map_data)
 		(*map_data)->arr_text[i] = gcollector((*map_data)->data_mlx->height * sizeof(int), 1);
 }
 
-void	rendering(t_map_data **map_data)
-{
-	t_textures_img	*text;
-	int			x;
-	int			y;
+// void	rendering(t_map_data **map_data)
+// {
+// 	t_textures_img	*text;
+// 	int			x;
+// 	int			y;
 
-	text = gcollector(sizeof(t_textures_img), 1);
-	text->image = NULL;
-	text->address = NULL;
-	text->line = 0;
-	text->pixels = 0;
-	text->endian = 0;
-	text->image = mlx_new_image((*map_data)->data_mlx->mlx, (*map_data)->data_mlx->width, (*map_data)->data_mlx->height);
-	if (!text->image)
-		ft_err("Error: Memory allocation failed");
-	text->address = (int *)mlx_get_data_addr(text->image, &text->pixels, &text->line, &text->endian);
-	x = -1;
-	while (++x < (*map_data)->data_mlx->height)
-	{
-		y = -1;
-		while (++y < (*map_data)->data_mlx->width)
-			text->address[(*map_data)->data_mlx->width * y + x] = (*map_data)->arr_text[x][y];
-	}
-	// mlx_image_to_window((*map_data)->data_mlx->mlx, (*map_data)->data_mlx->image, 0, 0);
-	mlx_image_to_window((*map_data)->data_mlx->mlx, text->image, 0, 0);
-	mlx_close_window((*map_data)->data_mlx->mlx);
-}
+// 	text = gcollector(sizeof(t_textures_img), 1);
+// 	text->image = NULL;
+// 	text->address = NULL;
+// 	text->line = 0;
+// 	text->pixels = 0;
+// 	text->endian = 0;
+// 	text->image = mlx_new_image((*map_data)->data_mlx->mlx, (*map_data)->data_mlx->width, (*map_data)->data_mlx->height);
+// 	if (!text->image)
+// 		ft_err("Error: Memory allocation failed");
+// 	text->address = (int *)mlx_get_data_addr(text->image, &text->pixels, &text->line, &text->endian);
+// 	x = -1;
+// 	while (++x < (*map_data)->data_mlx->height)
+// 	{
+// 		y = -1;
+// 		while (++y < (*map_data)->data_mlx->width)
+// 			text->address[(*map_data)->data_mlx->width * y + x] = (*map_data)->arr_text[x][y];
+// 	}
+// 	// mlx_image_to_window((*map_data)->data_mlx->mlx, (*map_data)->data_mlx->image, 0, 0);
+// 	mlx_image_to_window((*map_data)->data_mlx->mlx, text->image, 0, 0);
+// 	mlx_close_window((*map_data)->data_mlx->mlx);
+// }
 
 void    start_raycast(t_map_data **map_data)
 {
@@ -67,7 +67,7 @@ void    start_raycast(t_map_data **map_data)
 	recheck_text(map_data);
 	raycasting_init(&cast);
 	raycasting(map_data, &cast);
-	rendering(map_data);
+	// rendering(map_data);
 }
 
 void raycasting_init(t_cast *cast)
@@ -122,6 +122,7 @@ void raycasting_init(t_cast *cast)
 void	raycasting(t_map_data **map_data, t_cast *cast)
 {
 	int x;
+	int	j;
 
 	x = 0;
 	while (x < (*map_data)->width_map)
@@ -185,11 +186,18 @@ void	raycasting(t_map_data **map_data, t_cast *cast)
 		cast->drawEnd = cast->lineHeight / 2 + (*map_data)->height_map / 2;
 		if (cast->drawEnd >= (*map_data)->height_map)
 			cast->drawEnd = (*map_data)->height_map - 1;
-		if (cast->side == 0)
-			cast->posX = (*map_data)->player->y_pos_map + cast->perpWallDist * cast->rayDirY;
-		else
-			cast->posX = (*map_data)->player->x_pos_map + cast->perpWallDist * cast->rayDirX;
-		cast->posX -= floor(cast->posX);
+		j = cast->drawStart;
+		while (j < cast->drawEnd)
+		{
+			mlx_put_pixel((*map_data)->data_mlx->image, j, x, 0x00FF00);
+			j++;
+		}
+		
+		// if (cast->side == 0)
+		// 	cast->posX = (*map_data)->player->y_pos_map + cast->perpWallDist * cast->rayDirY;
+		// else
+		// 	cast->posX = (*map_data)->player->x_pos_map + cast->perpWallDist * cast->rayDirX;
+		// cast->posX -= floor(cast->posX);
 		x++;
 	}
 }
