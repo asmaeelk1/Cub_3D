@@ -10,36 +10,46 @@ SRC			=	src/cub.c \
 
 LIBMLX		=	MLX42/build/libmlx42.a
 LIBMLX_INC	=	-IMLX/include/MLX -Iinclude
-BREW_PREFIX	=	$(shell brew --prefix)
-MLXFLG		=	-Iinclude -L$(BREW_PREFIX)/lib -lglfw -lm -ldl -lX11 -lXext -lXcursor -lXfixes -lpthread
 OBJ			=	$(SRC:%.c=%.o)
 BNS_OBJ		=	$(BNS_SRCS:%.c=%.o)
 HEADER		= 	includes/cub.h
+UNAME_S := $(shell uname -s)
+
+ifeq ($(UNAME_S),Linux)
+    BREW_PREFIX	= $(shell brew --prefix)
+    MLXFLG		= -Iinclude -L$(BREW_PREFIX)/lib -lglfw -lm -ldl -lX11 -lXext -lXcursor -lXfixes -lpthread
+    $(info Building for Linux...)
+endif
+
+ifeq ($(UNAME_S),Darwin)
+    MLXFLG		= -Iinclude -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/" -framework Cocoa -framework OpenGL -framework IOKit
+    $(info Building for macOS...)
+endif
 
 all: $(NAME)
 
 %.o: %.c $(HEADER)
-	@$(CC) $(CFLAGS) $(LIBMLX_INC)  -c $< -o $@
+	@$(CC) $(CFLAGS) $(LIBMLX_INC) -c $< -o $@
 	@echo "🛠️ Creating Objects!!"
 
 $(NAME): $(OBJ)
 	@$(CC) $(OBJ) $(MLXFLG) $(LIBMLX) $(CFLAGS) -o $(NAME)
 	@echo "👌 Done"
 
-bonus : $(BNS_NAME)
+bonus: $(BNS_NAME)
 
-$(BNS_NAME) : $(BNS_OBJ)
+$(BNS_NAME): $(BNS_OBJ)
 	@$(CC) $(CFLAGS) $(BNS_OBJ) -o $(BNS_NAME)
 	@echo "✨ Bonus Done"
 
 clean:
 	@rm -f $(OBJ) $(BNS_OBJ)
-	@echo  "🧨 Deleting OBJS."
+	@echo "🧨 Deleting OBJS."
 
 fclean: clean
-	@rm -f  $(NAME) $(BNS_NAME)
-	@echo  "💣 Destroy all"
+	@rm -f $(NAME) $(BNS_NAME)
+	@echo "💣 Destroy all"
 
 re: fclean all
 
-.PHONY: clean 
+.PHONY: clean all re fclean bonus
