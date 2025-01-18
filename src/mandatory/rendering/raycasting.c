@@ -6,7 +6,7 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 05:35:38 by oel-feng          #+#    #+#             */
-/*   Updated: 2025/01/18 14:24:27 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/01/18 14:25:26 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,8 +199,8 @@ void raycasting(t_map_data **map_data, t_cast *cast)
 				}
 				  uint32_t color = (texPixel[3] << 24) | (texPixel[0] << 16) | 
                             (texPixel[1] << 8) | texPixel[2];
-				// if (cast->side == 1)
-				// 	color = (color >> 1) & 0xFFFFFFFF;
+				if (cast->side != 1)
+					color = (color >> 1) & 0x7F7F7F7F;
 				pixels[index] = color;
 			}
 			else
