@@ -6,7 +6,7 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 06:30:49 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/18 08:57:33 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/01/18 09:08:11 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,11 +178,9 @@ void	ft_err(char *err_msg);
 // draw 2D map
 void    plot_line(t_map_data **data, t_p p0, t_p p1, long color);
 void    draw_square(t_map_data **map_data, int x, int y, long color);
-void    circleBres(t_map_data *map_data, t_player *player, int r, long color);
 void    map_2d(t_map_data **map_data);
 // player movement
 void    my_keyhook(void *param);
-bool    is_wall(t_map_data **map_data, int x, int y);
 void	recheck_text(t_map_data **map_data);
 // void	rendering(t_map_data **map_data);
 void    start_raycast(t_map_data **map_data);

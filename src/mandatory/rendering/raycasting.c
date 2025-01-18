@@ -6,7 +6,7 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 05:35:38 by oel-feng          #+#    #+#             */
-/*   Updated: 2025/01/18 08:57:50 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/01/18 09:08:45 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -283,7 +283,6 @@ void raycasting_init(t_cast *cast)
 	cast->drawEnd = 0;
 }
 
-
 void raycasting(t_map_data **map_data, t_cast *cast)
 {
     if (!map_data || !*map_data || !(*map_data)->data_mlx || !(*map_data)->data_mlx->image)
@@ -295,8 +294,7 @@ void raycasting(t_map_data **map_data, t_cast *cast)
     const int width = (*map_data)->data_mlx->image->width;
     const int height = (*map_data)->data_mlx->image->height;
     uint32_t* pixels = (uint32_t*)(*map_data)->data_mlx->image->pixels;
-    
-    // Debug prints
+
     printf("Player position: x=%d, y=%d\n", (*map_data)->player->x_pos_map, (*map_data)->player->y_pos_map);
     printf("Player direction: xc=%d, yc=%d\n", (*map_data)->player->xc, (*map_data)->player->yc);
 	
@@ -306,7 +304,7 @@ void raycasting(t_map_data **map_data, t_cast *cast)
     double planeY = 0.66;
 
     for (int i = 0; i < width * height; i++)
-        pixels[i] = 0x000000FF;
+        pixels[i] = 0xFF000000;
     for (int x = 0; x < width; x++)
     {
         cast->cameraX = 2 * x / (double)width - 1;
@@ -378,11 +376,11 @@ void raycasting(t_map_data **map_data, t_cast *cast)
             if (index < 0 || index >= width * height)
                 continue;
             if (y < cast->drawStart)
-                pixels[index] = 0x444444FF;
+                pixels[index] = 0xFF0000FF;
             else if (y < cast->drawEnd)
-                pixels[index] = cast->side == 0 ? 0xFF0000FF : 0xCC0000FF;
+                pixels[index] = cast->side == 0 ? 0xFF00FF00 : 0xFF00CC00;
             else
-                pixels[index] = 0x888888FF;
+                pixels[index] = 0xFFFF0000;
         }
     }
 }
