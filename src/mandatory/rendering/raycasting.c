@@ -6,28 +6,13 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 05:35:38 by oel-feng          #+#    #+#             */
-/*   Updated: 2025/01/18 06:17:35 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/01/18 08:57:50 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub.h"
 
-void	recheck_text(t_map_data **map_data)
-{
-	int i;
 
-	if ((*map_data)->arr_text)
-	{
-		i = -1;
-		while (++i < 4)
-			free((*map_data)->arr_text[i]);
-		free((*map_data)->arr_text);
-	}
-	(*map_data)->arr_text = gcollector(((*map_data)->data_mlx->width + 1) * sizeof(int *), 1);
-	i = -1;
-	while (++i < (*map_data)->data_mlx->width)
-		(*map_data)->arr_text[i] = gcollector((*map_data)->data_mlx->height * sizeof(int), 1);
-}
 
 // void	rendering(t_map_data **map_data)
 // {
@@ -57,53 +42,48 @@ void	recheck_text(t_map_data **map_data)
 // 	mlx_close_window((*map_data)->data_mlx->mlx);
 // }
 
-void load_textures(t_map_data *map_data)
-{
-	map_data->textures[0] = mlx_load_png("textures/test.png");
-	map_data->textures[1] = mlx_load_png("textures/test.png");
-	map_data->textures[2] = mlx_load_png("textures/test.png");
-	map_data->textures[3] = mlx_load_png("textures/test.png");
-	if (!map_data->textures[0] || !map_data->textures[1] || !map_data->textures[2] || !map_data->textures[3])
-		ft_err("Error: Failed to load textures");
-	map_data->tex_width = map_data->textures[0]->width;
-	map_data->tex_height = map_data->textures[0]->height;
-}
+// void    start_raycast(t_map_data **map_data)
+// {
+// 	if (!map_data || !*map_data)
+//     {
+//         printf("Error: Invalid map_data\n");
+//         return;
+//     }
+    
+//     if (!(*map_data)->data_mlx)
+//     {
+//         printf("Error: data_mlx is NULL\n");
+//         return;
+//     }
+    
+//     if (!(*map_data)->data_mlx->mlx)
+//     {
+//         printf("Error: MLX instance is NULL\n");
+//         return;
+//     }
+    
+//     if (!(*map_data)->data_mlx->image)
+//     {
+//         printf("Error: MLX image is NULL\n");
+//         return;
+//     }
+    
+//     printf("Window dimensions: %d x %d\n", (*map_data)->data_mlx->width, (*map_data)->data_mlx->height);
+//     printf("Map dimensions: %d x %d\n", (*map_data)->width_map, (*map_data)->height_map);
+//     printf("Player position: (%d, %d)\n", (*map_data)->player->x_pos_map, (*map_data)->player->y_pos_map);
+//     printf("Player direction: (%d, %d)\n", (*map_data)->player->xc, (*map_data)->player->yc);
 
-void    start_raycast(t_map_data **map_data)
-{
-	t_cast  cast;
-	int     x;
+// 	t_cast  cast;
+// 	int     x;
 
-	x = 0;
-	cast = (*map_data)->cast;
-	recheck_text(map_data);
-	load_textures(*map_data);
-	raycasting_init(&cast);
-	raycasting(map_data, &cast);
-	// rendering(map_data);
-}
-
-void raycasting_init(t_cast *cast)
-{
-	cast->cameraX = 0;
-	cast->rayDirX = 0;
-	cast->rayDirY = 0;
-	cast->mapX = 0;
-	cast->mapY = 0;
-	cast->sideDistX = 0;
-	cast->sideDistY = 0;
-	cast->deltaDistX = 0;
-	cast->deltaDistY = 0;
-	cast->perpWallDist = 0;
-	cast->posX = 0;
-	cast->stepX = 0;
-	cast->stepY = 0;
-	cast->hit = 0;
-	cast->side = 0;
-	cast->lineHeight = 0;
-	cast->drawStart = 0;
-	cast->drawEnd = 0;
-}
+// 	x = 0;
+// 	cast = (*map_data)->cast;
+// 	recheck_text(map_data);
+// 	load_textures(*map_data);
+// 	raycasting_init(&cast);
+// 	raycasting(map_data, &cast);
+// 	// rendering(map_data);
+// }
 
 // void	mlx_my_draw_line(void *mlx, int x, int y, int x1, int y1, int color)
 // {
@@ -132,110 +112,444 @@ void raycasting_init(t_cast *cast)
 // 	}
 // }
 
-void	raycasting(t_map_data **map_data, t_cast *cast)
+// void	raycasting(t_map_data **map_data, t_cast *cast)
+// {
+// 	int x;
+// 	int	y;
+// 	double planeX = 0;
+//     double planeY = 0.66;
+	
+// 	if (!map_data || !*map_data || !(*map_data)->data_mlx || !(*map_data)->data_mlx->image)
+//     {
+//         ft_err("Error: Invalid MLX data");
+//         return;
+//     }
+
+//     int width = (*map_data)->data_mlx->width;
+//     int height = (*map_data)->data_mlx->height;
+//     x = 0;
+//     while (x < width)
+//     {
+//         cast->cameraX = 2 * x / (double)width - 1;
+//         cast->rayDirX = (*map_data)->player->xc + planeX * cast->cameraX;
+//         cast->rayDirY = (*map_data)->player->yc + planeY * cast->cameraX;
+//         cast->mapX = (int)(*map_data)->player->x_pos_map;
+//         cast->mapY = (int)(*map_data)->player->y_pos_map;
+//         cast->deltaDistX = (cast->rayDirX == 0) ? 1e30 : fabs(1 / cast->rayDirX);
+//         cast->deltaDistY = (cast->rayDirY == 0) ? 1e30 : fabs(1 / cast->rayDirY);
+//         cast->hit = 0;
+//         if (cast->rayDirX < 0)
+//         {
+//             cast->stepX = -1;
+//             cast->sideDistX = ((*map_data)->player->x_pos_map - cast->mapX) * cast->deltaDistX;
+//         }
+//         else
+//         {
+//             cast->stepX = 1;
+//             cast->sideDistX = (cast->mapX + 1.0 - (*map_data)->player->x_pos_map) * cast->deltaDistX;
+//         }
+//         if (cast->rayDirY < 0)
+//         {
+//             cast->stepY = -1;
+//             cast->sideDistY = ((*map_data)->player->y_pos_map - cast->mapY) * cast->deltaDistY;
+//         }
+//         else
+//         {
+//             cast->stepY = 1;
+//             cast->sideDistY = (cast->mapY + 1.0 - (*map_data)->player->y_pos_map) * cast->deltaDistY;
+//         }
+//         while (cast->hit == 0)
+//         {
+//             if (cast->sideDistX < cast->sideDistY)
+//             {
+//                 cast->sideDistX += cast->deltaDistX;
+//                 cast->mapX += cast->stepX;
+//                 cast->side = 0;
+//             }
+//             else
+//             {
+//                 cast->sideDistY += cast->deltaDistY;
+//                 cast->mapY += cast->stepY;
+//                 cast->side = 1;
+//             }
+//             if (cast->mapX < 0 || cast->mapX >= (*map_data)->width_map || 
+//                 cast->mapY < 0 || cast->mapY >= (*map_data)->height_map)
+//                 break;
+//             if ((*map_data)->map[cast->mapY][cast->mapX] == '1')
+//                 cast->hit = 1;
+//         }
+//         if (cast->side == 0)
+//             cast->perpWallDist = (cast->mapX - (*map_data)->player->x_pos_map + (1 - cast->stepX) / 2) / cast->rayDirX;
+//         else
+//             cast->perpWallDist = (cast->mapY - (*map_data)->player->y_pos_map + (1 - cast->stepY) / 2) / cast->rayDirY;
+//         cast->lineHeight = (int)(height / cast->perpWallDist);
+//         cast->drawStart = -cast->lineHeight / 2 + height / 2;
+//         if (cast->drawStart < 0)
+//             cast->drawStart = 0;
+//         cast->drawEnd = cast->lineHeight / 2 + height / 2;
+//         if (cast->drawEnd >= height)
+//             cast->drawEnd = height - 1;
+//         y = 0;
+//         while (y < cast->drawStart && y < height)
+//         {
+//             if (x >= 0 && x < width)
+//                 mlx_put_pixel((*map_data)->data_mlx->image, x, y, 0x444444);
+//             y++;
+//         }
+//         y = cast->drawStart;
+//         while (y < cast->drawEnd && y < height)
+//         {
+//             if (x >= 0 && x < width)
+//             {
+//                 uint32_t color = cast->side == 0 ? 0xFF0000 : 0xCC0000;
+//                 mlx_put_pixel((*map_data)->data_mlx->image, x, y, color);
+//             }
+//             y++;
+//         }
+//         y = cast->drawEnd;
+//         while (y < height)
+//         {
+//             if (x >= 0 && x < width)
+//                 mlx_put_pixel((*map_data)->data_mlx->image, x, y, 0x888888);
+//             y++;
+//         }
+//         x++;
+//     }
+// }
+
+void	recheck_text(t_map_data **map_data)
 {
-	int x;
-	int	j;
+	int i;
 
-	x = 0;
-	while (x < (*map_data)->width_map)
+	if ((*map_data)->arr_text)
 	{
-		raycasting_init(cast);
-		cast->cameraX = 2 * x / (double)(*map_data)->width_map - 1;
-		cast->rayDirX = (*map_data)->player->xc + (*map_data)->player->xc * cast->cameraX;
-		cast->rayDirY = (*map_data)->player->yc + (*map_data)->player->yc * cast->cameraX;
-		cast->mapX = (int)(*map_data)->player->x_pos_map;
-		cast->mapY = (int)(*map_data)->player->y_pos_map;
-		cast->deltaDistX = fabs(1 / cast->rayDirX);
-		cast->deltaDistY = fabs(1 / cast->rayDirY);
-		cast->hit = 0;
-		if (cast->rayDirX < 0)
-		{
-			cast->stepX = -1;
-			cast->sideDistX = ((*map_data)->player->x_pos_map - cast->mapX) * cast->deltaDistX;
-		}
-		else
-		{
-			cast->stepX = 1;
-			cast->sideDistX = (cast->mapX + 1.0 - (*map_data)->player->x_pos_map) * cast->deltaDistX;
-		}
-		if (cast->rayDirY < 0)
-		{
-			cast->stepY = -1;
-			cast->sideDistY = ((*map_data)->player->y_pos_map - cast->mapY) * cast->deltaDistY;
-		}
-		else
-		{
-			cast->stepY = 1;
-			cast->sideDistY = (cast->mapY + 1.0 - (*map_data)->player->y_pos_map) * cast->deltaDistY;
-		}
-		while (cast->hit == 0)
-		{
-		if (cast->sideDistX < cast->sideDistY)
-		{
-			cast->sideDistX += cast->deltaDistX;
-				cast->mapX += cast->stepX;
-				cast->side = 0;
-			}
-			else
-			{
-				cast->sideDistY += cast->deltaDistY;
-				cast->mapY += cast->stepY;
-				cast->side = 1;
-			}
-			if (cast->mapY < 0.25 || cast->mapX < 0.25 || cast->mapY > (*map_data)->height_map - 0.25 || cast->mapX > (*map_data)->width_map - 1.25)
-				break;
-			else if ((*map_data)->map[cast->mapY][cast->mapX] == '1')
-				cast->hit = 1;
-		}
-		if (cast->side == 0)
-			cast->perpWallDist = cast->sideDistX - cast->deltaDistX;
-		else
-			cast->perpWallDist = cast->sideDistY - cast->deltaDistY;
-		cast->lineHeight = (int)((*map_data)->height_map / cast->perpWallDist);
-		cast->drawStart = -cast->lineHeight / 2 + (*map_data)->height_map / 2;
-		if (cast->drawStart < 0)
-			cast->drawStart = 0;
-		cast->drawEnd = cast->lineHeight / 2 + (*map_data)->height_map / 2;
-		if (cast->drawEnd >= (*map_data)->height_map)
-			cast->drawEnd = (*map_data)->height_map - 1;
-		j = cast->drawStart;
-		while (j < cast->drawEnd)
-		{
-			mlx_put_pixel((*map_data)->data_mlx->image, j, x, 0x00FF00);
-			j++;
-		}
-		double wallX;
-		if (cast->side == 0)
-			wallX = (*map_data)->player->y_pos_map + cast->perpWallDist * cast->rayDirY;
-		else
-			wallX = (*map_data)->player->x_pos_map + cast->perpWallDist * cast->rayDirX;
-		wallX -= floor(wallX);
-
-		int texX = (int)(wallX * (double)(*map_data)->tex_width);
-		if (cast->side == 0 && cast->rayDirX > 0)
-			texX = (*map_data)->tex_width - texX - 1;
-		if (cast->side == 1 && cast->rayDirY < 0)
-			texX = (*map_data)->tex_width - texX - 1;
-
-		int y = cast->drawStart;
-		while (y < cast->drawEnd)
-		{
-			int d = y * 256 - (*map_data)->data_mlx->height * 128 + cast->lineHeight * 128;
-			int texY = ((d * (*map_data)->tex_height) / cast->lineHeight) / 256;
-			int color;
-			if (cast->side == 0)
-				color = ((int *)(*map_data)->texts->north)[(*map_data)->tex_height * texY + texX];
-			else if (cast->side == 1)
-				color = ((int *)(*map_data)->texts->south)[(*map_data)->tex_height * texY + texX];
-			else if (cast->side == 2)
-				color = ((int *)(*map_data)->texts->west)[(*map_data)->tex_height * texY + texX];
-			else
-				color = ((int *)(*map_data)->texts->east)[(*map_data)->tex_height * texY + texX];
-
-			mlx_put_pixel((*map_data)->data_mlx->image, x, y, color);
-			y++;
-		}
-		x++;
+		i = -1;
+		while (++i < 4)
+			free((*map_data)->arr_text[i]);
+		free((*map_data)->arr_text);
 	}
+	(*map_data)->arr_text = malloc((*map_data)->data_mlx->width * sizeof(int *));
+	i = -1;
+	while (++i < (*map_data)->data_mlx->width)
+		(*map_data)->arr_text[i] = malloc((*map_data)->data_mlx->height * sizeof(int));
 }
+
+void load_textures(t_map_data *map_data)
+{
+	map_data->textures[0] = mlx_load_png("./textures/test.png");
+	map_data->textures[1] = mlx_load_png("./textures/test.png");
+	map_data->textures[2] = mlx_load_png("./textures/test.png");
+	map_data->textures[3] = mlx_load_png("./textures/test.png");
+	if (!map_data->textures[0] || !map_data->textures[1] || !map_data->textures[2] || !map_data->textures[3])
+		ft_err("Error: Failed to load textures");
+	map_data->tex_width = map_data->textures[0]->width;
+	map_data->tex_height = map_data->textures[0]->height;
+}
+
+void start_raycast(t_map_data **map_data)
+{
+    if (!map_data || !*map_data || !(*map_data)->data_mlx)
+    {
+        printf("Invalid map_data in start_raycast\n");
+        return;
+    }
+
+    printf("MLX: %p\n", (*map_data)->data_mlx->mlx);
+    printf("Image: %p\n", (*map_data)->data_mlx->image);
+    
+    t_cast cast = (*map_data)->cast;
+    raycasting(map_data, &cast);
+}
+
+void raycasting_init(t_cast *cast)
+{
+	cast->cameraX = 0;
+	cast->rayDirX = 0;
+	cast->rayDirY = 0;
+	cast->mapX = 0;
+	cast->mapY = 0;
+	cast->sideDistX = 0;
+	cast->sideDistY = 0;
+	cast->deltaDistX = 0;
+	cast->deltaDistY = 0;
+	cast->perpWallDist = 0;
+	cast->posX = 0;
+	cast->stepX = 0;
+	cast->stepY = 0;
+	cast->hit = 0;
+	cast->side = 0;
+	cast->lineHeight = 0;
+	cast->drawStart = 0;
+	cast->drawEnd = 0;
+}
+
+
+void raycasting(t_map_data **map_data, t_cast *cast)
+{
+    if (!map_data || !*map_data || !(*map_data)->data_mlx || !(*map_data)->data_mlx->image)
+    {
+        printf("Error: Invalid pointers in raycasting\n");
+        return;
+    }
+
+    const int width = (*map_data)->data_mlx->image->width;
+    const int height = (*map_data)->data_mlx->image->height;
+    uint32_t* pixels = (uint32_t*)(*map_data)->data_mlx->image->pixels;
+    
+    // Debug prints
+    printf("Player position: x=%d, y=%d\n", (*map_data)->player->x_pos_map, (*map_data)->player->y_pos_map);
+    printf("Player direction: xc=%d, yc=%d\n", (*map_data)->player->xc, (*map_data)->player->yc);
+	
+    double dirX = -1;
+    double dirY = 0;
+    double planeX = 0;
+    double planeY = 0.66;
+
+    for (int i = 0; i < width * height; i++)
+        pixels[i] = 0x000000FF;
+    for (int x = 0; x < width; x++)
+    {
+        cast->cameraX = 2 * x / (double)width - 1;
+        cast->rayDirX = dirX + planeX * cast->cameraX;
+        cast->rayDirY = dirY + planeY * cast->cameraX;
+        cast->mapX = (int)(*map_data)->player->x_pos_map;
+        cast->mapY = (int)(*map_data)->player->y_pos_map;
+        cast->deltaDistX = (cast->rayDirX == 0) ? 1e30 : fabs(1 / cast->rayDirX);
+        cast->deltaDistY = (cast->rayDirY == 0) ? 1e30 : fabs(1 / cast->rayDirY);
+        if (cast->rayDirX < 0)
+        {
+            cast->stepX = -1;
+            cast->sideDistX = ((*map_data)->player->x_pos_map - cast->mapX) * cast->deltaDistX;
+        }
+        else
+        {
+            cast->stepX = 1;
+            cast->sideDistX = (cast->mapX + 1.0 - (*map_data)->player->x_pos_map) * cast->deltaDistX;
+        }
+        if (cast->rayDirY < 0)
+        {
+            cast->stepY = -1;
+            cast->sideDistY = ((*map_data)->player->y_pos_map - cast->mapY) * cast->deltaDistY;
+        }
+        else
+        {
+            cast->stepY = 1;
+            cast->sideDistY = (cast->mapY + 1.0 - (*map_data)->player->y_pos_map) * cast->deltaDistY;
+        }
+        cast->hit = 0;
+        while (cast->hit == 0)
+        {
+            if (cast->sideDistX < cast->sideDistY)
+            {
+                cast->sideDistX += cast->deltaDistX;
+                cast->mapX += cast->stepX;
+                cast->side = 0;
+            }
+            else
+            {
+                cast->sideDistY += cast->deltaDistY;
+                cast->mapY += cast->stepY;
+                cast->side = 1;
+            }
+            if (cast->mapX < 0 || cast->mapX >= (*map_data)->width_map || 
+                cast->mapY < 0 || cast->mapY >= (*map_data)->height_map)
+                break;
+            
+            if ((*map_data)->map[cast->mapY][cast->mapX] == '1')
+            {
+                cast->hit = 1;
+                printf("Hit wall at: mapX=%d, mapY=%d\n", cast->mapX, cast->mapY);
+            }
+        }
+        if (cast->side == 0)
+            cast->perpWallDist = (cast->mapX - (*map_data)->player->x_pos_map + 
+                               (1 - cast->stepX) / 2) / cast->rayDirX;
+        else
+            cast->perpWallDist = (cast->mapY - (*map_data)->player->y_pos_map + 
+                               (1 - cast->stepY) / 2) / cast->rayDirY;
+        cast->lineHeight = (int)(height / cast->perpWallDist);
+        cast->drawStart = -cast->lineHeight / 2 + height / 2;
+        cast->drawEnd = cast->lineHeight / 2 + height / 2;
+        if (cast->drawStart < 0) cast->drawStart = 0;
+        if (cast->drawEnd >= height) cast->drawEnd = height - 1;
+        for (int y = 0; y < height; y++)
+        {
+            int index = y * width + x;
+            if (index < 0 || index >= width * height)
+                continue;
+            if (y < cast->drawStart)
+                pixels[index] = 0x444444FF;
+            else if (y < cast->drawEnd)
+                pixels[index] = cast->side == 0 ? 0xFF0000FF : 0xCC0000FF;
+            else
+                pixels[index] = 0x888888FF;
+        }
+    }
+}
+
+// void raycasting(t_map_data **map_data, t_cast *cast)
+// {
+//     int x;
+//     int y;
+//     double planeX = 0;
+//     double planeY = 0.66;
+
+//     if (!map_data || !*map_data || !(*map_data)->data_mlx || !(*map_data)->data_mlx->image)
+//     {
+//         printf("Error: Invalid pointers in raycasting\n");
+//         return;
+//     }
+//     int width = (*map_data)->data_mlx->image->width;
+//     int height = (*map_data)->data_mlx->image->height;
+// 	uint32_t* pixels = (uint32_t*)(*map_data)->data_mlx->image->pixels;
+//     for (int i = 0; i < width * height; ++i)
+//         pixels[i] = 0x000000FF;
+//     (*map_data)->player->xc = -1;
+//     (*map_data)->player->yc = 0;
+//     for (int i = 0; i < width * height; ++i)
+// 	{
+//         uint32_t* pixels = (uint32_t*)(*map_data)->data_mlx->image->pixels;
+//         pixels[i] = 0x000000FF;
+//     }
+    
+//     x = 0;
+//     while (x < width)
+//     {
+//         cast->cameraX = 2 * x / (double)width - 1;
+//         cast->rayDirX = (*map_data)->player->xc + planeX * cast->cameraX;
+//         cast->rayDirY = (*map_data)->player->yc + planeY * cast->cameraX;
+//         cast->mapX = (int)(*map_data)->player->x_pos_map;
+//         cast->mapY = (int)(*map_data)->player->y_pos_map;
+//         cast->deltaDistX = (cast->rayDirX == 0) ? 1e30 : fabs(1 / cast->rayDirX);
+//         cast->deltaDistY = (cast->rayDirY == 0) ? 1e30 : fabs(1 / cast->rayDirY);
+//         cast->hit = 0;
+//         if (cast->rayDirX < 0)
+//         {
+//             cast->stepX = -1;
+//             cast->sideDistX = ((*map_data)->player->x_pos_map - cast->mapX) * cast->deltaDistX;
+//         }
+//         else
+//         {
+//             cast->stepX = 1;
+//             cast->sideDistX = (cast->mapX + 1.0 - (*map_data)->player->x_pos_map) * cast->deltaDistX;
+//         }
+//         if (cast->rayDirY < 0)
+//         {
+//             cast->stepY = -1;
+//             cast->sideDistY = ((*map_data)->player->y_pos_map - cast->mapY) * cast->deltaDistY;
+//         }
+//         else
+//         {
+//             cast->stepY = 1;
+//             cast->sideDistY = (cast->mapY + 1.0 - (*map_data)->player->y_pos_map) * cast->deltaDistY;
+//         }
+//         while (cast->hit == 0)
+//         {
+//             if (cast->sideDistX < cast->sideDistY)
+//             {
+//                 cast->sideDistX += cast->deltaDistX;
+//                 cast->mapX += cast->stepX;
+//                 cast->side = 0;
+//             }
+//             else
+//             {
+//                 cast->sideDistY += cast->deltaDistY;
+//                 cast->mapY += cast->stepY;
+//                 cast->side = 1;
+//             }
+            
+//             if (cast->mapX < 0 || cast->mapX >= (*map_data)->width_map || 
+//                 cast->mapY < 0 || cast->mapY >= (*map_data)->height_map)
+//                 break;
+                
+//             if ((*map_data)->map[cast->mapY][cast->mapX] == '1')
+//                 cast->hit = 1;
+//         }
+//         if (cast->side == 0)
+//             cast->perpWallDist = (cast->mapX - (*map_data)->player->x_pos_map + 
+//                                 (1 - cast->stepX) / 2) / cast->rayDirX;
+//         else
+//             cast->perpWallDist = (cast->mapY - (*map_data)->player->y_pos_map + 
+//                                 (1 - cast->stepY) / 2) / cast->rayDirY;
+//         cast->lineHeight = (int)(height / cast->perpWallDist);
+//         cast->drawStart = -cast->lineHeight / 2 + height / 2;
+//         if (cast->drawStart < 0)
+//             cast->drawStart = 0;
+//         cast->drawEnd = cast->lineHeight / 2 + height / 2;
+//         if (cast->drawEnd >= height)
+//             cast->drawEnd = height - 1;
+//         uint32_t* pixels = (uint32_t*)(*map_data)->data_mlx->image->pixels;
+//         for (y = 0; y < cast->drawStart && y < height; y++)
+//         {
+//             int index = y * width + x;
+//             if (index >= 0 && index < (width * height))
+//                 pixels[index] = 0x444444FF;
+//         }
+//         for (y = cast->drawStart; y < cast->drawEnd && y < height; y++)
+//         {
+//             int index = y * width + x;
+//             if (index >= 0 && index < (width * height))
+//             {
+//                 uint32_t color = cast->side == 0 ? 0xFF0000FF : 0xCC0000FF;
+//                 pixels[index] = color;
+//             }
+//         }
+//         for (y = cast->drawEnd; y < height; y++)
+//         {
+//             int index = y * width + x;
+//             if (index >= 0 && index < (width * height))
+//                 pixels[index] = 0x888888FF;
+//         }
+//         x++;
+//     }
+// }
+
+// void raycasting(t_map_data **map_data, t_cast *cast)
+// {
+// 	(void)cast;
+//     if (!map_data || !*map_data || !(*map_data)->data_mlx)
+//     {
+//         printf("Invalid map_data or data_mlx\n");
+//         return;
+//     }
+//     if (!(*map_data)->data_mlx->image)
+//     {
+//         printf("MLX image is NULL\n");
+//         return;
+//     }
+
+//     printf("Starting basic rendering test...\n");
+
+//     (*map_data)->player->xc = -1;
+//     (*map_data)->player->yc = 0;
+
+//     for (int y = 0; y < 100 && y < (*map_data)->data_mlx->height; y++)
+//     {
+//         for (int x = 0; x < 100 && x < (*map_data)->data_mlx->width; x++)
+//         {
+//             if (x % 2 == 0 && y % 2 == 0)
+//             {
+//                 printf("Drawing pixel at %d,%d\n", x, y);
+//                 mlx_put_pixel((*map_data)->data_mlx->image, x, y, 0xFF0000);
+//             }
+//         }
+//     }
+    
+//     printf("Basic rendering test complete\n");
+// }
+
+// void start_raycast(t_map_data **map_data)
+// {
+//     if (!map_data || !*map_data || !(*map_data)->data_mlx)
+//     {
+//         printf("Invalid map_data in start_raycast\n");
+//         return;
+//     }
+
+//     printf("MLX: %p\n", (*map_data)->data_mlx->mlx);
+//     // printf("Window: %p\n", (*map_data)->data_mlx->window);
+//     printf("Image: %p\n", (*map_data)->data_mlx->image);
+    
+//     t_cast cast = (*map_data)->cast;
+//     raycasting(map_data, &cast);
+// }

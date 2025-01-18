@@ -6,7 +6,7 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 06:29:40 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/18 06:08:28 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/01/18 07:43:55 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,17 @@ static void	set_data(t_map_data *map_data)
 	
 }
 
+void	start_textures(t_map_data *map_data)
+{
+	map_data->textures[0] = mlx_load_png("textures/test.png");
+	map_data->textures[1] = mlx_load_png("textures/test.png");
+	map_data->textures[2] = mlx_load_png("textures/test.png");
+	map_data->textures[3] = mlx_load_png("textures/test.png");
+	if (!map_data->textures[0] || !map_data->textures[1] || !map_data->textures[2] || !map_data->textures[3])
+		ft_err("Error: Failed to load textures");
+	map_data->tex_width = map_data->textures[0]->width;
+	map_data->tex_height = map_data->textures[0]->height;
+}
 
 int	main(int ac, char **av)
 {
@@ -85,7 +96,7 @@ int	main(int ac, char **av)
 	// draw 2d_map
 	// draw_square(map_data);
 	// raycasting(&map_data);
-
+	start_textures(map_data);
 	start_raycast(&map_data);
 
 	// map_2d(&map_data);
