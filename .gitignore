@@ -1,2 +1,3 @@
 *.o
 MLX42/
+outfile*.txt
