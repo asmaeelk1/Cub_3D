@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_elements.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asel-kha <asel-kha@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 23:01:25 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/08 11:51:32 by asel-kha         ###   ########.fr       */
+/*   Updated: 2025/01/18 06:09:19 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static void	init_colors(t_colors **colors, char *line)
 		ft_err(INVALID_MAP);
 }
 
-static void	init_textures(t_textures **textures, t_colors **colors, char *line)
+static void	init_textures(t_text_map **textures, t_colors **colors, char *line)
 {
 	while (*line == ' ' )
 		line++;
@@ -112,7 +112,7 @@ void	read_elements(int file_name, t_map_data **map_data)
 			line = get_next_line(file_name);
 			continue ;
 		}
-		init_textures(&(*map_data)->textures, &(*map_data)->colors, line);
+		init_textures(&(*map_data)->texts, &(*map_data)->colors, line);
 		if (i_elements > 1)
 			line = get_next_line(file_name);
 		i_elements--;

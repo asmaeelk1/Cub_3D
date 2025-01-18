@@ -6,7 +6,7 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 05:35:38 by oel-feng          #+#    #+#             */
-/*   Updated: 2025/01/17 16:14:48 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/01/18 06:17:35 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,18 @@ void	recheck_text(t_map_data **map_data)
 // 	mlx_close_window((*map_data)->data_mlx->mlx);
 // }
 
+void load_textures(t_map_data *map_data)
+{
+	map_data->textures[0] = mlx_load_png("textures/test.png");
+	map_data->textures[1] = mlx_load_png("textures/test.png");
+	map_data->textures[2] = mlx_load_png("textures/test.png");
+	map_data->textures[3] = mlx_load_png("textures/test.png");
+	if (!map_data->textures[0] || !map_data->textures[1] || !map_data->textures[2] || !map_data->textures[3])
+		ft_err("Error: Failed to load textures");
+	map_data->tex_width = map_data->textures[0]->width;
+	map_data->tex_height = map_data->textures[0]->height;
+}
+
 void    start_raycast(t_map_data **map_data)
 {
 	t_cast  cast;
@@ -65,6 +77,7 @@ void    start_raycast(t_map_data **map_data)
 	x = 0;
 	cast = (*map_data)->cast;
 	recheck_text(map_data);
+	load_textures(*map_data);
 	raycasting_init(&cast);
 	raycasting(map_data, &cast);
 	// rendering(map_data);
@@ -192,11 +205,37 @@ void	raycasting(t_map_data **map_data, t_cast *cast)
 			mlx_put_pixel((*map_data)->data_mlx->image, j, x, 0x00FF00);
 			j++;
 		}
-		// if (cast->side == 0)
-		// 	cast->posX = (*map_data)->player->y_pos_map + cast->perpWallDist * cast->rayDirY;
-		// else
-		// 	cast->posX = (*map_data)->player->x_pos_map + cast->perpWallDist * cast->rayDirX;
-		// cast->posX -= floor(cast->posX);
+		double wallX;
+		if (cast->side == 0)
+			wallX = (*map_data)->player->y_pos_map + cast->perpWallDist * cast->rayDirY;
+		else
+			wallX = (*map_data)->player->x_pos_map + cast->perpWallDist * cast->rayDirX;
+		wallX -= floor(wallX);
+
+		int texX = (int)(wallX * (double)(*map_data)->tex_width);
+		if (cast->side == 0 && cast->rayDirX > 0)
+			texX = (*map_data)->tex_width - texX - 1;
+		if (cast->side == 1 && cast->rayDirY < 0)
+			texX = (*map_data)->tex_width - texX - 1;
+
+		int y = cast->drawStart;
+		while (y < cast->drawEnd)
+		{
+			int d = y * 256 - (*map_data)->data_mlx->height * 128 + cast->lineHeight * 128;
+			int texY = ((d * (*map_data)->tex_height) / cast->lineHeight) / 256;
+			int color;
+			if (cast->side == 0)
+				color = ((int *)(*map_data)->texts->north)[(*map_data)->tex_height * texY + texX];
+			else if (cast->side == 1)
+				color = ((int *)(*map_data)->texts->south)[(*map_data)->tex_height * texY + texX];
+			else if (cast->side == 2)
+				color = ((int *)(*map_data)->texts->west)[(*map_data)->tex_height * texY + texX];
+			else
+				color = ((int *)(*map_data)->texts->east)[(*map_data)->tex_height * texY + texX];
+
+			mlx_put_pixel((*map_data)->data_mlx->image, x, y, color);
+			y++;
+		}
 		x++;
 	}
 }

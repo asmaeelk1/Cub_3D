@@ -6,7 +6,7 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 23:01:25 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/17 16:05:46 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/01/18 06:09:11 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static void	init_colors(t_colors **colors, char *line)
 		ft_err(INVALID_MAP);
 }
 
-static void	init_textures(t_textures **textures, t_colors **colors, char *line)
+static void	init_textures(t_text_map **textures, t_colors **colors, char *line)
 {
 	while (*line == ' ' )
 		line++;

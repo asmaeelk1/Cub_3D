@@ -6,7 +6,7 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 06:29:40 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/17 15:57:19 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/01/18 06:08:28 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	set_data(t_map_data *map_data)
 {
 	map_data->colors = gcollector(sizeof(t_colors), 1);
 	map_data->data_mlx = gcollector(sizeof(t_mlx_data), 1);
-	map_data->textures = gcollector(sizeof(t_textures), 1);
+	map_data->texts = gcollector(sizeof(t_text_map), 1);
 	map_data->map = NULL;
 	map_data->arr_text = NULL;
 	map_data->player = gcollector(sizeof(t_player), 1);
