@@ -6,7 +6,7 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 06:30:49 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/18 20:38:21 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/01/18 22:41:17 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@ enum    e_macros
 {
     WIDTH = 1800,
     HEIGHT = 1200,
-    BUFFER_SIZE = 42,
-    H = HEIGHT
+    BUFFER_SIZE = 42
 };
 
 # define INVALID_FILE "Invalid file name. Example: file_name.cub"
@@ -75,15 +74,6 @@ typedef struct s_mlx_data
 	int				height;
 }    t_mlx_data;
 
-typedef struct s_keys
-{
-    bool	w_pressed;
-    bool	s_pressed;
-    bool	a_pressed;
-    bool	d_pressed;
-    bool	left_pressed;
-    bool	right_pressed;
-}	t_keys;
 
 typedef struct s_player
 {
@@ -147,7 +137,6 @@ typedef struct s_map_data
 	int				**arr_text;
 	// t_raytext		textures;
 	mlx_texture_t	*textures[4];
-	t_keys			keys;
 	double			speed;
     int				tex_width;
     int				tex_height;
@@ -180,29 +169,20 @@ void	read_elements(int file_name, t_map_data **map_data);
 
 void	ft_err(char *err_msg);
 char	*get_next_line(int fd);
+void    my_keyhook(void *param);
 size_t	ft_strlen(const char *c);
 int		ft_atoi(const char *str);
 char	*ft_strchr(char *s, int c);
 char	*ft_strdup(const char *s1);
 char	**ft_split(char *s, char c);
+void	raycasting(t_map_data *map_data);
 char	*ft_strtok(char *str, char *sep);
 void	ft_putstr_fd(const char *s, int fd);
 int		ft_strcmp(const char *s1, char *s2);
 char	*ft_strtrim(char *s1, char const *set);
+int		rgb_to_int(int r, int g, int b, int a);
 int		ft_strncmp(char *s1, char *s2, size_t n);
 char	*ft_strjoin(const char *s1, const char *s2);
 char	*ft_substr(char *s, unsigned int start, size_t len);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
-
-// draw 2D map
-// void    map_2d(t_map_data **map_data);
-void    plot_line(t_map_data **data, t_p p0, t_p p1, long color);
-// void    draw_square(t_map_data **map_data, int x, int y, long color);
-
-// player movement
-void    my_keyhook(void *param);
-int		rgb_to_int(int r, int g, int b, int a);
-void	raycasting(t_map_data *map_data);
-void	movement_hook(mlx_key_data_t keydata, void* data);
-bool	check_collision(t_map_data *map_data, double new_x, double new_y);
 #endif

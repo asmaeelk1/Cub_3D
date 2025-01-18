@@ -6,7 +6,7 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 05:35:38 by oel-feng          #+#    #+#             */
-/*   Updated: 2025/01/18 20:39:11 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/01/18 22:37:36 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,90 +40,6 @@
 // ⣿⣷⣦⣬⣍⣉⣉⣛⣛⣉⠉⣤⣶⣾⣿⣿⣿⣿⣿⣿⡿⢰⣿⣿⣿⣿⣿⣿⣿⣿ //
 // ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣧⡘⣿⣿⣿⣿⣿⣿⣿⣿⡇⣼⣿⣿⣿⣿⣿⣿⣿⣿ //
 // ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣇⢸⣿⣿⣿⣿⣿⣿⣿⠁⣿⣿⣿⣿⣿⣿⣿⣿⣿ //
-
-bool	check_collision(t_map_data *map_data, double new_x, double new_y)
-{
-	double buffer;
-	int map_x;
-	int map_y;
-
-	buffer = 0.2;
-	map_x = (int)new_x;
-	map_y = (int)new_y;
-	// printf("Checking collision: new_x=%f, new_y=%f, map_x=%d, map_y=%d\n", 
-	//        new_x, new_y, map_x, map_y);
-	// printf("Map value at position: %c\n", map_data->map[map_y][map_x]);
-	// printf("Buffer checks: left=%f right=%f top=%f bottom=%f\n",
-	//        new_x - map_x, map_x + 1 - new_x, new_y - map_y, map_y + 1 - new_y);
-	
-	if (new_x - map_x < buffer && map_data->map[map_y][map_x-1] == '1')
-		return (true);
-	if (map_x + 1 - new_x < buffer && map_data->map[map_y][map_x+1] == '1')
-		return (true);
-	if (new_y - map_y < buffer && map_data->map[map_y-1][map_x] == '1')
-		return (true);
-	if (map_y + 1 - new_y < buffer && map_data->map[map_y+1][map_x] == '1')
-		return (true);
-	return (false);
-}
-
-void movement_hook(mlx_key_data_t keydata, void* data)
-{
-	t_map_data*	map_data;
-	
-	map_data = (t_map_data*)data;
-	if (keydata.action == MLX_PRESS)
-	{
-		if (keydata.key == MLX_KEY_W)
-			map_data->keys.w_pressed = true;
-		if (keydata.key == MLX_KEY_S)
-			map_data->keys.s_pressed = true;
-		if (keydata.key == MLX_KEY_A)
-			map_data->keys.a_pressed = true;
-		if (keydata.key == MLX_KEY_D)
-			map_data->keys.d_pressed = true;
-		if (keydata.key == MLX_KEY_LEFT)
-			map_data->keys.left_pressed = true;
-		if (keydata.key == MLX_KEY_RIGHT)
-			map_data->keys.right_pressed = true;
-	}
-	if (keydata.action == MLX_RELEASE)
-	{
-		if (keydata.key == MLX_KEY_W)
-			map_data->keys.w_pressed = false;
-		if (keydata.key == MLX_KEY_S)
-			map_data->keys.s_pressed = false;
-		if (keydata.key == MLX_KEY_A)
-			map_data->keys.a_pressed = false;
-		if (keydata.key == MLX_KEY_D)
-			map_data->keys.d_pressed = false;
-		if (keydata.key == MLX_KEY_LEFT)
-			map_data->keys.left_pressed = false;
-		if (keydata.key == MLX_KEY_RIGHT)
-			map_data->keys.right_pressed = false;
-	}
-}
-
-
-
-void	recheck_text(t_map_data **map_data)
-{
-	int i;
-
-	// if (!(*map_data)->textures)
-	//     (*map_data)->textures = gcollector(sizeof(mlx_texture_t*) * 4, 1);
-	if ((*map_data)->arr_text)
-	{
-		i = -1;
-		while (++i < 4)
-			free((*map_data)->arr_text[i]);
-		free((*map_data)->arr_text);
-	}
-	(*map_data)->arr_text = malloc((*map_data)->data_mlx->width * sizeof(int *));
-	i = -1;
-	while (++i < (*map_data)->data_mlx->width)
-		(*map_data)->arr_text[i] = malloc((*map_data)->data_mlx->height * sizeof(int));
-}
 
 void raycasting(t_map_data *map_data)
 {
