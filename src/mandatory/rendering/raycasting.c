@@ -6,7 +6,7 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 05:35:38 by oel-feng          #+#    #+#             */
-/*   Updated: 2025/01/18 13:57:58 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/01/18 14:24:27 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	recheck_text(t_map_data **map_data)
 {
 	int i;
 
+	// if (!(*map_data)->textures)
+    //     (*map_data)->textures = gcollector(sizeof(mlx_texture_t*) * 4, 1);
 	if ((*map_data)->arr_text)
 	{
 		i = -1;
@@ -195,9 +197,10 @@ void raycasting(t_map_data **map_data, t_cast *cast)
  					printf("Texture pixel values: A=%d R=%d G=%d B=%d\n", 
 			   		texPixel[0], texPixel[1], texPixel[2], texPixel[3]);
 				}
-				uint32_t color = (texPixel[0] << 24) | (texPixel[1] << 16) | (texPixel[2] << 8) | texPixel[3];
-				if (cast->side == 1)
-					color = (color >> 1) & 0x7F7F7F7F;
+				  uint32_t color = (texPixel[3] << 24) | (texPixel[0] << 16) | 
+                            (texPixel[1] << 8) | texPixel[2];
+				// if (cast->side == 1)
+				// 	color = (color >> 1) & 0xFFFFFFFF;
 				pixels[index] = color;
 			}
 			else

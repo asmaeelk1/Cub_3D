@@ -6,7 +6,7 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 06:30:49 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/18 13:43:12 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/01/18 14:16:49 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 # include <limits.h>
 # include <math.h>
 # include "../MLX42/include/MLX42/MLX42.h"
-// # include "../minilibx-linux/mlx.h"
 
 enum    e_macros
 {
