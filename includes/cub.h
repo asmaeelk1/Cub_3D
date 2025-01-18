@@ -6,7 +6,7 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 06:30:49 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/18 17:05:25 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/01/18 20:38:21 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ enum    e_macros
 {
     WIDTH = 1800,
     HEIGHT = 1200,
-    TILE_SIZE = 32,
     BUFFER_SIZE = 42,
     H = HEIGHT
 };
@@ -54,14 +53,13 @@ typedef struct s_textures
     char    *east;
 }    t_text_map;
 
-typedef struct s_textures_img
+typedef struct s_raytext
 {
-    void    *image;
-    int     pixels;
-    int     line;
-    int     endian;
-    int     *address;
-}    t_textures_img;
+	mlx_texture_t	*north;
+	mlx_texture_t	*south;
+	mlx_texture_t	*west;
+	mlx_texture_t	*east;
+} t_raytext;
 
 typedef struct s_colors
 {
@@ -98,8 +96,8 @@ typedef struct s_player
 	int		turn_dir;
 	int		xc;
 	int		yc;
-    int     x_pos_map;
-    int     y_pos_map;
+    double  x_pos_map;
+    double 	y_pos_map;
 	double dirX;
     double dirY;
     double planeX;
@@ -111,8 +109,8 @@ typedef struct s_cast
     double	cameraX;
     double	rayDirX;
     double	rayDirY;
-    int		mapX;
-    int		mapY;
+	int		mapX;
+	int		mapY;
     double	sideDistX;
     double	sideDistY;
     double	deltaDistX;
@@ -147,7 +145,7 @@ typedef struct s_map_data
     int				width_map;
     char			**map;
 	int				**arr_text;
-	int				tile_size;
+	// t_raytext		textures;
 	mlx_texture_t	*textures[4];
 	t_keys			keys;
 	double			speed;
@@ -177,7 +175,7 @@ void	*gcollector(size_t size, int mode);
 void	*ft_calloc(size_t count, size_t size);
 
 void	pars_map(t_map_data **map_data);
-void	parsing(char *file_name, t_map_data **map_data);
+void	parsing(char *file_name, t_map_data *map_data);
 void	read_elements(int file_name, t_map_data **map_data);
 
 void	ft_err(char *err_msg);
@@ -197,20 +195,14 @@ char	*ft_substr(char *s, unsigned int start, size_t len);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 
 // draw 2D map
-void    map_2d(t_map_data **map_data);
+// void    map_2d(t_map_data **map_data);
 void    plot_line(t_map_data **data, t_p p0, t_p p1, long color);
-void    draw_square(t_map_data **map_data, int x, int y, long color);
+// void    draw_square(t_map_data **map_data, int x, int y, long color);
 
 // player movement
 void    my_keyhook(void *param);
-void	raycasting_init(t_cast *cast);
-// void	rendering(t_map_data **map_data);
-void	start_moves(t_map_data *map_data);
-void	recheck_text(t_map_data **map_data);
-void    start_raycast(t_map_data **map_data);
 int		rgb_to_int(int r, int g, int b, int a);
-void	key_hook(mlx_key_data_t keydata, void *data);
-void	raycasting(t_map_data **map_data, t_cast *cast);
+void	raycasting(t_map_data *map_data);
 void	movement_hook(mlx_key_data_t keydata, void* data);
 bool	check_collision(t_map_data *map_data, double new_x, double new_y);
 #endif

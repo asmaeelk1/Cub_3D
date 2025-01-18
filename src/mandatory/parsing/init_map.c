@@ -6,7 +6,7 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 23:27:44 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/18 14:02:20 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/01/18 19:55:11 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ static void	check_char(char *line_map, int i_map, t_player *player)
 		if(line_map[i] == 'N' || line_map[i] == 'S' || line_map[i] == 'W'
 			|| line_map[i] == 'E')
 			{
-				player->x_pos_map = i;
-				player->y_pos_map = i_map;
+				player->x_pos_map = (double)i + 0.5;
+				player->y_pos_map = (double)i_map + 0.5;
 			}
 	}
 }
@@ -96,8 +96,8 @@ static void	is_map_valid(t_map_data **map_data)
 	}
 	if ((*map_data)->player->if_player_exist == false)
 		ft_err(INVALID_MAP);
-	(*map_data)->data_mlx->width = (*map_data)->width_map * TILE_SIZE;
-	(*map_data)->data_mlx->height = (*map_data)->height_map * TILE_SIZE;
+	(*map_data)->data_mlx->width = (*map_data)->width_map;
+	(*map_data)->data_mlx->height = (*map_data)->height_map;
 }
 
 void	pars_map(t_map_data **map_data)

@@ -6,7 +6,7 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 06:36:29 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/17 16:06:30 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/01/18 19:46:02 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,13 @@ static void	read_map(int file_name, t_map_data **map_data)
 	close(file_name);
 }
 
-void	parsing(char *file_name, t_map_data **map_data)
+void	parsing(char *file_name, t_map_data *map_data)
 {
 	int	fd;
 
 	fd = check_file(file_name);
 	
-	read_elements(fd, map_data);
-	read_map(fd, map_data);
-	pars_map(map_data);
+	read_elements(fd, &map_data);
+	read_map(fd, &map_data);
+	pars_map(&map_data);
 }

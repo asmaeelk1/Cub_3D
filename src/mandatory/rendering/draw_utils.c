@@ -42,25 +42,25 @@ void	plot_line(t_map_data **data, t_p p0, t_p p1, long color)
 	}
 }
 
-void		draw_square(t_map_data **data, int x, int y, long color)
-{
-    int i;
-    int j;
-    int start_x = x;
-    int start_y = y;
+// void		draw_square(t_map_data **data, int x, int y, long color)
+// {
+//     int i;
+//     int j;
+//     int start_x = x;
+//     int start_y = y;
     
-    i = 0;
-    while (i < TILE_SIZE)
-    {
-        j = 0;
-        while (j < TILE_SIZE)
-        {
-            if (start_x + i < (*data)->data_mlx->width && 
-                start_y + j < (*data)->data_mlx->height)
-                mlx_put_pixel((*data)->data_mlx->image, 
-                    start_x + i, start_y + j, color);
-            j++;
-        }
-        i++;
-    }
-}
+//     i = 0;
+//     while (i < TILE_SIZE)
+//     {
+//         j = 0;
+//         while (j < TILE_SIZE)
+//         {
+//             if (start_x + i < (*data)->data_mlx->width && 
+//                 start_y + j < (*data)->data_mlx->height)
+//                 mlx_put_pixel((*data)->data_mlx->image, 
+//                     start_x + i, start_y + j, color);
+//             j++;
+//         }
+//         i++;
+//     }
+// }
