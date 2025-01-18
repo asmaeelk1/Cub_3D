@@ -6,7 +6,7 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 06:29:40 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/18 14:10:22 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/01/18 17:19:30 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ static void	set_data(t_map_data *map_data)
 	map_data->p_x_pos = 0;
 	map_data->p_y_pos = 0;
 	map_data->wall = false;
+	map_data->speed = 1.0;
+	map_data->keys = (t_keys){0};
 }
 
 void	start_textures(t_map_data *map_data)
@@ -107,6 +109,43 @@ static void	set_plane_rotation(t_map_data *map_data)
 	 map_data->player->rotation_speed = 2 * (M_PI / 180);
 }
 
+void key_hook(mlx_key_data_t keydata, void *data)
+{
+    t_map_data  *map_data;
+
+	map_data = (t_map_data*)data;
+    if (keydata.action == MLX_PRESS)
+    {
+        if (keydata.key == MLX_KEY_W)
+            map_data->keys.w_pressed = true && printf("W pressed\n");
+        if (keydata.key == MLX_KEY_S)
+            map_data->keys.s_pressed = true && printf("S pressed\n");
+        if (keydata.key == MLX_KEY_A)
+            map_data->keys.a_pressed = true && printf("A pressed\n");
+        if (keydata.key == MLX_KEY_D)
+            map_data->keys.d_pressed = true && printf("D pressed\n");
+        if (keydata.key == MLX_KEY_LEFT)
+            map_data->keys.left_pressed = true && printf("LEFT pressed\n");
+        if (keydata.key == MLX_KEY_RIGHT)
+            map_data->keys.right_pressed = true && printf("RIGHT pressed\n");
+    }
+    if (keydata.action == MLX_RELEASE)
+    {
+        if (keydata.key == MLX_KEY_W)
+            map_data->keys.w_pressed = false && printf("W released\n");
+        if (keydata.key == MLX_KEY_S)
+            map_data->keys.s_pressed = false && printf("S released\n");
+        if (keydata.key == MLX_KEY_A)
+            map_data->keys.a_pressed = false && printf("A released\n");
+        if (keydata.key == MLX_KEY_D)
+            map_data->keys.d_pressed = false && printf("D released\n");
+        if (keydata.key == MLX_KEY_LEFT)
+            map_data->keys.left_pressed = false && printf("LEFT released\n");
+        if (keydata.key == MLX_KEY_RIGHT)
+            map_data->keys.right_pressed = false && printf("RIGHT released\n");
+    }
+}
+
 int	main(int ac, char **av)
 {
 	int			init_mlx;
@@ -135,6 +174,8 @@ int	main(int ac, char **av)
 	start_raycast(&map_data);
 
 	// map_2d(&map_data);
+	map_data->map[map_data->player->y_pos_map][map_data->player->x_pos_map] = '0';
+	mlx_key_hook(map_data->data_mlx->mlx, (void *)movement_hook, map_data);
 	mlx_loop_hook(map_data->data_mlx->mlx, (void *)my_keyhook, &map_data);
 	mlx_loop(map_data->data_mlx->mlx);
 	cleanup_and_exit(&map_data);

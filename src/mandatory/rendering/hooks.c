@@ -6,7 +6,7 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 21:24:10 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/18 07:44:30 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/01/18 16:57:52 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	my_keyhook(void *param)
 	hook_vector(*data);
 	mlx_delete_image((*data)->data_mlx->mlx, (*data)->data_mlx->image);
 	(*data)->data_mlx->image = mlx_new_image((*data)->data_mlx->mlx, WIDTH, H);
+	start_moves(*data);
 	start_raycast(data);
 	mlx_image_to_window((*data)->data_mlx->mlx, (*data)->data_mlx->image, 0, 0);
 }
