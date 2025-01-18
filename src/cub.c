@@ -6,7 +6,7 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 06:29:40 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/18 07:43:55 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/01/18 10:25:52 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,10 @@ static void	set_data(t_map_data *map_data)
 	map_data->wall = false;
 	map_data->player->rotate_angle = M_PI / 2;
 	map_data->player->rotation_speed = 2 * ( M_PI / 180);
+	map_data->player->dirX = -1.0;
+    map_data->player->dirY = 0.0;
+    map_data->player->planeX = 0.0;
+    map_data->player->planeY = 0.66;
 	
 }
 

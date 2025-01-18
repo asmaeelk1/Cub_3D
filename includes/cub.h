@@ -6,7 +6,7 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 06:30:49 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/18 09:08:11 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/01/18 10:24:57 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,10 @@ typedef struct s_player
 	int		yc;
     int     x_pos_map;
     int     y_pos_map;
+	double dirX;
+    double dirY;
+    double planeX;
+    double planeY;
 }	t_player;
 
 typedef struct s_cast
@@ -113,6 +117,12 @@ typedef struct s_cast
     int     lineHeight; // Height dyal line
     int     drawStart; // Start dyal line
     int     drawEnd; // End dyal line
+	double wallX;
+    int texNum;
+    int texX;
+	int texY;
+    double step;
+    double texPos;
 } t_cast;
 
 typedef struct s_map_data
@@ -186,5 +196,5 @@ void	recheck_text(t_map_data **map_data);
 void    start_raycast(t_map_data **map_data);
 void	raycasting_init(t_cast *cast);
 void	raycasting(t_map_data **map_data, t_cast *cast);
-
+int		rgb_to_int(int r, int g, int b, int a);
 #endif
