@@ -6,7 +6,7 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 06:29:40 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/18 10:25:52 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/01/18 14:10:22 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,6 @@ static void	set_data(t_map_data *map_data)
 	map_data->p_x_pos = 0;
 	map_data->p_y_pos = 0;
 	map_data->wall = false;
-	map_data->player->rotate_angle = M_PI / 2;
-	map_data->player->rotation_speed = 2 * ( M_PI / 180);
-	map_data->player->dirX = -1.0;
-    map_data->player->dirY = 0.0;
-    map_data->player->planeX = 0.0;
-    map_data->player->planeY = 0.66;
-	
 }
 
 void	start_textures(t_map_data *map_data)
@@ -75,6 +68,43 @@ void	start_textures(t_map_data *map_data)
 		ft_err("Error: Failed to load textures");
 	map_data->tex_width = map_data->textures[0]->width;
 	map_data->tex_height = map_data->textures[0]->height;
+}
+
+static void	set_plane_rotation(t_map_data *map_data)
+{
+	if (map_data->player->player == 'N')
+	{
+		map_data->player->rotate_angle = 3 * M_PI / 2;
+        map_data->player->dirX = 0;
+        map_data->player->dirY = -1;
+		map_data->player->planeX = 0.66;
+        map_data->player->planeY = 0;
+	}
+	else if (map_data->player->player == 'S')
+	{
+		map_data->player->rotate_angle = M_PI / 2;
+		map_data->player->dirX = 0;
+		map_data->player->dirY = 1;
+		map_data->player->planeX = -0.66;
+		map_data->player->planeY = 0;
+	}
+	else if (map_data->player->player == 'E')
+	{
+		map_data->player->rotate_angle = 0;
+        map_data->player->dirX = 1;
+        map_data->player->dirY = 0;
+        map_data->player->planeX = 0;
+        map_data->player->planeY = 0.66;
+	}
+	else if (map_data->player->player == 'W')
+	{
+		map_data->player->rotate_angle = M_PI;
+		map_data->player->dirX = -1;
+		map_data->player->dirY = 0;
+		map_data->player->planeX = 0;
+		map_data->player->planeY = -0.66;
+	}
+	 map_data->player->rotation_speed = 2 * (M_PI / 180);
 }
 
 int	main(int ac, char **av)
@@ -90,6 +120,7 @@ int	main(int ac, char **av)
 	map_data = gcollector(sizeof(t_map_data), 1);
 	set_data(map_data);
 	parsing(av[1], &map_data);
+	set_plane_rotation(map_data);
 	init_mlx = init_mlx_data(&map_data);
 	// raycasting_init(cast);
 	if (init_mlx)

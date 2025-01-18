@@ -6,7 +6,7 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 06:30:49 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/18 10:24:57 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/01/18 13:43:12 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,31 +99,31 @@ typedef struct s_player
 
 typedef struct s_cast
 {
-    double   cameraX; // X pos dyal camera
-    double   rayDirX; // Dir dyal ray f x
-    double   rayDirY; // Dir dyal ray f y
-    int     mapX;    // X pos f map 
-    int     mapY;    // Y pos f map
-    double   sideDistX; // Distance l a9rab x
-    double   sideDistY; // Distance l a9rab y
-    double   deltaDistX; // Distance dyal 1 tile f x
-    double   deltaDistY; // Distance dyal 1 tile f y
-    double   perpWallDist; // Distance dyal ray f wall (90 degree)
-    double   posX; // X pos dyal player
-    int     stepX; // Step dir f x (1 oula -1)
-    int     stepY;  // Step dir f y (1 oula -1)
-    int     hit; // Check ila t9as l wall oula la
-    int     side; // ina jiha t9as l7ayt
-    int     lineHeight; // Height dyal line
-    int     drawStart; // Start dyal line
-    int     drawEnd; // End dyal line
-	double wallX;
-    int texNum;
-    int texX;
-	int texY;
-    double step;
-    double texPos;
-} t_cast;
+    double	cameraX;
+    double	rayDirX;
+    double	rayDirY;
+    int		mapX;
+    int		mapY;
+    double	sideDistX;
+    double	sideDistY;
+    double	deltaDistX;
+    double	deltaDistY;
+    double	perpWallDist;
+    double	posX;
+    int		stepX;
+    int		stepY;
+    int		hit;
+    int		side;
+    int		lineHeight;
+    int		drawStart;
+    int		drawEnd;
+	double	wallX;
+    int		texNum;
+    int		texX;
+	int		texY;
+    double	step;
+    double	texPos;
+}	t_cast;
 
 typedef struct s_map_data
 {
