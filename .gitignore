@@ -1,3 +1,11 @@
+# Object files
 *.o
+
+# MLX42 Library
 MLX42/
+
+# debug files
 outfile*
+
+# Executable
+Cub3D
