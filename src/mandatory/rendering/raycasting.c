@@ -6,7 +6,7 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 05:35:38 by oel-feng          #+#    #+#             */
-/*   Updated: 2025/01/18 20:39:11 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/01/19 23:53:32 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,11 @@ void	recheck_text(t_map_data **map_data)
 		(*map_data)->arr_text[i] = malloc((*map_data)->data_mlx->height * sizeof(int));
 }
 
+// static unsigned int get_rgb(int r, int g, int b)
+// {
+// 	return (r << 24 | g << 16 | b << 8 | 0xFF);
+// }
+
 void raycasting(t_map_data *map_data)
 {
 	t_cast	cast = map_data->cast;
@@ -219,7 +224,7 @@ void raycasting(t_map_data *map_data)
 				pixels[index] = map_data->colors->c_ceiling;
 			else if (y < cast.drawEnd)
 			{
-				cast.texY = (int)cast.texPos & (map_data->tex_height - 1);
+				cast.texY = fmod(cast.texPos, map_data->tex_height);
 				cast.texPos += cast.step;
 				cast.texNum = 0;
 				if (cast.side == 0)
@@ -227,10 +232,13 @@ void raycasting(t_map_data *map_data)
 				else
 					cast.texNum = cast.rayDirY > 0 ? 2 : 3;	
 				uint8_t *texPixel = &map_data->textures[cast.texNum]->pixels[(cast.texY * map_data->tex_width + cast.texX) * 4];
-				// uint32_t color = (texPixel[0] << 24) | (texPixel[1] << 16) | 
-				// 			(texPixel[2] << 8) | texPixel[3];
-				uint32_t color = (texPixel[3] << 24) | (texPixel[0] << 16) | 
-							(texPixel[1] << 8) | texPixel[2];
+				uint32_t color = (texPixel[3] << 24) | (texPixel[2] << 16) | 
+							(texPixel[1] << 8) | texPixel[0];
+				// printf("texPixel[0]=%d, texPixel[1]=%d, texPixel[2]=%d, texPixel[3]=%d\n", texPixel[0], texPixel[1], texPixel[2], texPixel[3]);
+				// uint32_t color = (texPixel[3] << 24) | (texPixel[0] << 16) | 
+				// 			(texPixel[1] << 8) | texPixel[2];
+				// printf("color=%d\n", color);
+				// uint32_t color = get_rgb(texPixel[3], texPixel[0], texPixel[1]);
 				pixels[index] = color;
 			}
 			else
@@ -238,6 +246,8 @@ void raycasting(t_map_data *map_data)
 		}
 	}
 }
+
+
 
 
 // ⣿⣿⣿⣿⣿⣿⠿⢋⣥⣴⣶⣶⣶⣬⣙⠻⠟⣋⣭⣭⣭⣭⡙⠻⣿⣿⣿⣿⣿⣿ //
