@@ -6,11 +6,18 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 21:24:32 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/20 12:13:08 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/01/20 12:35:48 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub.h"
+
+void	ft_err(char *err_msg)
+{
+	ft_putstr_fd(err_msg, 2);
+	exit(EXIT_FAILURE);
+	gcollector(0, 0);
+}
 
 static bool	find_c(const char *sep, char c)
 {

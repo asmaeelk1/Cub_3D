@@ -1,18 +1,17 @@
 NAME		=	cub3D
 CC			= 	cc
 CFLAGS		=	-Wall -Wextra -Werror -Iincludes -I./includes/ -fsanitize=address -g3
-SRC			=	mandatory/cub.c mandatory/src/parsing/init_map.c mandatory/utils/utils1.c \
-				mandatory/src/parsing/parsing.c mandatory/src/parsing/init_elements.c \
-				mandatory/utils/gcollector.c mandatory/utils/gnl.c mandatory/utils/gnl_utils.c \
-				mandatory/utils/errors.c mandatory/utils/ft_split.c mandatory/utils/utils2.c \
-				mandatory/src/rendering/hooks.c mandatory/src/rendering/raycasting.c \
-				mandatory/src/rendering/rotation_init.c mandatory/src/rendering/textures.c \
+SRC			=	cub3d/cub.c cub3d/src/parsing/parsing.c \
+				cub3d/src/parsing/init_map.c cub3d/src/parsing/init_elements.c \
+				cub3d/utils/gcollector.c cub3d/utils/ft_split.c cub3d/utils/gnl.c \
+				cub3d/utils/utils1.c cub3d/utils/utils2.c cub3d/utils/gnl_utils.c \
+				cub3d/src/rendering/hooks.c cub3d/src/rendering/raycasting.c \
+				cub3d/src/rendering/rotation_init.c cub3d/src/rendering/textures.c \
 
 LIBMLX		=	MLX42/build/libmlx42.a
 LIBMLX_INC	=	-IMLX/include/MLX -Iinclude
 OBJ			=	$(SRC:%.c=%.o)
-BNS_OBJ		=	$(BNS_SRCS:%.c=%.o)
-HEADER		= 	mandatory/includes/cub.h
+HEADER		= 	cub3d/includes/cub.h
 UNAME_S := $(shell uname -s)
 
 ifeq ($(UNAME_S),Linux)
@@ -35,12 +34,6 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	@$(CC) $(OBJ) $(MLXFLG) $(LIBMLX) $(CFLAGS) -o $(NAME)
 	@echo "👌 Done"
-
-bonus: $(BNS_NAME)
-
-$(BNS_NAME): $(BNS_OBJ)
-	@$(CC) $(CFLAGS) $(BNS_OBJ) -o $(BNS_NAME)
-	@echo "Bonus Done"
 
 clean:
 	@rm -f $(OBJ) $(BNS_OBJ)
