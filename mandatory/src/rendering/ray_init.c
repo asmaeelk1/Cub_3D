@@ -6,11 +6,11 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 00:56:50 by oel-feng          #+#    #+#             */
-/*   Updated: 2025/01/20 01:09:11 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/01/20 02:07:24 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub.h"
+#include "../../includes/cub.h"
 
 static void	plane_rot(t_map_data *map_data)
 {

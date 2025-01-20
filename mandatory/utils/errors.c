@@ -6,11 +6,11 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 21:24:18 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/20 00:55:52 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/01/20 02:06:41 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub.h"
+#include "../includes/cub.h"
 
 void	ft_err(char *err_msg)
 {

@@ -6,11 +6,11 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 21:24:28 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/20 00:56:03 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/01/20 02:06:36 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub.h"
+#include "../includes/cub.h"
 
 size_t	ft_strlen(const char *c)
 {

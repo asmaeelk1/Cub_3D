@@ -6,11 +6,11 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 21:24:10 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/20 01:22:36 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/01/20 02:06:57 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/cub.h"
+#include "../../includes/cub.h"
 
 static void	up_down(t_map_data *map_data, double speed)
 {

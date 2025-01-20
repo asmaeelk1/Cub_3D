@@ -6,11 +6,11 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 23:01:25 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/20 01:02:09 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/01/20 02:06:11 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/cub.h"
+#include "../../includes/cub.h"
 
 static int	rgb_to_int(int r, int g, int b, int a)
 {

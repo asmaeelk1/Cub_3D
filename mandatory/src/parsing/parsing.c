@@ -6,11 +6,11 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 06:36:29 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/20 01:05:17 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/01/20 02:06:06 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/cub.h"
+#include "../../includes/cub.h"
 
 static int	check_file(char *file)
 {

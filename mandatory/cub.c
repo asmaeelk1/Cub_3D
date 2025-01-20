@@ -6,11 +6,11 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 06:29:40 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/20 02:00:28 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/01/20 02:05:59 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub.h"
+#include "includes/cub.h"
 
 int	init_mlx_data(t_map_data *data)
 {
@@ -49,7 +49,6 @@ static void	set_data(t_map_data *map_data)
 	map_data->data_mlx = gcollector(sizeof(t_mlx_data), 1);
 	map_data->texts = gcollector(sizeof(t_text_map), 1);
 	map_data->map = NULL;
-	map_data->arr_text = NULL;
 	map_data->player = gcollector(sizeof(t_player), 1);
 	map_data->player->player = '\0';
 	map_data->player->if_player_exist = false;

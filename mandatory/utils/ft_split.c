@@ -6,11 +6,11 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 21:24:23 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/20 00:55:58 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/01/20 02:06:49 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub.h"
+#include "../includes/cub.h"
 
 static int	count_words(char *str, char c)
 {

@@ -9,3 +9,6 @@ outfile*
 
 # Executable
 cub3D
+
+# VS Code
+.vscode/
