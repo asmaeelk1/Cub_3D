@@ -6,20 +6,18 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 06:30:49 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/20 12:18:34 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/01/20 12:31:57 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB_H
 # define CUB_H
 
+# include <math.h>
+# include <fcntl.h>
 # include <unistd.h>
 # include <stdlib.h>
-# include <stdio.h>
-# include <fcntl.h>
 # include <stdbool.h>
-# include <limits.h>
-# include <math.h>
 # include "../../MLX42/include/MLX42/MLX42.h"
 
 enum	e_macros
