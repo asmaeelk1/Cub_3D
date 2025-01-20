@@ -6,13 +6,13 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 23:01:25 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/18 06:09:19 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/01/20 01:02:09 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/cub.h"
 
-int	rgb_to_int(int r, int g, int b, int a)
+static int	rgb_to_int(int r, int g, int b, int a)
 {
 	return (r << 24 | g << 16 | b << 8 | a);
 }
@@ -25,7 +25,7 @@ void	pars_colors(char *color)
 
 	i = -1;
 	i_rgb = 0;
-	if(!ft_strtrim(color, " "))
+	if (!ft_strtrim(color, " "))
 		ft_err("Empty file");
 	if (color[ft_strlen(color) - 1] == ',' || color[0] == ',')
 		ft_err(INVALID_COLOR_FORMAT);
@@ -103,7 +103,7 @@ void	read_elements(int file_name, t_map_data **map_data)
 
 	i_elements = 6;
 	line = get_next_line(file_name);
-	if(!line)
+	if (!line)
 		ft_err("Empty file ");
 	while (line && i_elements > 0)
 	{

@@ -5,8 +5,8 @@ SRC			=	src/cub.c \
 				src/mandatory/parsing/parsing.c src/mandatory/parsing/init_elements.c src/mandatory/parsing/init_map.c\
 				src/utils/gcollector.c src/utils/gnl.c src/utils/gnl_utils.c src/utils/utils1.c \
 				src/utils/errors.c src/utils/ft_split.c src/utils/utils2.c \
-				src/mandatory/rendering/draw_utils.c src/mandatory/rendering/map2D.c  \
 				src/mandatory/rendering/hooks.c src/mandatory/rendering/raycasting.c \
+				src/mandatory/rendering/ray_init.c src/mandatory/rendering/textures.c \
 
 LIBMLX		=	MLX42/build/libmlx42.a
 LIBMLX_INC	=	-IMLX/include/MLX -Iinclude

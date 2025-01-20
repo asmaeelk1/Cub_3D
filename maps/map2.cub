@@ -1,7 +1,7 @@
-NO ./textures/test.png
-SO ./textures/test.png
-EA ./textures/test.png
-WE ./textures/test.png
+NO ./textures/Greyeagle2L.png
+SO ./textures/RedwallswasD.png
+EA ./textures/StoneUWcrossD.png
+WE ./textures/StoneUWHitlerD.png
 C  0,25,30
  F 54,100,0
                        111111111111

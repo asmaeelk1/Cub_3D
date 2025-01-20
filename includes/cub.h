@@ -6,7 +6,7 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 06:30:49 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/18 20:38:21 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/01/20 02:00:59 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,11 @@
 # include <math.h>
 # include "../MLX42/include/MLX42/MLX42.h"
 
-enum    e_macros
+enum	e_macros
 {
-    WIDTH = 1800,
-    HEIGHT = 1200,
-    BUFFER_SIZE = 42,
-    H = HEIGHT
+	WIDTH = 1800,
+	HEIGHT = 1200,
+	BUFFER_SIZE = 42
 };
 
 # define INVALID_FILE "Invalid file name. Example: file_name.cub"
@@ -41,54 +40,36 @@ have exactly 3 components (R, G, B), each between 0 and 255."
 
 typedef struct s_gc
 {
-    void        *content;
-    struct s_gc    *next;
-}    t_gc;
+	void		*content;
+	struct s_gc	*next;
+}	t_gc;
 
 typedef struct s_textures
 {
-    char    *north;
-    char    *south;
-    char    *west;
-    char    *east;
-}    t_text_map;
-
-typedef struct s_raytext
-{
-	mlx_texture_t	*north;
-	mlx_texture_t	*south;
-	mlx_texture_t	*west;
-	mlx_texture_t	*east;
-} t_raytext;
+	char	*north;
+	char	*south;
+	char	*west;
+	char	*east;
+}	t_text_map;
 
 typedef struct s_colors
 {
-    int	c_floor;
-    int	c_ceiling;
-}    t_colors;
+	int	c_floor;
+	int	c_ceiling;
+}	t_colors;
 
 typedef struct s_mlx_data
 {
-    mlx_t			*mlx;
-    mlx_image_t		*image;
-	int				width;
-	int				height;
-}    t_mlx_data;
-
-typedef struct s_keys
-{
-    bool	w_pressed;
-    bool	s_pressed;
-    bool	a_pressed;
-    bool	d_pressed;
-    bool	left_pressed;
-    bool	right_pressed;
-}	t_keys;
+	mlx_t		*mlx;
+	mlx_image_t	*image;
+	int			width;
+	int			height;
+}	t_mlx_data;
 
 typedef struct s_player
 {
-    char	player;
-    bool	if_player_exist;
+	char	player;
+	bool	if_player_exist;
 	int		x_pos;
 	int		y_pos;
 	double	rotate_angle;
@@ -96,63 +77,59 @@ typedef struct s_player
 	int		turn_dir;
 	int		xc;
 	int		yc;
-    double  x_pos_map;
-    double 	y_pos_map;
-	double dirX;
-    double dirY;
-    double planeX;
-    double planeY;
+	double	x_pos_map;
+	double	y_pos_map;
+	double	dir_x;
+	double	dir_y;
+	double	plane_x;
+	double	plane_y;
 }	t_player;
 
 typedef struct s_cast
 {
-    double	cameraX;
-    double	rayDirX;
-    double	rayDirY;
-	int		mapX;
-	int		mapY;
-    double	sideDistX;
-    double	sideDistY;
-    double	deltaDistX;
-    double	deltaDistY;
-    double	perpWallDist;
-    double	posX;
-    int		stepX;
-    int		stepY;
-    int		hit;
-    int		side;
-    int		lineHeight;
-    int		drawStart;
-    int		drawEnd;
-	double	wallX;
-    int		texNum;
-    int		texX;
-	int		texY;
-    double	step;
-    double	texPos;
+	double	camera_x;
+	double	raydir_x;
+	double	raydir_y;
+	int		map_x;
+	int		map_y;
+	double	sidedist_x;
+	double	sidedist_y;
+	double	deltadist_x;
+	double	deltadist_y;
+	double	perpwalldist;
+	int		step_x;
+	int		step_y;
+	int		hit;
+	int		side;
+	int		lineheight;
+	int		drawstart;
+	int		drawend;
+	double	wall_x;
+	int		tex_num;
+	int		tex_x;
+	int		tex_y;
+	double	step;
+	double	tex_pos;
 }	t_cast;
 
 typedef struct s_map_data
 {
-    t_text_map		*texts;
-    t_colors    	*colors;
-    t_mlx_data		*data_mlx;
+	t_text_map		*texts;
+	t_colors		*colors;
+	t_mlx_data		*data_mlx;
 	t_player		*player;
-    int             p_y_pos;
-    int             p_x_pos;
-    bool            wall;
-    int				height_map;
-    int				width_map;
-    char			**map;
-	int				**arr_text;
-	// t_raytext		textures;
+	int				p_y_pos;
+	int				p_x_pos;
+	bool			wall;
+	int				height_map;
+	int				width_map;
+	char			**map;
 	mlx_texture_t	*textures[4];
-	t_keys			keys;
 	double			speed;
-    int				tex_width;
-    int				tex_height;
-    t_cast          cast;
-}    t_map_data;
+	int				tex_width;
+	int				tex_height;
+	t_cast			cast;
+}	t_map_data;
 
 typedef struct s_p
 {
@@ -170,39 +147,29 @@ typedef struct s_plotline
 	int	e2;
 }	t_plotline;
 
-
-void	*gcollector(size_t size, int mode);
-void	*ft_calloc(size_t count, size_t size);
-
-void	pars_map(t_map_data **map_data);
-void	parsing(char *file_name, t_map_data *map_data);
-void	read_elements(int file_name, t_map_data **map_data);
-
 void	ft_err(char *err_msg);
 char	*get_next_line(int fd);
+void	my_keyhook(void *param);
 size_t	ft_strlen(const char *c);
 int		ft_atoi(const char *str);
 char	*ft_strchr(char *s, int c);
 char	*ft_strdup(const char *s1);
 char	**ft_split(char *s, char c);
+void	pars_map(t_map_data **map_data);
 char	*ft_strtok(char *str, char *sep);
+void	raycasting(t_map_data *map_data);
+void	*gcollector(size_t size, int mode);
 void	ft_putstr_fd(const char *s, int fd);
 int		ft_strcmp(const char *s1, char *s2);
+void	*ft_calloc(size_t count, size_t size);
 char	*ft_strtrim(char *s1, char const *set);
 int		ft_strncmp(char *s1, char *s2, size_t n);
+void	set_plane_rotation(t_map_data *map_data);
 char	*ft_strjoin(const char *s1, const char *s2);
+void	parsing(char *file_name, t_map_data *map_data);
 char	*ft_substr(char *s, unsigned int start, size_t len);
+void	read_elements(int file_name, t_map_data **map_data);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
+void	set_textures_data(t_map_data *map_data, t_cast *cast, int x, int y);
 
-// draw 2D map
-// void    map_2d(t_map_data **map_data);
-void    plot_line(t_map_data **data, t_p p0, t_p p1, long color);
-// void    draw_square(t_map_data **map_data, int x, int y, long color);
-
-// player movement
-void    my_keyhook(void *param);
-int		rgb_to_int(int r, int g, int b, int a);
-void	raycasting(t_map_data *map_data);
-void	movement_hook(mlx_key_data_t keydata, void* data);
-bool	check_collision(t_map_data *map_data, double new_x, double new_y);
 #endif

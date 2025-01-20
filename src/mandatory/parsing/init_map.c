@@ -6,7 +6,7 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 23:27:44 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/18 19:55:11 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/01/20 01:07:10 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,24 +35,24 @@ static void	check_char(char *line_map, int i_map, t_player *player)
 			&& line_map[i] != 'S' && line_map[i] != 'W' && line_map[i] != 'E'
 			&& line_map[i] != ' ')
 			ft_err(INVALID_MAP);
-		if(line_map[i] == 'N' || line_map[i] == 'S' || line_map[i] == 'W'
+		if (line_map[i] == 'N' || line_map[i] == 'S' || line_map[i] == 'W'
 			|| line_map[i] == 'E')
-			{
-				player->x_pos_map = (double)i + 0.5;
-				player->y_pos_map = (double)i_map + 0.5;
-			}
+		{
+			player->x_pos_map = (double)i + 0.5;
+			player->y_pos_map = (double)i_map + 0.5;
+		}
 	}
 }
 
 static void	is_zero_next_to_space(char *l_curr, char *prev, char *next,
 		t_map_data **map)
 {
-	int	i;
-	char *str;
+	int		i;
+	char	*str;
 
 	i = -1;
 	str = ft_strtrim(l_curr, " ");
-	if(str[0] != '1' || str[ft_strlen(str) - 1] != '1' )
+	if (str[0] != '1' || str[ft_strlen(str) - 1] != '1')
 		ft_err(INVALID_MAP);
 	while (l_curr[++i])
 	{
@@ -65,11 +65,10 @@ static void	is_zero_next_to_space(char *l_curr, char *prev, char *next,
 			if (prev[i] == ' ' || next[i] == ' ')
 				ft_err(INVALID_MAP);
 			if (l_curr[i] != '0' && (*map)->player->if_player_exist == false)
-			{
-				(*map)->player->player = l_curr[i];
-				(*map)->player->if_player_exist = true;
-			}
-			else if (l_curr[i] != '0' && (*map)->player->if_player_exist == true)
+				1 && ((*map)->player->player = l_curr[i],
+					(*map)->player->if_player_exist = true);
+			else if (l_curr[i] != '0'
+				&& (*map)->player->if_player_exist == true)
 				ft_err(INVALID_MAP);
 		}
 	}
@@ -118,12 +117,9 @@ void	pars_map(t_map_data **map_data)
 	i_map = -1;
 	while ((*map_data)->map[++i_map])
 	{
-		len_current_line = ft_strlen((*map_data)->map[i_map]);
-		while (len_current_line < max_len_line)
-		{
+		len_current_line = ft_strlen((*map_data)->map[i_map]) - 1;
+		while (++len_current_line < max_len_line)
 			(*map_data)->map[i_map] = ft_strjoin((*map_data)->map[i_map], " ");
-			len_current_line++;
-		}
 	}
 	(*map_data)->height_map = i_map;
 	(*map_data)->width_map = max_len_line;

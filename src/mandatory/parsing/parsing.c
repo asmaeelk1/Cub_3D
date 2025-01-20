@@ -6,7 +6,7 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 06:36:29 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/18 19:42:29 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/01/20 01:05:17 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	read_map(int file_name, t_map_data **map_data)
 	map_lines = NULL;
 	while (line && !ft_strncmp(ft_strtrim(line, " "), "\n", ft_strlen(line)))
 		line = get_next_line(file_name);
-	if(!line)
+	if (!line)
 		ft_err("Empty_file");
 	line = ft_strjoin(line, "\n");
 	while (line)
