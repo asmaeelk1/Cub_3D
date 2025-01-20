@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   init_elements.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asel-kha <asel-kha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 23:01:25 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/20 12:04:15 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/01/20 23:44:25 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub.h"
+#include <stdio.h>
 
-static int	rgb_to_int(int r, int g, int b, int a)
+static unsigned int	rgb_to_int(int r, int g, int b, int a)
 {
 	return (r << 24 | g << 16 | b << 8 | a);
 }
@@ -50,7 +51,7 @@ static void	init_colors(t_colors **colors, char *line)
 {
 	char	**rgb;
 	char	*save_line;
-	int		color;
+	unsigned int		color;
 
 	if (!ft_strncmp(line, "\n", ft_strlen(line)))
 		ft_err("invalid file");

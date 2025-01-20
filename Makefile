@@ -1,12 +1,13 @@
 NAME		=	cub3D
 CC			= 	cc
 CFLAGS		=	-Wall -Wextra -Werror -Iincludes -I./includes/ -fsanitize=address -g3
-SRC			=	cub3d/cub.c cub3d/src/parsing/init_map.c \
-				cub3d/src/parsing/init_elements.c cub3d/src/parsing/parsing.c \
-				cub3d/src/rendering/hooks.c cub3d/src/rendering/raycasting.c \
-				cub3d/src/rendering/rotation_init.c cub3d/src/rendering/textures.c \
-				cub3d/utils/ft_split.c cub3d/utils/gcollector.c cub3d/utils/gnl_utils.c \
-				cub3d/utils/gnl.c  cub3d/utils/utils1.c cub3d/utils/utils2.c  \
+SRC			=	cub/cub.c cub/src/parsing/init_map.c \
+				cub/src/parsing/init_elements.c cub/src/parsing/parsing.c \
+				cub/src/rendering/hooks.c cub/src/rendering/raycasting.c \
+				cub/src/rendering/draw_2D_map.c \
+				cub/src/rendering/rotation_init.c cub/src/rendering/textures.c \
+				cub/utils/ft_split.c cub/utils/gcollector.c cub/utils/gnl_utils.c \
+				cub/utils/gnl.c  cub/utils/utils1.c cub/utils/utils2.c  \
 
 LIBMLX		=	MLX42/build/libmlx42.a
 LIBMLX_INC	=	-IMLX/include/MLX -Iinclude

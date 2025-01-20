@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asel-kha <asel-kha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 06:30:49 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/20 12:31:57 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/01/21 00:00:26 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ typedef struct s_textures
 
 typedef struct s_colors
 {
-	int	c_ceiling;
-	int	c_floor;
+	unsigned int	c_ceiling;
+	unsigned int	c_floor;
 }	t_colors;
 
 typedef struct s_player
@@ -113,6 +113,7 @@ typedef struct s_map_data
 	t_colors		*colors;
 	t_player		*player;
 	mlx_image_t		*image;
+	mlx_image_t		*mini_map;
 	t_textures		*texts;
 	double			speed;
 	char			**map;
@@ -128,6 +129,7 @@ int		ft_atoi(const char *str);
 char	*ft_strchr(char *s, int c);
 char	*ft_strdup(const char *s1);
 char	**ft_split(char *s, char c);
+void	map_2d(t_map_data *map_data);
 void	pars_map(t_map_data **map_data);
 char	*ft_strtok(char *str, char *sep);
 void	raycasting(t_map_data *map_data);

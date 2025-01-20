@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asel-kha <asel-kha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 21:24:10 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/20 11:54:43 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/01/21 00:01:07 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,4 +116,5 @@ void	my_keyhook(void *param)
 	rotation_left(map_data, map_data->player->rotation_speed);
 	rotation_right(map_data, map_data->player->rotation_speed);
 	raycasting(map_data);
+	map_2d(map_data);
 }

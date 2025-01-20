@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asel-kha <asel-kha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 06:29:40 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/20 12:11:18 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/01/21 00:01:45 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ static int	init_mlx_data(t_map_data *data)
 		return (mlx_close_window(data->mlx), 1);
 	if (mlx_image_to_window(data->mlx, data->image, 0, 0) == -1)
 		return (mlx_close_window(data->mlx), 1);
+	data->mini_map = mlx_new_image(data->mlx, 200, 200);
+	mlx_image_to_window(data->mlx, data->mini_map, 0, 0);
 	return (0);
 }
 
