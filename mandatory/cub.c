@@ -6,68 +6,54 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 06:29:40 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/20 02:05:59 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/01/20 12:11:18 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/cub.h"
 
-int	init_mlx_data(t_map_data *data)
+static int	init_mlx_data(t_map_data *data)
 {
-	data->data_mlx->mlx = mlx_init(WIDTH, HEIGHT, "Cub_3D", true);
-	if (!(data->data_mlx->mlx))
-	{
-		ft_putstr_fd(mlx_strerror(mlx_errno), 2);
-		return (1);
-	}
-	data->data_mlx->image = mlx_new_image(data->data_mlx->mlx, WIDTH,
+	data->mlx = mlx_init(WIDTH, HEIGHT, "cub3D", true);
+	if (!(data->mlx))
+		return (ft_putstr_fd(mlx_strerror(mlx_errno), 2), 1);
+	data->image = mlx_new_image(data->mlx, WIDTH,
 			HEIGHT);
-	if (!(data->data_mlx->image))
-	{
-		mlx_close_window(data->data_mlx->mlx);
-		return (1);
-	}
-	if (mlx_image_to_window(data->data_mlx->mlx, data->data_mlx->image, 0,
-			0) == -1)
-	{
-		mlx_close_window(data->data_mlx->mlx);
-		return (1);
-	}
+	if (!(data->image))
+		return (mlx_close_window(data->mlx), 1);
+	if (mlx_image_to_window(data->mlx, data->image, 0, 0) == -1)
+		return (mlx_close_window(data->mlx), 1);
 	return (0);
 }
 
-void	cleanup_and_exit(t_map_data *data)
+static void	cleanup_and_exit(t_map_data *data)
 {
-	mlx_terminate(data->data_mlx->mlx);
+	mlx_terminate(data->mlx);
 	gcollector(0, 0);
 	exit(EXIT_SUCCESS);
 }
 
 static void	set_data(t_map_data *map_data)
 {
-	map_data->colors = gcollector(sizeof(t_colors), 1);
-	map_data->data_mlx = gcollector(sizeof(t_mlx_data), 1);
-	map_data->texts = gcollector(sizeof(t_text_map), 1);
-	map_data->map = NULL;
+	map_data->texts = gcollector(sizeof(t_textures), 1);
 	map_data->player = gcollector(sizeof(t_player), 1);
-	map_data->player->player = '\0';
+	map_data->colors = gcollector(sizeof(t_colors), 1);
 	map_data->player->if_player_exist = false;
-	map_data->p_x_pos = 0;
-	map_data->p_y_pos = 0;
-	map_data->wall = false;
+	map_data->player->player = '\0';
+	map_data->map = NULL;
 }
 
-void	start_textures(t_map_data *map_data)
+static void	start_textures(t_map_data *map_data)
 {
-	map_data->textures[0] = mlx_load_png(map_data->texts->north);
-	map_data->textures[1] = mlx_load_png(map_data->texts->south);
-	map_data->textures[2] = mlx_load_png(map_data->texts->west);
-	map_data->textures[3] = mlx_load_png(map_data->texts->east);
-	if (!map_data->textures[0] || !map_data->textures[1]
-		|| !map_data->textures[2] || !map_data->textures[3])
+	map_data->textures[NORTH] = mlx_load_png(map_data->texts->north);
+	map_data->textures[SOUTH] = mlx_load_png(map_data->texts->south);
+	map_data->textures[WEST] = mlx_load_png(map_data->texts->west);
+	map_data->textures[EAST] = mlx_load_png(map_data->texts->east);
+	if (!map_data->textures[NORTH] || !map_data->textures[SOUTH]
+		|| !map_data->textures[WEST] || !map_data->textures[EAST])
 		ft_err("Error: Failed to load textures");
-	map_data->tex_width = map_data->textures[0]->width;
-	map_data->tex_height = map_data->textures[0]->height;
+	map_data->tex_width = map_data->textures[NORTH]->width;
+	map_data->tex_height = map_data->textures[NORTH]->height;
 }
 
 int	main(int ac, char **av)
@@ -89,7 +75,7 @@ int	main(int ac, char **av)
 	start_textures(&map_data);
 	map_data.map[(int)map_data.player->y_pos_map]
 	[(int)map_data.player->x_pos_map] = '0';
-	mlx_loop_hook(map_data.data_mlx->mlx, my_keyhook, &map_data);
-	mlx_loop(map_data.data_mlx->mlx);
+	mlx_loop_hook(map_data.mlx, my_keyhook, &map_data);
+	mlx_loop(map_data.mlx);
 	cleanup_and_exit(&map_data);
 }

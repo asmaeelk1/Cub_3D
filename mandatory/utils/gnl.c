@@ -6,13 +6,13 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 21:24:25 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/20 02:06:25 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/01/20 11:39:44 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub.h"
 
-char	*split_nl(char **save)
+static char	*split_nl(char **save)
 {
 	char	*line;
 	char	*tmp;
@@ -29,7 +29,7 @@ char	*split_nl(char **save)
 	return (line);
 }
 
-char	*read_line(int fd, char *save)
+static char	*read_line(int fd, char *save)
 {
 	char	*buff;
 	int		readret;

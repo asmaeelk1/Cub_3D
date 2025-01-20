@@ -6,7 +6,7 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 05:35:38 by oel-feng          #+#    #+#             */
-/*   Updated: 2025/01/20 02:07:18 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/01/20 12:19:03 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,17 +113,15 @@ static void	init_data(t_cast *cast, t_map_data *map_data, int x)
 
 void	raycasting(t_map_data *map_data)
 {
-	t_cast		cast;
 	int			x;
 
 	x = -1;
-	cast = map_data->cast;
 	while (++x < WIDTH)
 	{
-		init_data(&cast, map_data, x);
-		init_step(&cast, map_data);
-		set_dda(&cast, map_data);
-		ray_cont(&cast, map_data);
-		set_textures_data(map_data, &cast, x, -1);
+		init_data(&map_data->cast, map_data, x);
+		init_step(&map_data->cast, map_data);
+		set_dda(&map_data->cast, map_data);
+		ray_cont(&map_data->cast, map_data);
+		set_textures_data(&map_data->cast, map_data, x, -1);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 23:27:44 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/20 02:06:16 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/01/20 11:38:57 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,6 @@ static void	is_map_valid(t_map_data **map_data)
 	}
 	if ((*map_data)->player->if_player_exist == false)
 		ft_err(INVALID_MAP);
-	(*map_data)->data_mlx->width = (*map_data)->width_map;
-	(*map_data)->data_mlx->height = (*map_data)->height_map;
 }
 
 void	pars_map(t_map_data **map_data)

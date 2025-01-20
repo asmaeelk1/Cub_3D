@@ -6,29 +6,11 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 21:24:32 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/20 02:06:53 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/01/20 12:13:08 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub.h"
-
-char	*ft_strtrim(char *s1, char const *set)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	if (!s1 || !set)
-		return (NULL);
-	j = ft_strlen(s1) - 1;
-	if (ft_strlen (s1) == 0)
-		return (ft_strdup(""));
-	while (s1[i] && ft_strchr((char *)set, s1[i]))
-		i++;
-	while (s1[j] && ft_strchr((char *)set, s1[j]))
-		j--;
-	return (ft_substr(s1, i, j - (i - 1)));
-}
 
 static bool	find_c(const char *sep, char c)
 {
@@ -57,6 +39,24 @@ char	*ft_strtok(char *str, char *sep)
 	if (*hold)
 		*hold++ = 0;
 	return (token);
+}
+
+char	*ft_strtrim(char *s1, char const *set)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	if (!s1 || !set)
+		return (NULL);
+	j = ft_strlen(s1) - 1;
+	if (ft_strlen (s1) == 0)
+		return (ft_strdup(""));
+	while (s1[i] && ft_strchr((char *)set, s1[i]))
+		i++;
+	while (s1[j] && ft_strchr((char *)set, s1[j]))
+		j--;
+	return (ft_substr(s1, i, j - (i - 1)));
 }
 
 int	ft_atoi(const char *str)

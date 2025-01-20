@@ -6,7 +6,7 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 23:01:25 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/20 02:06:11 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/01/20 12:04:15 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	rgb_to_int(int r, int g, int b, int a)
 	return (r << 24 | g << 16 | b << 8 | a);
 }
 
-void	pars_colors(char *color)
+static void	pars_colors(char *color)
 {
 	int		i_rgb;
 	char	*color_token;
@@ -68,7 +68,7 @@ static void	init_colors(t_colors **colors, char *line)
 		ft_err(INVALID_MAP);
 }
 
-static void	init_textures(t_text_map **textures, t_colors **colors, char *line)
+static void	init_textures(t_textures **textures, t_colors **colors, char *line)
 {
 	while (*line == ' ' )
 		line++;

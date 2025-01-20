@@ -6,7 +6,7 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 01:34:38 by oel-feng          #+#    #+#             */
-/*   Updated: 2025/01/20 02:07:30 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/01/20 12:20:19 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,16 @@ static void	my_draw_function(t_cast *cast, t_map_data *map_data,
 	if (cast->side == 0)
 	{
 		if (cast->raydir_x > 0)
-			cast->tex_num = 0;
+			cast->tex_num = NORTH;
 		else
-			cast->tex_num = 1;
+			cast->tex_num = SOUTH;
 	}
 	else
 	{
 		if (cast->raydir_y > 0)
-			cast->tex_num = 2;
+			cast->tex_num = WEST;
 		else
-			cast->tex_num = 3;
+			cast->tex_num = EAST;
 	}
 	texpixel = &map_data->textures[cast->tex_num]->pixels[(cast->tex_y
 			* map_data->tex_width + cast->tex_x) * 4];
@@ -42,12 +42,12 @@ static void	my_draw_function(t_cast *cast, t_map_data *map_data,
 	pixels[index] = color;
 }
 
-void	set_textures_data(t_map_data *map_data, t_cast *cast, int x, int y)
+void	set_textures_data(t_cast *cast, t_map_data *map_data, int x, int y)
 {
 	uint32_t	*pixels;
 	int			index;
 
-	pixels = (uint32_t *)map_data->data_mlx->image->pixels;
+	pixels = (uint32_t *)map_data->image->pixels;
 	cast->wall_x -= floor(cast->wall_x);
 	cast->tex_x = (int)(cast->wall_x * map_data->tex_width);
 	if (cast->side == 0 && cast->raydir_x > 0)
