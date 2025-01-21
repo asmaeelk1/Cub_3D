@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_2D_map.c                                      :+:      :+:    :+:   */
+/*   draw_2D_map_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asel-kha <asel-kha@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: ghriyba <ghriyba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 22:49:21 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/20 23:57:24 by asel-kha         ###   ########.fr       */
+/*   Updated: 2025/01/21 22:44:11 by ghriyba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub.h"
+#include "../../includes/cub_bonus.h"
 
 void		draw_square(t_map_data *data, int x, int y, long color)
 {
