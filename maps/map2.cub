@@ -3,7 +3,7 @@ SO ./textures/south.png
 EA ./textures/east.png
 WE ./textures/west.png
 
-C 0,25,30
+C 0,255,200
 F 54,100,0
 
                         111111111111

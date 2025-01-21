@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   init_elements_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghriyba <ghriyba@student.42.fr>            +#+  +:+       +#+        */
+/*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 23:01:25 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/21 22:43:37 by ghriyba          ###   ########.fr       */
+/*   Updated: 2025/01/22 00:00:35 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub_bonus.h"
 
-static unsigned int	rgb_to_int(int r, int g, int b, int a)
+static unsigned int	rgb_to_int(int a, int r, int b, int g)
 {
-	return (r << 24 | g << 16 | b << 8 | a);
+	return (a << 24 | r << 16 | b << 8 | g);
 }
 
 static void	pars_colors(char *color)
@@ -59,7 +59,7 @@ static void	init_colors(t_colors **colors, char *line)
 	line = ft_strtrim(line + 2, " ");
 	pars_colors(ft_strtrim(save_line + 2, " "));
 	rgb = ft_split(line, ',');
-	color = rgb_to_int(ft_atoi(rgb[0]), ft_atoi(rgb[1]), ft_atoi(rgb[2]), 255);
+	color = rgb_to_int(255, ft_atoi(rgb[2]), ft_atoi(rgb[1]), ft_atoi(rgb[0]));
 	if (!ft_strncmp(save_line, "F ", 2) && (*colors)->c_floor == -1)
 		(*colors)->c_floor = color;
 	else if (!ft_strncmp(save_line, "C ", 2) && (*colors)->c_ceiling == -1)
