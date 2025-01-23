@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub.h                                              :+:      :+:    :+:   */
+/*   cub_bonus.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asel-kha <asel-kha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 06:30:49 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/23 16:34:41 by asel-kha         ###   ########.fr       */
+/*   Updated: 2025/01/23 16:23:35 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB_H
-# define CUB_H
+#ifndef CUB_BONUS_H
+# define CUB_BONUS_H
 
 # include <math.h>
 # include <fcntl.h>
@@ -129,13 +129,13 @@ int		ft_atoi(const char *str);
 char	*ft_strchr(char *s, int c);
 char	*ft_strdup(const char *s1);
 char	**ft_split(char *s, char c);
-void	map_2d(t_map_data *map_data);
 void	pars_map(t_map_data **map_data);
 char	*ft_strtok(char *str, char *sep);
 void	raycasting(t_map_data *map_data);
 void	*gcollector(size_t size, int mode);
-void	ft_putstr_fd(const char *s, int fd);
+void	map_2d(t_map_data *map_data, int i);
 int		ft_strcmp(const char *s1, char *s2);
+void	ft_putstr_fd(const char *s, int fd);
 void	*ft_calloc(size_t count, size_t size);
 char	*ft_strtrim(char *s1, char const *set);
 int		ft_strncmp(char *s1, char *s2, size_t n);
@@ -143,7 +143,9 @@ void	set_plane_rotation(t_map_data *map_data);
 char	*ft_strjoin(const char *s1, const char *s2);
 void	parsing(char *file_name, t_map_data *map_data);
 char	*ft_substr(char *s, unsigned int start, size_t len);
+void	mouse_hook(double x_pos, double y_pos, void *param);
 void	read_elements(int file_name, t_map_data **map_data);
+void	hook_change(struct mlx_key_data keydata, void *param);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 void	set_textures_data(t_cast *cast, t_map_data *map_data, int x, int y);
 

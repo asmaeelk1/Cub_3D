@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub.c                                              :+:      :+:    :+:   */
+/*   cub_bonus.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghriyba <ghriyba@student.42.fr>            +#+  +:+       +#+        */
+/*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 06:29:40 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/21 22:29:49 by ghriyba          ###   ########.fr       */
+/*   Updated: 2025/01/23 10:40:33 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/cub.h"
+#include "includes/cub_bonus.h"
 
 static int	init_mlx_data(t_map_data *data)
 {
@@ -81,6 +81,9 @@ int	main(int ac, char **av)
 	start_textures(&map_data);
 	map_data.map[(int)map_data.player->y_pos_map]
 	[(int)map_data.player->x_pos_map] = '0';
+	mlx_set_cursor_mode(map_data.mlx, MLX_MOUSE_DISABLED);
+	mlx_key_hook(map_data.mlx, hook_change, &map_data);
+	mlx_cursor_hook(map_data.mlx, mouse_hook, &map_data);
 	mlx_loop_hook(map_data.mlx, my_keyhook, &map_data);
 	mlx_loop(map_data.mlx);
 	cleanup_and_exit(&map_data);

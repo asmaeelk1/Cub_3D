@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hooks.c                                            :+:      :+:    :+:   */
+/*   hooks_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghriyba <ghriyba@student.42.fr>            +#+  +:+       +#+        */
+/*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 21:24:10 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/21 22:26:21 by ghriyba          ###   ########.fr       */
+/*   Updated: 2025/01/23 10:27:15 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub.h"
+#include "../../includes/cub_bonus.h"
 
 static void	up_down(t_map_data *map_data, double speed)
 {
@@ -116,4 +116,5 @@ void	my_keyhook(void *param)
 	rotation_left(map_data, map_data->player->rotation_speed);
 	rotation_right(map_data, map_data->player->rotation_speed);
 	raycasting(map_data);
+	map_2d(map_data, -1);
 }

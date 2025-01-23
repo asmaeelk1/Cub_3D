@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   textures.c                                         :+:      :+:    :+:   */
+/*   textures_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 01:34:38 by oel-feng          #+#    #+#             */
-/*   Updated: 2025/01/23 10:04:11 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/01/23 10:05:51 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub.h"
+#include "../../includes/cub_bonus.h"
 
 static void	my_draw_function(t_cast *cast, t_map_data *map_data,
 	uint32_t *pixels, int index)

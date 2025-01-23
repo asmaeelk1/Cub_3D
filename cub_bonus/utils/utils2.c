@@ -6,11 +6,11 @@
 /*   By: asel-kha <asel-kha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 21:24:32 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/23 16:34:51 by asel-kha         ###   ########.fr       */
+/*   Updated: 2025/01/23 16:33:32 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub.h"
+#include "../includes/cub_bonus.h"
 
 static bool	find_c(const char *sep, char c)
 {

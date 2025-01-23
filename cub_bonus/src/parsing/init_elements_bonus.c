@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_elements.c                                    :+:      :+:    :+:   */
+/*   init_elements_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 23:01:25 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/23 02:10:00 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/01/23 02:10:04 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub.h"
+#include "../../includes/cub_bonus.h"
 
 static unsigned int	rgb_to_int(int r, int g, int b, int a)
 {

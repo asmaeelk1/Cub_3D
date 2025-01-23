@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   gcollector.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ghriyba <ghriyba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 21:22:38 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/23 14:16:42 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/01/21 22:45:57 by ghriyba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub.h"
+#include "../includes/cub_bonus.h"
 
-static void	clear_gc(t_gc **gc)
+void	clear_gc(t_gc **gc)
 {
 	t_gc	*tmp;
 	t_gc	*node;
