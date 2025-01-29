@@ -3,8 +3,8 @@ SO ./textures/colorstone.png
 WE ./textures/greystone.png
 EA ./textures/redbrick.png
 
-C 0,255,200
-F +,+,+
+C 0,25,20
+F 0,0,0
 
                         11111111111
                         10000000001
