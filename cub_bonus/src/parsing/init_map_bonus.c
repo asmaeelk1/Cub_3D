@@ -6,7 +6,7 @@
 /*   By: ghriyba <ghriyba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 23:27:44 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/21 22:43:47 by ghriyba          ###   ########.fr       */
+/*   Updated: 2025/01/28 19:13:35 by ghriyba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	check_char(char *line_map, int i_map, t_player *player)
 	{
 		if (line_map[i] != '1' && line_map[i] != '0' && line_map[i] != 'N'
 			&& line_map[i] != 'S' && line_map[i] != 'W' && line_map[i] != 'E'
-			&& line_map[i] != ' ')
+			&& line_map[i] != ' ' && line_map[i] != 'D')
 			ft_err(INVALID_MAP);
 		if (line_map[i] == 'N' || line_map[i] == 'S' || line_map[i] == 'W'
 			|| line_map[i] == 'E')

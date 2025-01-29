@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_2D_map_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ghriyba <ghriyba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 22:49:21 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/23 02:16:09 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/01/28 20:20:49 by ghriyba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	map_2d(t_map_data *map_data, int i)
 			y = (i * 15) + off_y;
 			if (map_data->map[i][j] == '1')
 				draw_square(map_data, x, y, 255);
-			else if (map_data->map[i][j] == '0')
+			else if (map_data->map[i][j] == '0' || map_data->map[i][j] == '2')
 				draw_square(map_data, x, y, 0X6B01C8FF);
 		}
 	}
