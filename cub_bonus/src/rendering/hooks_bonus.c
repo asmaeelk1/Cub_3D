@@ -6,11 +6,12 @@
 /*   By: ghriyba <ghriyba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 21:24:10 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/29 23:10:54 by ghriyba          ###   ########.fr       */
+/*   Updated: 2025/01/31 02:33:13 by ghriyba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub_bonus.h"
+#include <libc.h>
 
 static void	up_down(t_map_data *map_data, double speed)
 {
@@ -104,22 +105,19 @@ static void	rotation_right(t_map_data *map_data, double rot_speed)
 	}
 }
 
-// void	movement_shake(t_player *player)
-// {
-// 		static float shake_time = 0;
-//     	static float shake_intensity = 0.03;
-// 		shake_time += 0.09;
-// 		float shake_x = sin(shake_time * 8) * shake_intensity;
-//         float shake_y = cos(shake_time * 8) * shake_intensity;
-//     	player->y_pos_map += shake_y;
-//         player->x_pos_map += shake_x;
-// }
-
 void is_open(t_map_data *map_data, int player_x, int player_y) {
-    if (map_data->map[player_y][player_x] == 'D') {
+    if (map_data->map[player_y][player_x] == 'D')
+	{
         map_data->map[player_y][player_x] = '2';
-    } else if (map_data->map[player_y][player_x] == '2') {
+		map_data->door->x = player_x;
+		map_data->door->y = player_y;
+		map_data->door->state = 1;
+    }
+	else if (map_data->map[player_y][player_x] == '2') {
         map_data->map[player_y][player_x] = 'D';
+		map_data->door->x = player_x;
+		map_data->door->y = player_y;
+		map_data->door->state = 3;
     }
 }
 
@@ -153,6 +151,20 @@ void	close_door(t_map_data *map_data, t_player *player)
         is_open(map_data, player_x, player_y - 1);
 }
 
+void	animation(t_map_data *map_data)
+{
+	int i = 0;
+	
+	while(i < 61)
+	{
+		map_data->text = mlx_load_png(map_data->frames[i]);
+		map_data->img_frame = mlx_texture_to_image(map_data->mlx, map_data->text);
+		mlx_image_to_window(map_data->mlx, map_data->img_frame, 640, 580);
+
+		i++;
+	}
+}
+
 void my_keyhook(void *param)
 {
     t_map_data *map_data ;
@@ -164,6 +176,8 @@ void my_keyhook(void *param)
 		open_door(map_data, map_data->player);
 	if( mlx_is_key_down(map_data->mlx, MLX_KEY_C))
 		close_door(map_data, map_data->player);
+	if( mlx_is_key_down(map_data->mlx, MLX_KEY_SPACE))
+		animation(map_data);	
     up_down(map_data, map_data->speed);
     left_right(map_data, map_data->speed);
     rotation_left(map_data, map_data->player->rotation_speed);

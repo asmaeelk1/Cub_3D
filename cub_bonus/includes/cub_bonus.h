@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub_bonus.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asel-kha <asel-kha@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: ghriyba <ghriyba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 06:30:49 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/23 16:23:35 by asel-kha         ###   ########.fr       */
+/*   Updated: 2025/01/31 02:22:11 by ghriyba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,13 @@ typedef struct s_cast
 	int		hit;
 }	t_cast;
 
+typedef struct s_door {
+    int x;
+    int y;
+    float progress; 
+    int state;
+} t_door;
+
 typedef struct s_map_data
 {
 	mlx_texture_t	*textures[4];
@@ -113,14 +120,20 @@ typedef struct s_map_data
 	t_colors		*colors;
 	t_player		*player;
 	mlx_image_t		*image;
+	mlx_image_t		*img_frame;
+	char			*frames[61];
+	mlx_image_t		*frame;
 	mlx_image_t		*mini_map;
+	mlx_texture_t	*text;
 	t_textures		*texts;
 	double			speed;
 	char			**map;
 	t_cast			cast;
 	mlx_t			*mlx;
+	t_door			*door;
 }	t_map_data;
 
+char	*ft_itoa(int n);
 void	ft_err(char *err_msg);
 char	*get_next_line(int fd);
 void	my_keyhook(void *param);
