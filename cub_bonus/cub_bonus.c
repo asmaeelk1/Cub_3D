@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub_bonus.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghriyba <ghriyba@student.42.fr>            +#+  +:+       +#+        */
+/*   By: asel-kha <asel-kha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 06:29:40 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/31 02:31:17 by ghriyba          ###   ########.fr       */
+/*   Updated: 2025/01/31 20:20:37 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ static int	init_mlx_data(t_map_data *data)
 	if (mlx_image_to_window(data->mlx, data->image, 0, 0) == -1)
 		return (mlx_close_window(data->mlx), 1);
 	data->mini_map = mlx_new_image(data->mlx, 200, 200);
-	data->text = mlx_load_png("cub_bonus/frames/frame_1.png");
-	data->img_frame = mlx_new_image(data->mlx, WIDTH,
-			HEIGHT);
+	data->text = mlx_load_png(data->frames[0]);
+	// data->img_frame = mlx_new_image(data->mlx, WIDTH,
+	// 		HEIGHT);
 	data->img_frame = mlx_texture_to_image(data->mlx, data->text);
 	mlx_image_to_window(data->mlx, data->mini_map, 0, 0);
-	mlx_image_to_window(data->mlx, data->img_frame, 640, 580);
+	mlx_image_to_window(data->mlx, data->img_frame,  740, 717);
 	return (0);
 }
 
@@ -100,12 +100,12 @@ int	main(int ac, char **av)
 	set_data(&map_data);
 	parsing(av[1], &map_data);
 	set_plane_rotation(&map_data);
+	int_arr_frames(&map_data);
 	if (init_mlx_data(&map_data) == 1)
 	{
 		gcollector(0, 0);
 		exit(EXIT_FAILURE);
 	}
-	int_arr_frames(&map_data);
 	start_textures(&map_data);
 	map_data.map[(int)map_data.player->y_pos_map]
 	[(int)map_data.player->x_pos_map] = '0';
