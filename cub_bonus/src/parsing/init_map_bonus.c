@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_map_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghriyba <ghriyba@student.42.fr>            +#+  +:+       +#+        */
+/*   By: asel-kha <asel-kha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 23:27:44 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/28 19:13:35 by ghriyba          ###   ########.fr       */
+/*   Updated: 2025/01/31 19:37:13 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,15 @@ static void	check_char(char *line_map, int i_map, t_player *player)
 	}
 }
 
+void	check_doors(char *l_curr, char *prev, char *next, int pos_door)
+{
+	if(pos_door == 0)
+		ft_err(INVALID_MAP);
+	if((l_curr[pos_door -1] != '1' || l_curr[pos_door + 1] != '1')
+		&& (prev[pos_door] != '1' || next[pos_door] != '1'))
+		ft_err("INVALID_MAP");
+}
+
 static void	is_zero_next_to_space(char *l_curr, char *prev, char *next,
 		t_map_data **map)
 {
@@ -57,14 +66,14 @@ static void	is_zero_next_to_space(char *l_curr, char *prev, char *next,
 	while (l_curr[++i])
 	{
 		if (l_curr[i] == '0' || l_curr[i] == 'N' || l_curr[i] == 'S'
-			|| l_curr[i] == 'W' || l_curr[i] == 'E')
+			|| l_curr[i] == 'W' || l_curr[i] == 'E' || l_curr[i] == 'D')
 		{
-			if ((i - 1 >= 0 && l_curr[i - 1] == ' ') || (i
-					+ 1 < (*map)->height_map && l_curr[i + 1] == ' '))
+			if ((i - 1 >= 0 && l_curr[i - 1] == ' ')
+					|| (i + 1 < (*map)->height_map && l_curr[i + 1] == ' ')
+					|| prev[i] == ' ' || next[i] == ' ')
 				ft_err(INVALID_MAP);
-			if (prev[i] == ' ' || next[i] == ' ')
-				ft_err(INVALID_MAP);
-			if (l_curr[i] != '0' && (*map)->player->if_player_exist == false)
+				(l_curr[i] == 'D') && (check_doors(l_curr, prev, next, i), 0);
+			if (l_curr[i] != '0' && l_curr[i] != 'D' && (*map)->player->if_player_exist == false)
 				1 && ((*map)->player->player = l_curr[i],
 					(*map)->player->if_player_exist = true);
 			else if (l_curr[i] != '0'

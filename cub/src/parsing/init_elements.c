@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_elements.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asel-kha <asel-kha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 23:01:25 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/23 02:10:00 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/01/31 19:41:14 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	pars_colors(char *color)
 	i_rgb = 0;
 	if (!ft_strtrim(color, " "))
 		ft_err("Empty file");
-	if (color[ft_strlen(color) - 1] == ',' || color[0] == ',')
+	if ((ft_strlen(color) > 1 && color[ft_strlen(color) - 1] == ',') || color[0] == ',')
 		ft_err(INVALID_COLOR_FORMAT);
 	while (color[++i])
 		if (color[i] == ',' && color[i + 1] == ',')
@@ -70,8 +70,6 @@ static void	init_colors(t_colors **colors, char *line)
 
 static void	init_textures(t_textures **textures, t_colors **colors, char *line)
 {
-	while (*line == ' ' )
-		line++;
 	if (!ft_strncmp(line, "NO ", 3) && !(*textures)->north)
 	{
 		line[ft_strlen(line) - 1] = 0;
@@ -92,6 +90,8 @@ static void	init_textures(t_textures **textures, t_colors **colors, char *line)
 		line[ft_strlen(line) - 1] = 0;
 		(*textures)->east = ft_strtrim(line + 3, " \t");
 	}
+	else if(ft_strncmp(line, "C ", 2) && ft_strncmp(line, "F ", 2) )
+		ft_err(INVALID_MAP);
 	else
 		init_colors(colors, line);
 }
@@ -112,6 +112,8 @@ void	read_elements(int file_name, t_map_data **map_data)
 			line = get_next_line(file_name);
 			continue ;
 		}
+		while (*line == ' ' )
+			line++;
 		init_textures(&(*map_data)->texts, &(*map_data)->colors, line);
 		if (i_elements > 1)
 			line = get_next_line(file_name);
