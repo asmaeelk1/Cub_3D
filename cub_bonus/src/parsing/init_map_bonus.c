@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_map_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghriyba <ghriyba@student.42.fr>            +#+  +:+       +#+        */
+/*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 23:27:44 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/31 23:28:52 by ghriyba          ###   ########.fr       */
+/*   Updated: 2025/02/01 21:01:18 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static void	is_zero_next_to_space(char *l_curr, char *prev, char *next,
 					|| (i + 1 < (*map)->height_map && l_curr[i + 1] == ' ')
 					|| prev[i] == ' ' || next[i] == ' ')
 				ft_err(INVALID_MAP);
-				(l_curr[i] == 'D') && (check_doors(l_curr, prev, next, i), 0);
+			(l_curr[i] == 'D') && (check_doors(l_curr, prev, next, i), 0);
 			if (l_curr[i] != '0' && l_curr[i] != 'D' && (*map)->player->if_player_exist == false)
 				1 && ((*map)->player->player = l_curr[i],
 					(*map)->player->if_player_exist = true);

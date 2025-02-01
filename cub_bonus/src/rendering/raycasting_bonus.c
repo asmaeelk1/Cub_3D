@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghriyba <ghriyba@student.42.fr>            +#+  +:+       +#+        */
+/*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 05:35:38 by oel-feng          #+#    #+#             */
-/*   Updated: 2025/01/30 01:07:40 by ghriyba          ###   ########.fr       */
+/*   Updated: 2025/02/01 20:57:54 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static void	set_dda(t_cast *cast, t_map_data *map_data)
 		if (cast->map_x < 0 || cast->map_x >= WIDTH
 			|| cast->map_y < 0 || cast->map_y >= HEIGHT)
 			break ;
-		if (map_data->map[cast->map_y][cast->map_x] == '1' || map_data->map[cast->map_y][cast->map_x] == 'D' )
+		if (map_data->map[cast->map_y][cast->map_x] == '1' || map_data->map[cast->map_y][cast->map_x] == 'D')
 			cast->hit = 1;
 	}
 }

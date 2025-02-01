@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghriyba <ghriyba@student.42.fr>            +#+  +:+       +#+        */
+/*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 21:24:10 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/02/01 02:48:48 by ghriyba          ###   ########.fr       */
+/*   Updated: 2025/02/01 21:02:42 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,22 +18,34 @@ static void	up_down(t_map_data *map_data, double speed)
 	{
 		if (map_data->map[(int)map_data->player->y_pos_map]
 			[(int)(map_data->player->x_pos_map
-				+ map_data->player->dir_x * speed)] != '1')
+				+ map_data->player->dir_x * speed)] != '1'
+				&& map_data->map[(int)map_data->player->y_pos_map]
+			[(int)(map_data->player->x_pos_map
+				+ map_data->player->dir_x * speed)] != 'D')
 			map_data->player->x_pos_map += map_data->player->dir_x * speed;
 		if (map_data->map[(int)(map_data->player->y_pos_map
 				+ map_data->player->dir_y * speed)]
-				[(int)map_data->player->x_pos_map] != '1')
+				[(int)map_data->player->x_pos_map] != '1'
+				&& map_data->map[(int)(map_data->player->y_pos_map
+				+ map_data->player->dir_y * speed)]
+				[(int)map_data->player->x_pos_map] != 'D')
 			map_data->player->y_pos_map += map_data->player->dir_y * speed;
 	}
 	if (mlx_is_key_down(map_data->mlx, MLX_KEY_S))
 	{
 		if (map_data->map[(int)map_data->player->y_pos_map]
 			[(int)(map_data->player->x_pos_map - map_data->player->dir_x
-				* speed)] != '1')
+				* speed)] != '1'
+				&& map_data->map[(int)map_data->player->y_pos_map]
+			[(int)(map_data->player->x_pos_map - map_data->player->dir_x
+				* speed)] != 'D')
 			map_data->player->x_pos_map -= map_data->player->dir_x * speed;
 		if (map_data->map[(int)(map_data->player->y_pos_map
 				- map_data->player->dir_y * speed)]
-				[(int)map_data->player->x_pos_map] != '1')
+				[(int)map_data->player->x_pos_map] != '1'
+				&& map_data->map[(int)(map_data->player->y_pos_map
+				- map_data->player->dir_y * speed)]
+				[(int)map_data->player->x_pos_map] != 'D')
 			map_data->player->y_pos_map -= map_data->player->dir_y * speed;
 	}
 }
@@ -44,22 +56,33 @@ static void	left_right(t_map_data *map_data, double speed)
 	{
 		if (map_data->map[(int)map_data->player->y_pos_map]
 			[(int)(map_data->player->x_pos_map
-				- map_data->player->plane_x * speed)] != '1')
+				- map_data->player->plane_x * speed)] != '1'
+				&& map_data->map[(int)map_data->player->y_pos_map]
+			[(int)(map_data->player->x_pos_map
+				- map_data->player->plane_x * speed)] != 'D')
 			map_data->player->x_pos_map -= map_data->player->plane_x * speed;
 		if (map_data->map[(int)(map_data->player->y_pos_map
 				- map_data->player->plane_y * speed)]
-				[(int)map_data->player->x_pos_map] != '1')
+				[(int)map_data->player->x_pos_map] != '1'
+				&& map_data->map[(int)(map_data->player->y_pos_map
+				- map_data->player->plane_y * speed)]
+				[(int)map_data->player->x_pos_map] != 'D')
 			map_data->player->y_pos_map -= map_data->player->plane_y * speed;
 	}
 	if (mlx_is_key_down(map_data->mlx, MLX_KEY_D))
 	{
 		if (map_data->map[(int)map_data->player->y_pos_map]
 			[(int)(map_data->player->x_pos_map + map_data->player->plane_x
-				* speed)] != '1')
+				* speed)] != '1' && map_data->map[(int)map_data->player->y_pos_map]
+			[(int)(map_data->player->x_pos_map + map_data->player->plane_x
+				* speed)] != 'D')
 			map_data->player->x_pos_map += map_data->player->plane_x * speed;
 		if (map_data->map[(int)(map_data->player->y_pos_map
 				+ map_data->player->plane_y * speed)]
-				[(int)map_data->player->x_pos_map] != '1')
+				[(int)map_data->player->x_pos_map] != '1'
+				&& map_data->map[(int)(map_data->player->y_pos_map
+				+ map_data->player->plane_y * speed)]
+				[(int)map_data->player->x_pos_map] != 'D')
 			map_data->player->y_pos_map += map_data->player->plane_y * speed;
 	}
 }
@@ -104,50 +127,52 @@ static void	rotation_right(t_map_data *map_data, double rot_speed)
 	}
 }
 
-void is_open(t_map_data *map_data, int player_x, int player_y) {
-    if (map_data->map[player_y][player_x] == 'D')
+void is_open(t_map_data *map_data, int player_x, int player_y)
+{
+	if (map_data->map[player_y][player_x] == 'D')
 	{
-        map_data->map[player_y][player_x] = '2';
+		map_data->map[player_y][player_x] = '2';
 		map_data->door->x = player_x;
 		map_data->door->y = player_y;
 		map_data->door->state = 1;
-    }
-	else if (map_data->map[player_y][player_x] == '2') {
-        map_data->map[player_y][player_x] = 'D';
+	}
+	else if (map_data->map[player_y][player_x] == '2')
+	{
+		map_data->map[player_y][player_x] = 'D';
 		map_data->door->x = player_x;
 		map_data->door->y = player_y;
 		map_data->door->state = 3;
-    }
+	}
 }
 
 void	open_door(t_map_data *map_data, t_player *player) 
 {
 	int player_x = (int)player->x_pos_map;
-    int player_y = (int)player->y_pos_map;
+	int player_y = (int)player->y_pos_map;
 
-    if (map_data->map[player_y][player_x + 1] == 'D')
-        is_open(map_data, player_x + 1, player_y);
-    else if (map_data->map[player_y][player_x - 1] == 'D')
-        is_open(map_data, player_x - 1, player_y);
-    else if (map_data->map[player_y + 1][player_x] == 'D')
-        is_open(map_data, player_x, player_y + 1);
-    else if (map_data->map[player_y - 1][player_x] == 'D')
-        is_open(map_data, player_x, player_y - 1);
+	if (map_data->map[player_y][player_x + 1] == 'D')
+		is_open(map_data, player_x + 1, player_y);
+	else if (map_data->map[player_y][player_x - 1] == 'D')
+		is_open(map_data, player_x - 1, player_y);
+	else if (map_data->map[player_y + 1][player_x] == 'D')
+		is_open(map_data, player_x, player_y + 1);
+	else if (map_data->map[player_y - 1][player_x] == 'D')
+		is_open(map_data, player_x, player_y - 1);
 }
 
 void	close_door(t_map_data *map_data, t_player *player)
 {
 	int player_x = (int)player->x_pos_map;
-    int player_y = (int)player->y_pos_map;
+	int player_y = (int)player->y_pos_map;
 
-    if (map_data->map[player_y][player_x + 1] == '2')
-        is_open(map_data, player_x + 1, player_y);
-    else if (map_data->map[player_y][player_x - 1] == '2')
-        is_open(map_data, player_x - 1, player_y);
-    else if (map_data->map[player_y + 1][player_x] == '2')
-        is_open(map_data, player_x, player_y + 1);
-    else if (map_data->map[player_y - 1][player_x] == '2')
-        is_open(map_data, player_x, player_y - 1);
+	if (map_data->map[player_y][player_x + 1] == '2')
+		is_open(map_data, player_x + 1, player_y);
+	else if (map_data->map[player_y][player_x - 1] == '2')
+		is_open(map_data, player_x - 1, player_y);
+	else if (map_data->map[player_y + 1][player_x] == '2')
+		is_open(map_data, player_x, player_y + 1);
+	else if (map_data->map[player_y - 1][player_x] == '2')
+		is_open(map_data, player_x, player_y - 1);
 }
 
 void	animation(void *param)
@@ -171,11 +196,11 @@ void	animation(void *param)
 
 void my_keyhook(void *param)
 {
-    t_map_data *map_data ;
+	t_map_data *map_data ;
 
 	map_data = (t_map_data *)param;
-    if (mlx_is_key_down(map_data->mlx, MLX_KEY_ESCAPE))
-        mlx_close_window(map_data->mlx);
+	if (mlx_is_key_down(map_data->mlx, MLX_KEY_ESCAPE))
+		mlx_close_window(map_data->mlx);
 	if (mlx_is_key_down(map_data->mlx, MLX_KEY_O))
 		open_door(map_data, map_data->player);
 	if( mlx_is_key_down(map_data->mlx, MLX_KEY_C))
@@ -183,10 +208,10 @@ void my_keyhook(void *param)
 	if (mlx_is_key_down(map_data->mlx, MLX_KEY_SPACE))
 		map_data->animation_playing = true; 
 	animation(map_data);
-    up_down(map_data, map_data->speed);
-    left_right(map_data, map_data->speed);
-    rotation_left(map_data, map_data->player->rotation_speed);
-    rotation_right(map_data, map_data->player->rotation_speed);
-    raycasting(map_data);
-    map_2d(map_data, -1);
+	up_down(map_data, map_data->speed);
+	left_right(map_data, map_data->speed);
+	rotation_left(map_data, map_data->player->rotation_speed);
+	rotation_right(map_data, map_data->player->rotation_speed);
+	raycasting(map_data);
+	map_2d(map_data, -1);
 }
