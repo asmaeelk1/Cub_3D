@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asel-kha <asel-kha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 21:24:23 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/23 14:34:40 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/02/01 17:00:52 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,50 @@ void	ft_err(char *err_msg)
 	ft_putstr_fd(err_msg, 2);
 	gcollector(0, 0);
 	exit(EXIT_FAILURE);
+}
+
+static int	len_int(long nbr)
+{
+	int	count;
+
+	count = 0;
+	if (nbr < 0)
+	{
+		count++;
+		nbr *= -1;
+	}
+	while (nbr > 0)
+	{
+		nbr = nbr / 10;
+		count++;
+	}
+	return (count);
+}
+
+char	*ft_itoa(int n)
+{
+	char	*res;
+	int		i;
+	long	nbr;
+
+	if (n == 0)
+		return (ft_strdup("0"));
+	nbr = n;
+	i = len_int(nbr);
+	res = gcollector(i + 1, 1);
+	if (!res)
+		return (NULL);
+	if (nbr < 0)
+	{
+		res[0] = '-';
+		nbr *= -1;
+	}
+	res[i--] = '\0';
+	while (nbr > 0)
+	{
+		res[i] = nbr % 10 + '0';
+		nbr = nbr / 10;
+		i--;
+	}
+	return (res);
 }

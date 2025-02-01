@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_2D_map_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghriyba <ghriyba@student.42.fr>            +#+  +:+       +#+        */
+/*   By: asel-kha <asel-kha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 22:49:21 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/28 20:20:49 by ghriyba          ###   ########.fr       */
+/*   Updated: 2025/02/01 16:03:38 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ static void	draw_square(t_map_data *data, int x, int y, long color)
 		j = 0;
 		while (j < 15)
 		{
-			if (start_x + i < 200 && start_y + j < 200
-				&& start_x + i > 0 && start_y + j > 0)
+			if (start_x + i < 200 && start_y + j < 200 && start_x + i > 0
+				&& start_y + j > 0)
 				mlx_put_pixel(data->mini_map, start_x + i, start_y + j, color);
 			j++;
 		}
@@ -48,8 +48,8 @@ static void	draw_player(t_map_data *map_data, int color)
 		while (j < 3)
 		{
 			if (i < 200 && j < 200)
-				mlx_put_pixel(map_data->mini_map, 200 / 2 + j,
-					200 / 2 + i, color);
+				mlx_put_pixel(map_data->mini_map, 200 / 2 + j, 200 / 2 + i,
+					color);
 			j++;
 		}
 		i++;

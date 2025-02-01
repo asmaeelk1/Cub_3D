@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub_bonus.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghriyba <ghriyba@student.42.fr>            +#+  +:+       +#+        */
+/*   By: asel-kha <asel-kha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 06:29:40 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/02/01 02:48:14 by ghriyba          ###   ########.fr       */
+/*   Updated: 2025/02/01 16:25:05 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	init_mlx_data(t_map_data *data)
 	data->text = mlx_load_png(data->frames[0]);
 	data->img_frame = mlx_texture_to_image(data->mlx, data->text);
 	mlx_image_to_window(data->mlx, data->mini_map, 0, 0);
-	mlx_image_to_window(data->mlx, data->img_frame,  740, 717);
+	mlx_image_to_window(data->mlx, data->img_frame,  730, 720);
 	return (0);
 }
 
