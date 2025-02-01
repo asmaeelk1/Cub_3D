@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   hooks_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asel-kha <asel-kha@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: ghriyba <ghriyba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 21:24:10 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/31 20:51:07 by asel-kha         ###   ########.fr       */
+/*   Updated: 2025/02/01 02:48:48 by ghriyba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub_bonus.h"
-#include <unistd.h>
 
 static void	up_down(t_map_data *map_data, double speed)
 {
@@ -155,22 +154,19 @@ void	animation(void *param)
 {
 	t_map_data *map_data = param;
 	static int i = 0;
-	
-	// while(i < 61)
-	// {
-		if(i == 61)
-		{
-			i = 0;
-			return;
-		}
+	if(i == 61)
+	{
+		i = 0;
+		map_data->animation_playing = false;
+		return;
+	}
+	if(map_data->animation_playing) {	
 		mlx_delete_image(map_data->mlx, map_data->img_frame);
-		mlx_delete_texture(map_data->text);
 		map_data->text = mlx_load_png(map_data->frames[i]);
 		map_data->img_frame = mlx_texture_to_image(map_data->mlx, map_data->text);
-		mlx_image_to_window(map_data->mlx, map_data->img_frame, 740, 717);
-		// usleep(100);
+		mlx_image_to_window(map_data->mlx, map_data->img_frame,  640, 600);
 		i++;
-	// }
+	}
 }
 
 void my_keyhook(void *param)
@@ -184,8 +180,9 @@ void my_keyhook(void *param)
 		open_door(map_data, map_data->player);
 	if( mlx_is_key_down(map_data->mlx, MLX_KEY_C))
 		close_door(map_data, map_data->player);
-	if( mlx_is_key_down(map_data->mlx, MLX_KEY_SPACE))
-		mlx_loop_hook(map_data->mlx, &animation, map_data);	
+	if (mlx_is_key_down(map_data->mlx, MLX_KEY_SPACE))
+		map_data->animation_playing = true; 
+	animation(map_data);
     up_down(map_data, map_data->speed);
     left_right(map_data, map_data->speed);
     rotation_left(map_data, map_data->player->rotation_speed);

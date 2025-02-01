@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_map_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asel-kha <asel-kha@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: ghriyba <ghriyba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 23:27:44 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/31 19:37:13 by asel-kha         ###   ########.fr       */
+/*   Updated: 2025/01/31 23:28:52 by ghriyba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	check_doors(char *l_curr, char *prev, char *next, int pos_door)
 		ft_err(INVALID_MAP);
 	if((l_curr[pos_door -1] != '1' || l_curr[pos_door + 1] != '1')
 		&& (prev[pos_door] != '1' || next[pos_door] != '1'))
-		ft_err("INVALID_MAP");
+		ft_err(INVALID_MAP);
 }
 
 static void	is_zero_next_to_space(char *l_curr, char *prev, char *next,
@@ -76,7 +76,7 @@ static void	is_zero_next_to_space(char *l_curr, char *prev, char *next,
 			if (l_curr[i] != '0' && l_curr[i] != 'D' && (*map)->player->if_player_exist == false)
 				1 && ((*map)->player->player = l_curr[i],
 					(*map)->player->if_player_exist = true);
-			else if (l_curr[i] != '0'
+			else if (l_curr[i] != '0' && l_curr[i] != 'D'
 				&& (*map)->player->if_player_exist == true)
 				ft_err(INVALID_MAP);
 		}

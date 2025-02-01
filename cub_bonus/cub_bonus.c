@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub_bonus.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asel-kha <asel-kha@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: ghriyba <ghriyba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 06:29:40 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/31 20:20:37 by asel-kha         ###   ########.fr       */
+/*   Updated: 2025/02/01 02:48:14 by ghriyba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ static int	init_mlx_data(t_map_data *data)
 		return (mlx_close_window(data->mlx), 1);
 	data->mini_map = mlx_new_image(data->mlx, 200, 200);
 	data->text = mlx_load_png(data->frames[0]);
-	// data->img_frame = mlx_new_image(data->mlx, WIDTH,
-	// 		HEIGHT);
 	data->img_frame = mlx_texture_to_image(data->mlx, data->text);
 	mlx_image_to_window(data->mlx, data->mini_map, 0, 0);
 	mlx_image_to_window(data->mlx, data->img_frame,  740, 717);
@@ -48,6 +46,7 @@ static void	int_arr_frames(t_map_data *data)
 		data->frames[i] = ft_strjoin(path, ".png");
 		index_frame++;
 	}
+	data->animation_playing = false;
 }
 
 static void	cleanup_and_exit(t_map_data *data)

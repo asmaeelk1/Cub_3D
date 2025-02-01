@@ -6,7 +6,7 @@
 /*   By: ghriyba <ghriyba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 06:30:49 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/31 02:22:11 by ghriyba          ###   ########.fr       */
+/*   Updated: 2025/02/01 02:33:53 by ghriyba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ typedef struct s_map_data
 	mlx_image_t		*image;
 	mlx_image_t		*img_frame;
 	char			*frames[61];
+	bool			animation_playing;
 	mlx_image_t		*frame;
 	mlx_image_t		*mini_map;
 	mlx_texture_t	*text;
