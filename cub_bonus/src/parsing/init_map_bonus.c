@@ -6,7 +6,7 @@
 /*   By: asel-kha <asel-kha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 23:27:44 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/02/02 21:36:18 by asel-kha         ###   ########.fr       */
+/*   Updated: 2025/02/02 21:53:24 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,9 @@ void	is_zero_next_to_space(char *l_curr, char *prev, char *next,
 				|| prev[i] == ' ' || next[i] == ' ')
 				ft_err(INVALID_MAP);
 			(l_curr[i] == 'D') && (check_doors(l_curr, prev, next, i), 0);
-			if (l_curr[i] != '0' && l_curr[i] != 'D' && (*map)->player->if_player_exist == false)
-				1 && ((*map)->player->player = l_curr[i],
+			if (l_curr[i] != '0' && l_curr[i] != 'D'
+				&& (*map)->player->if_player_exist == false)
+				(1) && ((*map)->player->player = l_curr[i],
 					(*map)->player->if_player_exist = true);
 			else if (l_curr[i] != '0' && l_curr[i] != 'D'
 				&& (*map)->player->if_player_exist == true)

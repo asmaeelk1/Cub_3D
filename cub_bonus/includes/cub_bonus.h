@@ -6,7 +6,7 @@
 /*   By: asel-kha <asel-kha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 06:30:49 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/02/02 21:35:39 by asel-kha         ###   ########.fr       */
+/*   Updated: 2025/02/02 21:58:33 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,7 @@ typedef struct s_map_data
 
 char	*ft_itoa(int n);
 void	ft_err(char *err_msg);
+void	animation(void *param);
 char	*get_next_line(int fd);
 void	my_keyhook(void *param);
 size_t	ft_strlen(const char *c);
@@ -153,17 +154,21 @@ void	*gcollector(size_t size, int mode);
 void	map_2d(t_map_data *map_data, int i);
 int		ft_strcmp(const char *s1, char *s2);
 void	ft_putstr_fd(const char *s, int fd);
+void	start_textures(t_map_data *map_data);
 void	*ft_calloc(size_t count, size_t size);
 char	*ft_strtrim(char *s1, char const *set);
 int		ft_strncmp(char *s1, char *s2, size_t n);
 void	set_plane_rotation(t_map_data *map_data);
 char	*ft_strjoin(const char *s1, const char *s2);
 void	parsing(char *file_name, t_map_data *map_data);
+void	open_door(t_map_data *map_data, t_player *player);
+void	close_door(t_map_data *map_data, t_player *player);
 char	*ft_substr(char *s, unsigned int start, size_t len);
 void	mouse_hook(double x_pos, double y_pos, void *param);
 void	read_elements(int file_name, t_map_data **map_data);
 void	hook_change(struct mlx_key_data keydata, void *param);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
+void	is_open(t_map_data *map_data, int player_x, int player_y);
 void	set_textures_data(t_cast *cast, t_map_data *map_data, int x, int y);
 void	is_zero_next_to_space(char *l_curr, char *prev, char *next,
 			t_map_data **map);

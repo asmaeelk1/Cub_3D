@@ -16,6 +16,7 @@ BNS_SRCS	=	cub_bonus/cub_bonus.c cub_bonus/src/parsing/init_map_bonus.c \
 				cub_bonus/src/rendering/hooks_bonus.c cub_bonus/src/rendering/raycasting_bonus.c \
 				cub_bonus/src/rendering/draw_2D_map_bonus.c cub_bonus/src/rendering/mouse_hook.c\
 				cub_bonus/src/rendering/rotation_init_bonus.c cub_bonus/src/rendering/textures_bonus.c \
+				cub_bonus/src/rendering/doors.c \
 				cub_bonus/utils/ft_split.c cub_bonus/utils/gcollector.c cub_bonus/utils/gnl_utils.c \
 				cub_bonus/utils/gnl.c  cub_bonus/utils/utils1.c cub_bonus/utils/utils2.c \
 

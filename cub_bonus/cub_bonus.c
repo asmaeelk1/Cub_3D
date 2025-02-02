@@ -6,7 +6,7 @@
 /*   By: asel-kha <asel-kha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 06:29:40 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/02/02 21:40:03 by asel-kha         ###   ########.fr       */
+/*   Updated: 2025/02/02 21:49:25 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,19 @@ static int	init_mlx_data(t_map_data *data)
 	data->text = mlx_load_png(data->frames[0]);
 	data->img_frame = mlx_texture_to_image(data->mlx, data->text);
 	mlx_image_to_window(data->mlx, data->mini_map, 0, 0);
-	mlx_image_to_window(data->mlx, data->img_frame,  730, 720);
+	mlx_image_to_window(data->mlx, data->img_frame, 730, 720);
 	return (0);
 }
 
-static void	int_arr_frames(t_map_data *data) 
+static void	int_arr_frames(t_map_data *data)
 {
-	int i;
-	int index_frame;
-	char *path;
+	int		i;
+	int		index_frame;
+	char	*path;
 
 	i = -1;
 	index_frame = 1;
-	while(++i < 61)
+	while (++i < 61)
 	{
 		path = "cub_bonus/frames/frame_";
 		path = ft_strjoin(path, ft_itoa(index_frame));
@@ -63,9 +63,9 @@ static void	set_data(t_map_data *map_data)
 	map_data->colors = gcollector(sizeof(t_colors), 1);
 	map_data->door = gcollector(sizeof(t_door), 1);
 	map_data->door->x = -1;
-    map_data->door->y = -1;
-    map_data->door->progress = 0.0;
-    map_data->door->state = 0;
+	map_data->door->y = -1;
+	map_data->door->progress = 0.0;
+	map_data->door->state = 0;
 	map_data->player->if_player_exist = false;
 	map_data->player->player = '\0';
 	map_data->map = NULL;
@@ -75,19 +75,6 @@ static void	set_data(t_map_data *map_data)
 	map_data->texts->west = NULL;
 	map_data->texts->north = NULL;
 	map_data->texts->south = NULL;
-}
-
-static void	start_textures(t_map_data *map_data)
-{
-	map_data->textures[NORTH] = mlx_load_png(map_data->texts->north);
-	map_data->textures[SOUTH] = mlx_load_png(map_data->texts->south);
-	map_data->textures[WEST] = mlx_load_png(map_data->texts->west);
-	map_data->textures[EAST] = mlx_load_png(map_data->texts->east);
-	if (!map_data->textures[NORTH] || !map_data->textures[SOUTH]
-		|| !map_data->textures[WEST] || !map_data->textures[EAST])
-		ft_err("Error: Failed to load textures");
-	map_data->tex_width = map_data->textures[NORTH]->width;
-	map_data->tex_height = map_data->textures[NORTH]->height;
 }
 
 int	main(int ac, char **av)

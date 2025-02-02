@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asel-kha <asel-kha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 01:34:38 by oel-feng          #+#    #+#             */
-/*   Updated: 2025/01/23 10:05:51 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/02/02 21:59:43 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ static void	my_draw_function(t_cast *cast, t_map_data *map_data,
 	}
 	texpixel = &map_data->textures[cast->tex_num]->pixels[(cast->tex_y
 			* map_data->tex_width + cast->tex_x) * 4];
-	color = (texpixel[3] << 24) | (texpixel[2] << 16) | (texpixel[1] << 8) | texpixel[0];
+	color = (texpixel[3] << 24) | (texpixel[2] << 16)
+		| (texpixel[1] << 8) | texpixel[0];
 	pixels[index] = color;
 }
 
@@ -68,4 +69,17 @@ void	set_textures_data(t_cast *cast, t_map_data *map_data, int x, int y)
 		else
 			pixels[index] = map_data->colors->c_floor;
 	}
+}
+
+void	start_textures(t_map_data *map_data)
+{
+	map_data->textures[NORTH] = mlx_load_png(map_data->texts->north);
+	map_data->textures[SOUTH] = mlx_load_png(map_data->texts->south);
+	map_data->textures[WEST] = mlx_load_png(map_data->texts->west);
+	map_data->textures[EAST] = mlx_load_png(map_data->texts->east);
+	if (!map_data->textures[NORTH] || !map_data->textures[SOUTH]
+		|| !map_data->textures[WEST] || !map_data->textures[EAST])
+		ft_err("Error: Failed to load textures");
+	map_data->tex_width = map_data->textures[NORTH]->width;
+	map_data->tex_height = map_data->textures[NORTH]->height;
 }
