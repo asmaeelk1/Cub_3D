@@ -6,7 +6,7 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 21:24:23 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/23 14:35:07 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/02/02 21:23:15 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ char	**ft_split(char *s, char c)
 
 void	ft_err(char *err_msg)
 {
+	close(save_fd(0, false));
 	ft_putstr_fd(err_msg, 2);
 	gcollector(0, 0);
 	exit(EXIT_FAILURE);

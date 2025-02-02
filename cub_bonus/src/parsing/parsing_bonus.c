@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghriyba <ghriyba@student.42.fr>            +#+  +:+       +#+        */
+/*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 06:36:29 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/21 22:43:52 by ghriyba          ###   ########.fr       */
+/*   Updated: 2025/02/02 21:23:38 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static int	check_file(char *file)
 		fd = open(file, O_RDONLY, 0644);
 	if (fd < 0)
 		ft_err(FILE_NOT_FOUND);
+	save_fd(fd, true);
 	return (fd);
 }
 

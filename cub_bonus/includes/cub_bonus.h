@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub_bonus.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghriyba <ghriyba@student.42.fr>            +#+  +:+       +#+        */
+/*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 06:30:49 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/02/01 02:33:53 by ghriyba          ###   ########.fr       */
+/*   Updated: 2025/02/02 21:24:05 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,7 @@ char	*get_next_line(int fd);
 void	my_keyhook(void *param);
 size_t	ft_strlen(const char *c);
 int		ft_atoi(const char *str);
+int		save_fd(int fd, bool hold);
 char	*ft_strchr(char *s, int c);
 char	*ft_strdup(const char *s1);
 char	**ft_split(char *s, char c);

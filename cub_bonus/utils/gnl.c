@@ -3,14 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   gnl.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghriyba <ghriyba@student.42.fr>            +#+  +:+       +#+        */
+/*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 21:24:25 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/21 22:46:16 by ghriyba          ###   ########.fr       */
+/*   Updated: 2025/02/02 21:23:46 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub_bonus.h"
+
+int	save_fd(int fd, bool hold)
+{
+	static int	_fd = -1;
+
+	if (hold)
+		_fd = fd;
+	return (_fd);
+}
 
 static char	*split_nl(char **save)
 {
