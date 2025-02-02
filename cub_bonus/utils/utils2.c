@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghriyba <ghriyba@student.42.fr>            +#+  +:+       +#+        */
+/*   By: asel-kha <asel-kha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 21:24:32 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/31 02:20:01 by ghriyba          ###   ########.fr       */
+/*   Updated: 2025/02/01 16:59:46 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,50 +89,4 @@ int	ft_atoi(const char *str)
 			ft_err(INVALID_COLOR);
 	}
 	return (res * sign);
-}
-
-static int	len_int(long nbr)
-{
-	int	count;
-
-	count = 0;
-	if (nbr < 0)
-	{
-		count++;
-		nbr *= -1;
-	}
-	while (nbr > 0)
-	{
-		nbr = nbr / 10;
-		count++;
-	}
-	return (count);
-}
-
-char	*ft_itoa(int n)
-{
-	char	*res;
-	int		i;
-	long	nbr;
-
-	if (n == 0)
-		return (ft_strdup("0"));
-	nbr = n;
-	i = len_int(nbr);
-	res = gcollector(i + 1, 1);
-	if (!res)
-		return (NULL);
-	if (nbr < 0)
-	{
-		res[0] = '-';
-		nbr *= -1;
-	}
-	res[i--] = '\0';
-	while (nbr > 0)
-	{
-		res[i] = nbr % 10 + '0';
-		nbr = nbr / 10;
-		i--;
-	}
-	return (res);
 }

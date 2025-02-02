@@ -13,7 +13,7 @@
 #include "../../includes/cub_bonus.h"
 
 static void	my_draw_function(t_cast *cast, t_map_data *map_data,
-	uint32_t *pixels, int index)
+		uint32_t *pixels, int index)
 {
 	uint8_t		*texpixel;
 	uint32_t	color;
@@ -37,8 +37,7 @@ static void	my_draw_function(t_cast *cast, t_map_data *map_data,
 	}
 	texpixel = &map_data->textures[cast->tex_num]->pixels[(cast->tex_y
 			* map_data->tex_width + cast->tex_x) * 4];
-	color = (texpixel[3] << 24) | (texpixel[2] << 16)
-		| (texpixel[1] << 8) | texpixel[0];
+	color = (texpixel[3] << 24) | (texpixel[2] << 16) | (texpixel[1] << 8) | texpixel[0];
 	pixels[index] = color;
 }
 
@@ -55,8 +54,8 @@ void	set_textures_data(t_cast *cast, t_map_data *map_data, int x, int y)
 	if (cast->side == 1 && cast->raydir_y < 0)
 		cast->tex_x = map_data->tex_width - cast->tex_x - 1;
 	cast->step = (double)map_data->tex_height / cast->lineheight;
-	cast->tex_pos = (cast->drawstart - HEIGHT
-			/ 2 + cast->lineheight / 2) * cast->step;
+	cast->tex_pos = (cast->drawstart - HEIGHT / 2 + cast->lineheight / 2)
+		* cast->step;
 	while (++y < HEIGHT)
 	{
 		index = y * WIDTH + x;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub_bonus.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asel-kha <asel-kha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 06:30:49 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/02/02 21:24:05 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/02/02 21:35:39 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,12 +103,13 @@ typedef struct s_cast
 	int		hit;
 }	t_cast;
 
-typedef struct s_door {
-    int x;
-    int y;
-    float progress; 
-    int state;
-} t_door;
+typedef struct s_door
+{
+	int		x;
+	int		y;
+	float	progress;
+	int		state;
+}	t_door;
 
 typedef struct s_map_data
 {
@@ -142,6 +143,7 @@ size_t	ft_strlen(const char *c);
 int		ft_atoi(const char *str);
 int		save_fd(int fd, bool hold);
 char	*ft_strchr(char *s, int c);
+void	check_if_walls(char *line);
 char	*ft_strdup(const char *s1);
 char	**ft_split(char *s, char c);
 void	pars_map(t_map_data **map_data);
@@ -163,5 +165,7 @@ void	read_elements(int file_name, t_map_data **map_data);
 void	hook_change(struct mlx_key_data keydata, void *param);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 void	set_textures_data(t_cast *cast, t_map_data *map_data, int x, int y);
+void	is_zero_next_to_space(char *l_curr, char *prev, char *next,
+			t_map_data **map);
 
 #endif
