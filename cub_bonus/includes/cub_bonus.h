@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub_bonus.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asel-kha <asel-kha@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 06:30:49 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/02/02 21:58:33 by asel-kha         ###   ########.fr       */
+/*   Updated: 2025/02/03 04:11:13 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdbool.h>
-# include "../../MLX42/include/MLX42/MLX42.h"
+# include "../../../MLX42/include/MLX42/MLX42.h"
 
 enum	e_macros
 {
@@ -32,16 +32,15 @@ enum	e_textures
 	NORTH = 0,
 	SOUTH = 1,
 	WEST = 2,
-	EAST = 3
+	EAST = 3,
+	DOOR = 4
 };
 
-# define INVALID_FILE "Invalid file name. Example: file_name.cub"
-# define FILE_NOT_FOUND "File not found"
-# define INVALID_MAP "Invalid map!"
-# define INVALID_COLOR "Error: Invalid color values. Each RGB component must be \
-between 0 and 255."
-# define INVALID_COLOR_FORMAT "Error: Invalid color format. A valid color must \
-have exactly 3 components (R, G, B), each between 0 and 255."
+# define INVALID_COLOR_FORMAT "Error: Invalid color format."
+# define INVALID_COLOR "Error: Invalid color values."
+# define INVALID_FILE "Error: Invalid file name."
+# define FILE_NOT_FOUND "Error: File not found"
+# define INVALID_MAP "Error: Invalid map!"
 
 typedef struct s_gc
 {
@@ -105,34 +104,34 @@ typedef struct s_cast
 
 typedef struct s_door
 {
-	int		x;
-	int		y;
 	float	progress;
 	int		state;
+	int		x;
+	int		y;
 }	t_door;
 
 typedef struct s_map_data
 {
-	mlx_texture_t	*textures[4];
-	int				tex_height;
+	bool			animation_playing;
+	mlx_texture_t	*textures[5];
+	char			*frames[61];
+	mlx_image_t		*img_frame;
 	int				height_map;
+	int				tex_height;
 	int				width_map;
 	int				tex_width;
+	mlx_image_t		*mini_map;
 	t_colors		*colors;
 	t_player		*player;
-	mlx_image_t		*image;
-	mlx_image_t		*img_frame;
-	char			*frames[61];
-	bool			animation_playing;
-	mlx_image_t		*frame;
-	mlx_image_t		*mini_map;
-	mlx_texture_t	*text;
 	t_textures		*texts;
-	double			speed;
+	mlx_image_t		*image;
+	mlx_image_t		*frame;
+	t_door			*door;
+	mlx_texture_t	*text;
 	char			**map;
+	double			speed;
 	t_cast			cast;
 	mlx_t			*mlx;
-	t_door			*door;
 }	t_map_data;
 
 char	*ft_itoa(int n);
@@ -151,6 +150,7 @@ void	pars_map(t_map_data **map_data);
 char	*ft_strtok(char *str, char *sep);
 void	raycasting(t_map_data *map_data);
 void	*gcollector(size_t size, int mode);
+void	cleanup_and_exit(t_map_data *data);
 void	map_2d(t_map_data *map_data, int i);
 int		ft_strcmp(const char *s1, char *s2);
 void	ft_putstr_fd(const char *s, int fd);
@@ -160,7 +160,11 @@ char	*ft_strtrim(char *s1, char const *set);
 int		ft_strncmp(char *s1, char *s2, size_t n);
 void	set_plane_rotation(t_map_data *map_data);
 char	*ft_strjoin(const char *s1, const char *s2);
+void	up_mvmnt(t_map_data *map_data, double speed);
 void	parsing(char *file_name, t_map_data *map_data);
+void	left_mvmnt(t_map_data *map_data, double speed);
+void	down_mvmnt(t_map_data *map_data, double speed);
+void	right_mvmnt(t_map_data *map_data, double speed);
 void	open_door(t_map_data *map_data, t_player *player);
 void	close_door(t_map_data *map_data, t_player *player);
 char	*ft_substr(char *s, unsigned int start, size_t len);

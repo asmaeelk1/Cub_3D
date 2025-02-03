@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub_bonus.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asel-kha <asel-kha@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 06:29:40 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/02/02 21:49:25 by asel-kha         ###   ########.fr       */
+/*   Updated: 2025/02/03 04:14:08 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	int_arr_frames(t_map_data *data)
 	data->animation_playing = false;
 }
 
-static void	cleanup_and_exit(t_map_data *data)
+void	cleanup_and_exit(t_map_data *data)
 {
 	mlx_terminate(data->mlx);
 	gcollector(0, 0);

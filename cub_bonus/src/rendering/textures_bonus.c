@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asel-kha <asel-kha@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 01:34:38 by oel-feng          #+#    #+#             */
-/*   Updated: 2025/02/02 21:59:43 by asel-kha         ###   ########.fr       */
+/*   Updated: 2025/02/03 03:48:59 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,14 @@
 static void	my_draw_function(t_cast *cast, t_map_data *map_data,
 		uint32_t *pixels, int index)
 {
-	uint8_t		*texpixel;
+	uint8_t		*pix;
 	uint32_t	color;
 
 	cast->tex_y = fmod(cast->tex_pos, map_data->tex_height);
-	cast->tex_pos += cast->step;
-	cast->tex_num = 0;
-	if (cast->side == 0)
+	1 && (cast->tex_pos += cast->step, cast->tex_num = 0);
+	if (map_data->map[cast->map_y][cast->map_x] == 'D')
+		cast->tex_num = DOOR;
+	else if (cast->side == 0)
 	{
 		if (cast->raydir_x > 0)
 			cast->tex_num = EAST;
@@ -35,10 +36,9 @@ static void	my_draw_function(t_cast *cast, t_map_data *map_data,
 		else
 			cast->tex_num = NORTH;
 	}
-	texpixel = &map_data->textures[cast->tex_num]->pixels[(cast->tex_y
+	pix = &map_data->textures[cast->tex_num]->pixels[(cast->tex_y
 			* map_data->tex_width + cast->tex_x) * 4];
-	color = (texpixel[3] << 24) | (texpixel[2] << 16)
-		| (texpixel[1] << 8) | texpixel[0];
+	color = (pix[3] << 24) | (pix[2] << 16) | (pix[1] << 8) | pix[0];
 	pixels[index] = color;
 }
 
@@ -77,8 +77,10 @@ void	start_textures(t_map_data *map_data)
 	map_data->textures[SOUTH] = mlx_load_png(map_data->texts->south);
 	map_data->textures[WEST] = mlx_load_png(map_data->texts->west);
 	map_data->textures[EAST] = mlx_load_png(map_data->texts->east);
+	map_data->textures[DOOR] = mlx_load_png("./textures/door.png");
 	if (!map_data->textures[NORTH] || !map_data->textures[SOUTH]
-		|| !map_data->textures[WEST] || !map_data->textures[EAST])
+		|| !map_data->textures[WEST] || !map_data->textures[EAST]
+		|| !map_data->textures[DOOR])
 		ft_err("Error: Failed to load textures");
 	map_data->tex_width = map_data->textures[NORTH]->width;
 	map_data->tex_height = map_data->textures[NORTH]->height;

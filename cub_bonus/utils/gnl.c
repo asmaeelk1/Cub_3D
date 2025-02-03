@@ -6,7 +6,7 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 21:24:25 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/02/02 21:23:46 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/02/03 03:35:32 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 int	save_fd(int fd, bool hold)
 {
-	static int	_fd = -1;
+	static int	save = -1;
 
 	if (hold)
-		_fd = fd;
-	return (_fd);
+		save = fd;
+	return (save);
 }
 
 static char	*split_nl(char **save)

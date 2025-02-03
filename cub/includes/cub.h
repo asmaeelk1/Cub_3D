@@ -6,7 +6,7 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 06:30:49 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/02/02 21:24:09 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/02/03 04:47:45 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdbool.h>
-# include "../../MLX42/include/MLX42/MLX42.h"
+# include "../../../MLX42/include/MLX42/MLX42.h"
 
 enum	e_macros
 {
@@ -34,14 +34,11 @@ enum	e_textures
 	WEST = 2,
 	EAST = 3
 };
-
-# define INVALID_FILE "Invalid file name. Example: file_name.cub"
-# define FILE_NOT_FOUND "File not found"
-# define INVALID_MAP "Invalid map!"
-# define INVALID_COLOR "Error: Invalid color values. Each RGB component must be \
-between 0 and 255."
-# define INVALID_COLOR_FORMAT "Error: Invalid color format. A valid color must \
-have exactly 3 components (R, G, B), each between 0 and 255."
+# define INVALID_COLOR_FORMAT "Error: Invalid color format."
+# define INVALID_COLOR "Error: Invalid color values."
+# define INVALID_FILE "Error: Invalid file name."
+# define FILE_NOT_FOUND "Error: File not found"
+# define INVALID_MAP "Error: Invalid map!"
 
 typedef struct s_gc
 {
