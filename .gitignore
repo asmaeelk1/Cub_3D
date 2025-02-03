@@ -1,14 +1,9 @@
 # Object files
 *.o
 
-# MLX42 Library
-MLX42/
-
-# debug files
-outfile*
-
 # Executable
 cub3D
+cub3D_bonus
 
 # VS Code
 .vscode/
