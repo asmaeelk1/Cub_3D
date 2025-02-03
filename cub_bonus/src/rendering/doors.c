@@ -6,7 +6,7 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 20:54:27 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/02/03 03:53:25 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/02/03 05:19:24 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,15 @@ void	close_door(t_map_data *map_data, t_player *player)
 		is_open(map_data, player_x, player_y - 1);
 }
 
+static void	free_texture(mlx_texture_t *texture)
+{
+	if (!texture)
+		return ;
+	if (texture->pixels)
+		free(texture->pixels);
+	free(texture);
+}
+
 void	animation(void *param)
 {
 	t_map_data	*map_data;
@@ -78,6 +87,7 @@ void	animation(void *param)
 	}
 	if (map_data->animation_playing)
 	{
+		free_texture(map_data->text);
 		mlx_delete_image(map_data->mlx, map_data->img_frame);
 		map_data->text = mlx_load_png(map_data->frames[i]);
 		map_data->img_frame = mlx_texture_to_image(map_data->mlx,
