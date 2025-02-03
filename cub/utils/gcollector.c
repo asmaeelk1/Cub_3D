@@ -6,47 +6,83 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 21:22:38 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/01/23 14:16:42 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/02/03 20:52:20 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub.h"
 
-static void	clear_gc(t_gc **gc)
+static t_col	*new_node(void	*ptr)
 {
-	t_gc	*tmp;
-	t_gc	*node;
+	t_col	*new;
 
-	tmp = *gc;
-	while (tmp)
-	{
-		node = tmp;
+	new = malloc(sizeof(t_col));
+	if (!new)
+		return (NULL);
+	new->ptr = ptr;
+	new->next = NULL;
+	return (new);
+}
+
+static t_col	*last_node(t_col **head)
+{
+	t_col	*tmp;
+
+	if (!head || !*head)
+		return (NULL);
+	tmp = *head;
+	while (tmp != NULL && tmp->next != NULL)
 		tmp = tmp->next;
-		free(node->content);
-		free(node);
+	return (tmp);
+}
+
+static void	add_back(t_col	**head, t_col *new)
+{
+	if (!head || !new)
+		return ;
+	if (!*head)
+		*head = new;
+	else
+		last_node(head)->next = new;
+}
+
+static void	clear_all(t_col **head)
+{
+	t_col	*cur;
+	t_col	*tmp;
+
+	if (!head || !*head)
+		return ;
+	cur = *head;
+	while (cur)
+	{
+		tmp = cur->next;
+		free(cur->ptr);
+		cur->ptr = NULL;
+		free(cur);
+		cur = tmp;
 	}
-	gc = NULL;
+	*head = NULL;
 }
 
 void	*gcollector(size_t size, int mode)
 {
-	static t_gc	*gc;
-	t_gc		*node;
-	void		*data;
+	static t_col	*head;
+	t_col			*tmp;
+	void			*ptr;
 
-	if (mode)
+	if (mode == 1)
 	{
-		data = malloc(size);
-		if (!data)
-			return (clear_gc(&gc), exit(1), NULL);
-		node = malloc(sizeof(t_gc));
-		if (!node)
-			return (clear_gc(&gc), free(data), NULL);
-		node->content = data;
-		node->next = gc;
-		gc = node;
-		return (data);
+		ptr = malloc(size);
+		if (!ptr)
+			return (clear_all(&head), NULL);
+		tmp = new_node(ptr);
+		if (!tmp)
+			return (clear_all(&head), free(ptr), NULL);
+		add_back(&head, tmp);
+		return (ptr);
 	}
-	else
-		return (clear_gc(&gc), NULL);
+	else if (mode == 0)
+		clear_all(&head);
+	return (NULL);
 }

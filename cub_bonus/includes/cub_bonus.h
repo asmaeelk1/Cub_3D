@@ -6,7 +6,7 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 06:30:49 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/02/03 04:11:13 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/02/03 20:53:30 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,11 @@ enum	e_textures
 # define FILE_NOT_FOUND "Error: File not found"
 # define INVALID_MAP "Error: Invalid map!"
 
-typedef struct s_gc
+typedef struct s_col
 {
-	void		*content;
-	struct s_gc	*next;
-}	t_gc;
+	void			*ptr;
+	struct s_col	*next;
+}	t_col;
 
 typedef struct s_textures
 {

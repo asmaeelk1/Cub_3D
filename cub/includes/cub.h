@@ -6,7 +6,7 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 06:30:49 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/02/03 04:47:45 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/02/03 20:51:18 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,11 @@ enum	e_textures
 # define FILE_NOT_FOUND "Error: File not found"
 # define INVALID_MAP "Error: Invalid map!"
 
-typedef struct s_gc
+typedef struct s_col
 {
-	void		*content;
-	struct s_gc	*next;
-}	t_gc;
+	void			*ptr;
+	struct s_col	*next;
+}	t_col;
 
 typedef struct s_textures
 {
@@ -127,7 +127,6 @@ int		save_fd(int fd, bool hold);
 char	*ft_strchr(char *s, int c);
 char	*ft_strdup(const char *s1);
 char	**ft_split(char *s, char c);
-void	map_2d(t_map_data *map_data);
 void	pars_map(t_map_data **map_data);
 char	*ft_strtok(char *str, char *sep);
 void	raycasting(t_map_data *map_data);
