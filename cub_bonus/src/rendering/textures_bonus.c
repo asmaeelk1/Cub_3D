@@ -6,7 +6,7 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 01:34:38 by oel-feng          #+#    #+#             */
-/*   Updated: 2025/02/03 03:48:59 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/02/03 19:57:03 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	set_textures_data(t_cast *cast, t_map_data *map_data, int x, int y)
 			continue ;
 		if (y < cast->drawstart)
 			pixels[index] = map_data->colors->c_ceiling;
-		else if (y < cast->drawend)
+		else if (y <= cast->drawend)
 			my_draw_function(cast, map_data, pixels, index);
 		else
 			pixels[index] = map_data->colors->c_floor;
