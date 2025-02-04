@@ -6,7 +6,7 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 06:29:40 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/02/03 20:56:39 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/02/04 04:58:45 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,8 @@ static void	set_data(t_map_data *map_data)
 	map_data->texts->south = NULL;
 }
 
-void foo(void) {system("lsof -c cub3D_bonus");}
-
 int	main(int ac, char **av)
 {
-	atexit(foo);
 	t_map_data	map_data;
 
 	if (ac < 2)
