@@ -6,83 +6,93 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 21:22:38 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/02/03 20:52:28 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/02/04 05:15:29 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub_bonus.h"
 
-static t_col	*new_node(void	*ptr)
+static t_memory	*create_node(void *ptr)
 {
-	t_col	*new;
+	t_memory	*new;
 
-	new = malloc(sizeof(t_col));
+	new = malloc(sizeof(t_memory));
 	if (!new)
 		return (NULL);
-	new->ptr = ptr;
+	new->address = ptr;
 	new->next = NULL;
 	return (new);
 }
 
-static t_col	*last_node(t_col **head)
+static t_memory	*find_last(t_memory **head)
 {
-	t_col	*tmp;
+	t_memory	*current;
 
+	current = *head;
 	if (!head || !*head)
 		return (NULL);
-	tmp = *head;
-	while (tmp != NULL && tmp->next != NULL)
-		tmp = tmp->next;
-	return (tmp);
+	while (current->next)
+		current = current->next;
+	return (current);
 }
 
-static void	add_back(t_col	**head, t_col *new)
+static void	lst_add_back(t_memory **head, t_memory *new)
 {
 	if (!head || !new)
 		return ;
 	if (!*head)
 		*head = new;
 	else
-		last_node(head)->next = new;
+		find_last(head)->next = new;
 }
 
-static void	clear_all(t_col **head)
+static void	free_memory(t_memory **head)
 {
-	t_col	*cur;
-	t_col	*tmp;
+	t_memory	*current;
+	t_memory	*next;
 
+	current = *head;
 	if (!head || !*head)
 		return ;
-	cur = *head;
-	while (cur)
+	while (current)
 	{
-		tmp = cur->next;
-		free(cur->ptr);
-		cur->ptr = NULL;
-		free(cur);
-		cur = tmp;
+		next = current->next;
+		if (current->address)
+		{
+			free(current->address);
+			current->address = NULL;
+		}
+		free(current);
+		current = next;
 	}
 	*head = NULL;
 }
 
 void	*gcollector(size_t size, int mode)
 {
-	static t_col	*head;
-	t_col			*tmp;
+	static t_memory	*memory_list;
+	t_memory		*tracker;
 	void			*ptr;
 
 	if (mode == 1)
 	{
 		ptr = malloc(size);
 		if (!ptr)
-			return (clear_all(&head), NULL);
-		tmp = new_node(ptr);
-		if (!tmp)
-			return (clear_all(&head), free(ptr), NULL);
-		add_back(&head, tmp);
+		{
+			free_memory(&memory_list);
+			return (NULL);
+		}
+		tracker = create_node(ptr);
+		if (!tracker)
+		{
+			free(ptr);
+			free_memory(&memory_list);
+			return (NULL);
+		}
+		lst_add_back(&memory_list, tracker);
 		return (ptr);
 	}
 	else if (mode == 0)
-		clear_all(&head);
+		free_memory(&memory_list);
 	return (NULL);
 }
