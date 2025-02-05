@@ -6,7 +6,7 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 23:01:25 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/02/03 22:45:19 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/02/05 23:01:29 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	pars_colors(char *color)
 	i = -1;
 	i_rgb = 0;
 	if (!ft_strtrim(color, " "))
-		ft_err("Empty file");
+		ft_err(EMPTY_FILE);
 	if ((ft_strlen(color) > 1 && color[ft_strlen(color) - 1] == ',')
 		|| color[0] == ',')
 		ft_err(INVALID_COLOR_FORMAT);
@@ -103,7 +103,7 @@ void	read_elements(int file_name, t_map_data **map_data)
 	i_elements = 6;
 	line = get_next_line(file_name);
 	if (!line)
-		ft_err("Empty file ");
+		ft_err(EMPTY_FILE);
 	while (line && i_elements > 0)
 	{
 		while (*line == ' ')

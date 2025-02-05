@@ -6,7 +6,7 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 06:30:49 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/02/04 05:14:18 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/02/05 23:00:51 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,14 @@ enum	e_textures
 };
 
 # define INVALID_COLOR_FORMAT "Error: Invalid color format."
+# define EMPTY_FILE "Error: Empty file."
+# define INVALID_FILE "Error: Invalid file."
 # define INVALID_COLOR "Error: Invalid color values."
-# define INVALID_FILE "Error: Invalid file name."
-# define FILE_NOT_FOUND "Error: File not found"
-# define INVALID_MAP "Error: Invalid map!"
+# define FILE_NOT_FOUND "Error: File not found."
+# define INVALID_MAP "Error: Invalid map."
+# define INVALID_TEXTURE "Error: Failed to load textures."
+# define INVALID_TEXTURE_SIZE "Error: Invalid texture size."
+# define MALLOC_FAILURE "Error: Malloc Failure"
 
 typedef struct s_memory
 {

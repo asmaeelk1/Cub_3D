@@ -6,7 +6,7 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 01:34:38 by oel-feng          #+#    #+#             */
-/*   Updated: 2025/02/05 03:15:26 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/02/05 22:58:53 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,13 +81,13 @@ void	start_textures(t_map_data *map_data)
 	map_data->textures[EAST] = mlx_load_png(map_data->texts->east);
 	if (!map_data->textures[NORTH] || !map_data->textures[SOUTH]
 		|| !map_data->textures[WEST] || !map_data->textures[EAST])
-		ft_err("Error: Failed to load textures");
+		ft_err(INVALID_TEXTURE);
 	i = -1;
 	while (++i < 4)
 	{
 		if ((int)map_data->textures[i]->height != 64
 			&& (int)map_data->textures[i]->width != 64)
-			ft_err("Error: Invalid texture size.");
+			ft_err(INVALID_TEXTURE_SIZE);
 	}
 	map_data->tex_width = map_data->textures[NORTH]->width;
 	map_data->tex_height = map_data->textures[NORTH]->height;

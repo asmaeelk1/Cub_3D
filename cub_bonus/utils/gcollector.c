@@ -6,7 +6,7 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 21:22:38 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/02/05 03:14:22 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/02/05 23:02:23 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,12 +78,12 @@ void	*gcollector(size_t size, int mode)
 	{
 		ptr = malloc(size);
 		if (!ptr)
-			ft_err("Error: Malloc Failure");
+			ft_err(MALLOC_FAILURE);
 		tracker = create_node(ptr);
 		if (!tracker)
 		{
 			free(ptr);
-			ft_err("Error: Malloc Failure");
+			ft_err(MALLOC_FAILURE);
 		}
 		lst_add_back(&memory_list, tracker);
 		return (ptr);
