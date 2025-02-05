@@ -6,7 +6,7 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 06:30:49 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/02/04 05:13:43 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/02/05 03:15:33 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,7 @@ void	raycasting(t_map_data *map_data);
 void	*gcollector(size_t size, int mode);
 void	ft_putstr_fd(const char *s, int fd);
 int		ft_strcmp(const char *s1, char *s2);
+void	start_textures(t_map_data *map_data);
 void	*ft_calloc(size_t count, size_t size);
 char	*ft_strtrim(char *s1, char const *set);
 int		ft_strncmp(char *s1, char *s2, size_t n);

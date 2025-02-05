@@ -6,7 +6,7 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 06:29:40 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/02/03 20:09:52 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/02/05 03:15:17 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,19 +49,6 @@ static void	set_data(t_map_data *map_data)
 	map_data->texts->west = NULL;
 	map_data->texts->north = NULL;
 	map_data->texts->south = NULL;
-}
-
-static void	start_textures(t_map_data *map_data)
-{
-	map_data->textures[NORTH] = mlx_load_png(map_data->texts->north);
-	map_data->textures[SOUTH] = mlx_load_png(map_data->texts->south);
-	map_data->textures[WEST] = mlx_load_png(map_data->texts->west);
-	map_data->textures[EAST] = mlx_load_png(map_data->texts->east);
-	if (!map_data->textures[NORTH] || !map_data->textures[SOUTH]
-		|| !map_data->textures[WEST] || !map_data->textures[EAST])
-		ft_err("Error: Failed to load textures");
-	map_data->tex_width = map_data->textures[NORTH]->width;
-	map_data->tex_height = map_data->textures[NORTH]->height;
 }
 
 int	main(int ac, char **av)
