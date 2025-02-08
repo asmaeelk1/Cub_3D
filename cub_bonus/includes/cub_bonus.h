@@ -6,7 +6,7 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 06:30:49 by asel-kha          #+#    #+#             */
-/*   Updated: 2025/02/05 23:00:51 by oel-feng         ###   ########.fr       */
+/*   Updated: 2025/02/08 06:23:33 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdbool.h>
-# include "../../../MLX42/include/MLX42/MLX42.h"
+# include "/home/oel-feng/Desktop/MLX42/include/MLX42/MLX42.h"
 
 enum	e_macros
 {
