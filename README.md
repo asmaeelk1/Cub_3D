@@ -34,6 +34,7 @@ To compile the bonus part, `cd` into the cloned directory and:
 ```shell
 make bonus
 ```
+Note: you will need to change both mandatory and bonus header /home/oel-feng to your specified machine user name.
 
 
 To run the program:
@@ -79,3 +80,6 @@ Useful resources for this project are:
 - MLX42: [MLX42 official docs](https://github.com/codam-coding-college/MLX42/tree/master/docs)
 - Raycasting: [Lode's Computer Graphics Tutorial - Raycasting](https://lodev.org/cgtutor/raycasting.html)
 - Textures: [Lode's Computer Graphics Tutorial - Textured Raycaster](https://lodev.org/cgtutor/raycasting.html#Textured_Raycaster)
+
+## Credit
+This two-person project was done by both [Asmae ELKHATTAB](https://github.com/asmaeelk1) and [Ouadie El Fengour](https://github.com/Wayde-Ouadie).
