@@ -34,7 +34,7 @@ To compile the bonus part, `cd` into the cloned directory and:
 ```shell
 make bonus
 ```
-Note: you will need to change both mandatory and bonus header /home/oel-feng to your specified machine user name.
+Note: you will need to change both mandatory and bonus header /home/oel-feng/.... to your specified machine user name instead of oel-feng.
 
 
 To run the program:
