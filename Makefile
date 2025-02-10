@@ -40,6 +40,8 @@ endif
 
 all: ${NAME}
 
+bonus: ${BNS_NAME}
+
 cub/%.o: cub/%.c cub/includes/cub.h
 	${CC} ${CFLAGS} $(LIBMLX_INC) -c $< -o $@
 
@@ -49,7 +51,7 @@ cub_bonus/%.o: cub_bonus/%.c cub_bonus/includes/cub_bonus.h
 ${NAME}: ${OBJ}
 	${CC} $(OBJ) $(MLXFLG) $(LIBMLX) ${CFLAGS} -o ${NAME}
 
-bonus: ${BNS_OBJ}
+${BNS_NAME}: ${BNS_OBJ}
 	${CC} ${BNS_OBJ} $(MLXFLG) $(LIBMLX) ${CFLAGS} -o ${BNS_NAME}
 
 clean:
