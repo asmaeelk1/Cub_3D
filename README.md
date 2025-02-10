@@ -19,6 +19,7 @@ cmake --build build -j4 # or do make -C build -j4
 Clone the repository:
 
 ```shell
+cd ~/Desktop
 git clone https://github.com/asmaeelk1/Cub_3D.git
 ```
 
@@ -34,7 +35,7 @@ To compile the bonus part, `cd` into the cloned directory and:
 ```shell
 make bonus
 ```
-Note: you will need to change both mandatory and bonus header /home/oel-feng/.... to your specified machine user name instead of oel-feng.
+Note: both the MLX42 library and the cub3D project should be cloned to the same directory (Desktop is not a requirement), or if you prefer to clone them to seperate location, make sure to match the location of the MLX42.h in the headers to the prefered location (YOUR/PREFERED/LOCATION/MLX42/include/MLX42/MLX42.h).
 
 
 To run the program:
